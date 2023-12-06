@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Probability Rules | Statistical Inference via Data Science</title>
+  <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Probability Rules | Statistical Inference via Data Science" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://moderndive.com//images/logos/book_cover.png" />
+  <meta property="og:description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
+  <meta name="github-repo" content="moderndive/ModernDive_book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Probability Rules | Statistical Inference via Data Science" />
+  <meta name="twitter:site" content="@ModernDive" />
+  <meta name="twitter:description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
+  <meta name="twitter:image" content="https://moderndive.com//images/logos/book_cover.png" />
+
+<meta name="author" content="Chester Ismay and Albert Y. Kim   Foreword by Kelly S. McConville" />
+
+
+<meta name="date" content="2023-12-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/logos/favicons/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="1-CS2.html"/>
+<link rel="next" href="3-CONDPROB.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YVFBK9P73R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YVFBK9P73R');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to ModernDive</a></li>
+<li class="chapter" data-level="" data-path="foreword.html"><a href="foreword.html"><i class="fa fa-check"></i>Foreword</a></li>
+<li class="part"><span><b>I Probability Modeling</b></span></li>
+<li class="chapter" data-level="1" data-path="1-CS2.html"><a href="1-CS2.html"><i class="fa fa-check"></i><b>1</b> Probability Case Study</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-CS2.html"><a href="1-CS2.html#objectives"><i class="fa fa-check"></i><b>1.1</b> Objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="1-CS2.html"><a href="1-CS2.html#introduction-to-probability-models"><i class="fa fa-check"></i><b>1.2</b> Introduction to probability models</a></li>
+<li class="chapter" data-level="1.3" data-path="1-CS2.html"><a href="1-CS2.html#probability-models"><i class="fa fa-check"></i><b>1.3</b> Probability models</a></li>
+<li class="chapter" data-level="1.4" data-path="1-CS2.html"><a href="1-CS2.html#case-study"><i class="fa fa-check"></i><b>1.4</b> Case study</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="1-CS2.html"><a href="1-CS2.html#break-down-the-question"><i class="fa fa-check"></i><b>1.4.1</b> Break down the question</a></li>
+<li class="chapter" data-level="1.4.2" data-path="1-CS2.html"><a href="1-CS2.html#simulate-computational"><i class="fa fa-check"></i><b>1.4.2</b> Simulate (computational)</a></li>
+<li class="chapter" data-level="1.4.3" data-path="1-CS2.html"><a href="1-CS2.html#plotting"><i class="fa fa-check"></i><b>1.4.3</b> Plotting</a></li>
+<li class="chapter" data-level="1.4.4" data-path="1-CS2.html"><a href="1-CS2.html#mathematical-solution"><i class="fa fa-check"></i><b>1.4.4</b> Mathematical solution</a></li>
+<li class="chapter" data-level="1.4.5" data-path="1-CS2.html"><a href="1-CS2.html#general-solution"><i class="fa fa-check"></i><b>1.4.5</b> General solution</a></li>
+<li class="chapter" data-level="1.4.6" data-path="1-CS2.html"><a href="1-CS2.html#data-science-approach"><i class="fa fa-check"></i><b>1.4.6</b> Data science approach</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="1-CS2.html"><a href="1-CS2.html#homework-problems"><i class="fa fa-check"></i><b>1.5</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="1-CS2.html"><a href="1-CS2.html#solutions-manual"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html"><i class="fa fa-check"></i><b>2</b> Probability Rules</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#objectives-1"><i class="fa fa-check"></i><b>2.1</b> Objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#probability-vs-statistics"><i class="fa fa-check"></i><b>2.2</b> Probability vs Statistics</a></li>
+<li class="chapter" data-level="2.3" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#basic-probability-terms"><i class="fa fa-check"></i><b>2.3</b> Basic probability terms</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#sample-space"><i class="fa fa-check"></i><b>2.3.1</b> Sample space</a></li>
+<li class="chapter" data-level="2.3.2" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#union-and-intersection"><i class="fa fa-check"></i><b>2.3.2</b> Union and intersection</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#probability"><i class="fa fa-check"></i><b>2.4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#probability-properties"><i class="fa fa-check"></i><b>2.4.1</b> Probability properties</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#equally-likely-scenarios"><i class="fa fa-check"></i><b>2.4.2</b> Equally likely scenarios</a></li>
+<li class="chapter" data-level="2.4.3" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#using-r-equally-likely-scenarios"><i class="fa fa-check"></i><b>2.4.3</b> Using <code>R</code> (Equally likely scenarios)</a></li>
+<li class="chapter" data-level="2.4.4" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#note"><i class="fa fa-check"></i><b>2.4.4</b> Note</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#counting-rules"><i class="fa fa-check"></i><b>2.5</b> Counting rules</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#multiplication-rule-1-order-matters-sample-with-replacement"><i class="fa fa-check"></i><b>2.5.1</b> Multiplication rule 1: Order matters, sample with replacement</a></li>
+<li class="chapter" data-level="2.5.2" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#multiplication-rule-2-permutation-order-matters-sampling-without-replacement"><i class="fa fa-check"></i><b>2.5.2</b> Multiplication rule 2 (Permutation): Order Matters, Sampling Without Replacement</a></li>
+<li class="chapter" data-level="2.5.3" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#multiplication-rule-3-combination-order-does-not-matter-sampling-without-replacement"><i class="fa fa-check"></i><b>2.5.3</b> Multiplication rule 3 (Combination): Order Does Not Matter, Sampling Without Replacement</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#homework-problems-1"><i class="fa fa-check"></i><b>2.6</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="2-PROBRULES.html"><a href="2-PROBRULES.html#solutions-manual-1"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html"><i class="fa fa-check"></i><b>3</b> Conditional Probability</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#objectives-2"><i class="fa fa-check"></i><b>3.1</b> Objectives</a></li>
+<li class="chapter" data-level="3.2" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#conditional-probability"><i class="fa fa-check"></i><b>3.2</b> Conditional Probability</a></li>
+<li class="chapter" data-level="3.3" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#independence"><i class="fa fa-check"></i><b>3.3</b> Independence</a></li>
+<li class="chapter" data-level="3.4" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#bayes-rule"><i class="fa fa-check"></i><b>3.4</b> Bayes’ Rule</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#approach-using-whole-numbers"><i class="fa fa-check"></i><b>3.4.1</b> Approach using whole numbers</a></li>
+<li class="chapter" data-level="3.4.2" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#mathematical-approach"><i class="fa fa-check"></i><b>3.4.2</b> Mathematical approach</a></li>
+<li class="chapter" data-level="3.4.3" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#simulation"><i class="fa fa-check"></i><b>3.4.3</b> Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#homework-problems-2"><i class="fa fa-check"></i><b>3.5</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="3-CONDPROB.html"><a href="3-CONDPROB.html#solutions-manual-2"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html"><i class="fa fa-check"></i><b>4</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#objectives-3"><i class="fa fa-check"></i><b>4.1</b> Objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#random-variables"><i class="fa fa-check"></i><b>4.2</b> Random variables</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#how-does-this-help"><i class="fa fa-check"></i><b>4.2.1</b> How does this help?</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#discrete-vs-continuous"><i class="fa fa-check"></i><b>4.2.2</b> Discrete vs Continuous</a></li>
+<li class="chapter" data-level="4.2.3" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#discrete-distribution-functions"><i class="fa fa-check"></i><b>4.2.3</b> Discrete distribution functions</a></li>
+<li class="chapter" data-level="4.2.4" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#probability-mass-function"><i class="fa fa-check"></i><b>4.2.4</b> Probability mass function</a></li>
+<li class="chapter" data-level="4.2.5" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#cumulative-distribution-function"><i class="fa fa-check"></i><b>4.2.5</b> Cumulative distribution function</a></li>
+<li class="chapter" data-level="4.2.6" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#simulating-random-variables"><i class="fa fa-check"></i><b>4.2.6</b> Simulating random variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#moments"><i class="fa fa-check"></i><b>4.3</b> Moments</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#expectation"><i class="fa fa-check"></i><b>4.3.1</b> Expectation</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#mean"><i class="fa fa-check"></i><b>4.3.2</b> Mean</a></li>
+<li class="chapter" data-level="4.3.3" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#variance"><i class="fa fa-check"></i><b>4.3.3</b> Variance</a></li>
+<li class="chapter" data-level="4.3.4" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#mean-and-variance-of-linear-transformations"><i class="fa fa-check"></i><b>4.3.4</b> Mean and variance of Linear Transformations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#homework-problems-3"><i class="fa fa-check"></i><b>4.4</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="4-RANDVAR.html"><a href="4-RANDVAR.html#solutions-manual-3"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html"><i class="fa fa-check"></i><b>5</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#objectives-4"><i class="fa fa-check"></i><b>5.1</b> Objectives</a></li>
+<li class="chapter" data-level="5.2" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#continuous-random-variables"><i class="fa fa-check"></i><b>5.2</b> Continuous random variables</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#continuous-distribution-functions"><i class="fa fa-check"></i><b>5.2.1</b> Continuous distribution functions</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#probability-density-function"><i class="fa fa-check"></i><b>5.2.2</b> Probability density function</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#cumulative-distribution-function-1"><i class="fa fa-check"></i><b>5.2.3</b> Cumulative distribution function</a></li>
+<li class="chapter" data-level="5.2.4" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#simulation-1"><i class="fa fa-check"></i><b>5.2.4</b> Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#moments-1"><i class="fa fa-check"></i><b>5.3</b> Moments</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#mean-and-variance"><i class="fa fa-check"></i><b>5.3.1</b> Mean and variance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#homework-problems-4"><i class="fa fa-check"></i><b>5.4</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="5-CONRANDVAR.html"><a href="5-CONRANDVAR.html#solutions-manual-4"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html"><i class="fa fa-check"></i><b>6</b> Named Discrete Distributions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#objectives-5"><i class="fa fa-check"></i><b>6.1</b> Objectives</a></li>
+<li class="chapter" data-level="6.2" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#named-distributions"><i class="fa fa-check"></i><b>6.2</b> Named distributions</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#discrete-uniform-distribution"><i class="fa fa-check"></i><b>6.2.1</b> Discrete uniform distribution</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#simulating"><i class="fa fa-check"></i><b>6.2.2</b> Simulating</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#binomial-distribution"><i class="fa fa-check"></i><b>6.2.3</b> Binomial distribution</a></li>
+<li class="chapter" data-level="6.2.4" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#software-functions"><i class="fa fa-check"></i><b>6.2.4</b> Software Functions</a></li>
+<li class="chapter" data-level="6.2.5" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#poisson-distribution"><i class="fa fa-check"></i><b>6.2.5</b> Poisson distribution</a></li>
+<li class="chapter" data-level="6.2.6" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#hypergeometric"><i class="fa fa-check"></i><b>6.2.6</b> Hypergeometric</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#homework-problems-5"><i class="fa fa-check"></i><b>6.3</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="6-DISCRETENAMED.html"><a href="6-DISCRETENAMED.html#solutions-manual-5"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html"><i class="fa fa-check"></i><b>7</b> Named Continuous Distributions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#objectives-6"><i class="fa fa-check"></i><b>7.1</b> Objectives</a></li>
+<li class="chapter" data-level="7.2" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#continuous-distributions"><i class="fa fa-check"></i><b>7.2</b> Continuous distributions</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#uniform-distribution"><i class="fa fa-check"></i><b>7.2.1</b> Uniform distribution</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#exponential-distribution"><i class="fa fa-check"></i><b>7.2.2</b> Exponential distribution</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#memory-less-property"><i class="fa fa-check"></i><b>7.2.3</b> Memory-less property</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#gamma-distribution"><i class="fa fa-check"></i><b>7.2.4</b> Gamma distribution</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#weibull-distribution"><i class="fa fa-check"></i><b>7.2.5</b> Weibull distribution</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#normal-distribution"><i class="fa fa-check"></i><b>7.2.6</b> Normal distribution</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#beta-distribution"><i class="fa fa-check"></i><b>7.2.7</b> Beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#homework-problems-6"><i class="fa fa-check"></i><b>7.3</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="7-CONTNNAMED.html"><a href="7-CONTNNAMED.html#solutions-manual-6"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="part"><span><b>II Introduction to Data</b></span></li>
+<li class="chapter" data-level="8" data-path="8-CS1.html"><a href="8-CS1.html"><i class="fa fa-check"></i><b>8</b> Data Case Study</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8-CS1.html"><a href="8-CS1.html#introduction-to-data-unleashing-the-power-of-information-in-r"><i class="fa fa-check"></i><b>8.1</b> Introduction to Data: Unleashing the Power of Information in R</a></li>
+<li class="chapter" data-level="8.2" data-path="8-CS1.html"><a href="8-CS1.html#case-study-1"><i class="fa fa-check"></i><b>8.2</b> Case Study</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="8-CS1.html"><a href="8-CS1.html#research-question"><i class="fa fa-check"></i><b>8.2.1</b> Research question</a></li>
+<li class="chapter" data-level="8.2.2" data-path="8-CS1.html"><a href="8-CS1.html#collect-the-relevant-data"><i class="fa fa-check"></i><b>8.2.2</b> Collect the relevant data</a></li>
+<li class="chapter" data-level="8.2.3" data-path="8-CS1.html"><a href="8-CS1.html#import-data"><i class="fa fa-check"></i><b>8.2.3</b> Import data</a></li>
+<li class="chapter" data-level="8.2.4" data-path="8-CS1.html"><a href="8-CS1.html#explore-data"><i class="fa fa-check"></i><b>8.2.4</b> Explore data</a></li>
+<li class="chapter" data-level="8.2.5" data-path="8-CS1.html"><a href="8-CS1.html#visualize-the-data"><i class="fa fa-check"></i><b>8.2.5</b> Visualize the data</a></li>
+<li class="chapter" data-level="8.2.6" data-path="8-CS1.html"><a href="8-CS1.html#conclusion"><i class="fa fa-check"></i><b>8.2.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="8-CS1.html"><a href="8-CS1.html#homework-problems-7"><i class="fa fa-check"></i><b>8.3</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="8-CS1.html"><a href="8-CS1.html#solutions-manual-7"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="9-DB.html"><a href="9-DB.html"><i class="fa fa-check"></i><b>9</b> Data Basics</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="9-DB.html"><a href="9-DB.html#introduction-to-data-unleashing-the-power-of-information-in-r-1"><i class="fa fa-check"></i><b>9.1</b> Introduction to Data: Unleashing the Power of Information in R</a></li>
+<li class="chapter" data-level="9.2" data-path="9-DB.html"><a href="9-DB.html#the-data-analysis-process"><i class="fa fa-check"></i><b>9.2</b> The Data Analysis Process</a></li>
+<li class="chapter" data-level="9.3" data-path="9-DB.html"><a href="9-DB.html#data-frames-in-r"><i class="fa fa-check"></i><b>9.3</b> Data Frames in <code>R</code></a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="9-DB.html"><a href="9-DB.html#two-ways-of-loading-data"><i class="fa fa-check"></i><b>9.3.1</b> Two Ways of Loading Data</a></li>
+<li class="chapter" data-level="9.3.2" data-path="9-DB.html"><a href="9-DB.html#exploring-a-data-frame"><i class="fa fa-check"></i><b>9.3.2</b> Exploring a Data Frame</a></li>
+<li class="chapter" data-level="9.3.3" data-path="9-DB.html"><a href="9-DB.html#tidy-data"><i class="fa fa-check"></i><b>9.3.3</b> Tidy Data</a></li>
+<li class="chapter" data-level="9.3.4" data-path="9-DB.html"><a href="9-DB.html#types-of-variables"><i class="fa fa-check"></i><b>9.3.4</b> Types of Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="9-DB.html"><a href="9-DB.html#solutions-manual-8"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-ODCP.html"><a href="10-ODCP.html"><i class="fa fa-check"></i><b>10</b> Overview of Data Collection Principles</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-ODCP.html"><a href="10-ODCP.html#overview-of-data-collection-principles"><i class="fa fa-check"></i><b>10.1</b> Overview of data collection principles</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="10-ODCP.html"><a href="10-ODCP.html#populations-and-samples"><i class="fa fa-check"></i><b>10.1.1</b> Populations and samples</a></li>
+<li class="chapter" data-level="10.1.2" data-path="10-ODCP.html"><a href="10-ODCP.html#anecdotal-evidence"><i class="fa fa-check"></i><b>10.1.2</b> Anecdotal evidence</a></li>
+<li class="chapter" data-level="10.1.3" data-path="10-ODCP.html"><a href="10-ODCP.html#sampling-from-a-population"><i class="fa fa-check"></i><b>10.1.3</b> Sampling from a population</a></li>
+<li class="chapter" data-level="10.1.4" data-path="10-ODCP.html"><a href="10-ODCP.html#explanatory-and-response-variables"><i class="fa fa-check"></i><b>10.1.4</b> Explanatory and response variables</a></li>
+<li class="chapter" data-level="10.1.5" data-path="10-ODCP.html"><a href="10-ODCP.html#introducing-observational-studies-and-experiments"><i class="fa fa-check"></i><b>10.1.5</b> Introducing observational studies and experiments</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="10-ODCP.html"><a href="10-ODCP.html#homework-problems-8"><i class="fa fa-check"></i><b>10.2</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="10-ODCP.html"><a href="10-ODCP.html#solutions-manual-9"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-STUDY.html"><a href="11-STUDY.html"><i class="fa fa-check"></i><b>11</b> Studies</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-STUDY.html"><a href="11-STUDY.html#observation-studies-sampling-strategies-and-experiments"><i class="fa fa-check"></i><b>11.1</b> Observation studies, sampling strategies, and experiments</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="11-STUDY.html"><a href="11-STUDY.html#observational-studies"><i class="fa fa-check"></i><b>11.1.1</b> Observational studies</a></li>
+<li class="chapter" data-level="11.1.2" data-path="11-STUDY.html"><a href="11-STUDY.html#three-sampling-methods"><i class="fa fa-check"></i><b>11.1.2</b> Three sampling methods</a></li>
+<li class="chapter" data-level="11.1.3" data-path="11-STUDY.html"><a href="11-STUDY.html#experiments"><i class="fa fa-check"></i><b>11.1.3</b> Experiments</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="11-STUDY.html"><a href="11-STUDY.html#homework-problems-9"><i class="fa fa-check"></i><b>11.2</b> Homework Problems</a></li>
+<li class="chapter" data-level="" data-path="11-STUDY.html"><a href="11-STUDY.html#solutions-manual-10"><i class="fa fa-check"></i>Solutions Manual</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-viz.html"><a href="12-viz.html"><i class="fa fa-check"></i><b>12</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="12-viz.html"><a href="12-viz.html#needed-packages"><i class="fa fa-check"></i>Needed packages</a></li>
+<li class="chapter" data-level="12.1" data-path="12-viz.html"><a href="12-viz.html#grammarofgraphics"><i class="fa fa-check"></i><b>12.1</b> The grammar of graphics</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="12-viz.html"><a href="12-viz.html#components-of-the-grammar"><i class="fa fa-check"></i><b>12.1.1</b> Components of the grammar</a></li>
+<li class="chapter" data-level="12.1.2" data-path="12-viz.html"><a href="12-viz.html#gapminder"><i class="fa fa-check"></i><b>12.1.2</b> Gapminder data</a></li>
+<li class="chapter" data-level="12.1.3" data-path="12-viz.html"><a href="12-viz.html#other-components"><i class="fa fa-check"></i><b>12.1.3</b> Other components</a></li>
+<li class="chapter" data-level="12.1.4" data-path="12-viz.html"><a href="12-viz.html#ggplot2-package"><i class="fa fa-check"></i><b>12.1.4</b> ggplot2 package</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="12-viz.html"><a href="12-viz.html#FiveNG"><i class="fa fa-check"></i><b>12.2</b> Five named graphs - the 5NG</a></li>
+<li class="chapter" data-level="12.3" data-path="12-viz.html"><a href="12-viz.html#scatterplots"><i class="fa fa-check"></i><b>12.3</b> 5NG#1: Scatterplots</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="12-viz.html"><a href="12-viz.html#geompoint"><i class="fa fa-check"></i><b>12.3.1</b> Scatterplots via <code>geom_point</code></a></li>
+<li class="chapter" data-level="12.3.2" data-path="12-viz.html"><a href="12-viz.html#overplotting"><i class="fa fa-check"></i><b>12.3.2</b> Overplotting</a></li>
+<li class="chapter" data-level="12.3.3" data-path="12-viz.html"><a href="12-viz.html#summary"><i class="fa fa-check"></i><b>12.3.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="12-viz.html"><a href="12-viz.html#linegraphs"><i class="fa fa-check"></i><b>12.4</b> 5NG#2: Linegraphs</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="12-viz.html"><a href="12-viz.html#geomline"><i class="fa fa-check"></i><b>12.4.1</b> Linegraphs via <code>geom_line</code></a></li>
+<li class="chapter" data-level="12.4.2" data-path="12-viz.html"><a href="12-viz.html#summary-1"><i class="fa fa-check"></i><b>12.4.2</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="12-viz.html"><a href="12-viz.html#histograms"><i class="fa fa-check"></i><b>12.5</b> 5NG#3: Histograms</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="12-viz.html"><a href="12-viz.html#geomhistogram"><i class="fa fa-check"></i><b>12.5.1</b> Histograms via <code>geom_histogram</code></a></li>
+<li class="chapter" data-level="12.5.2" data-path="12-viz.html"><a href="12-viz.html#adjustbins"><i class="fa fa-check"></i><b>12.5.2</b> Adjusting the bins</a></li>
+<li class="chapter" data-level="12.5.3" data-path="12-viz.html"><a href="12-viz.html#summary-2"><i class="fa fa-check"></i><b>12.5.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="12-viz.html"><a href="12-viz.html#facets"><i class="fa fa-check"></i><b>12.6</b> Facets</a></li>
+<li class="chapter" data-level="12.7" data-path="12-viz.html"><a href="12-viz.html#boxplots"><i class="fa fa-check"></i><b>12.7</b> 5NG#4: Boxplots</a>
+<ul>
+<li class="chapter" data-level="12.7.1" data-path="12-viz.html"><a href="12-viz.html#geomboxplot"><i class="fa fa-check"></i><b>12.7.1</b> Boxplots via <code>geom_boxplot</code></a></li>
+<li class="chapter" data-level="12.7.2" data-path="12-viz.html"><a href="12-viz.html#summary-3"><i class="fa fa-check"></i><b>12.7.2</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12.8" data-path="12-viz.html"><a href="12-viz.html#geombar"><i class="fa fa-check"></i><b>12.8</b> 5NG#5: Barplots</a>
+<ul>
+<li class="chapter" data-level="12.8.1" data-path="12-viz.html"><a href="12-viz.html#barplots-via-geom_bar-or-geom_col"><i class="fa fa-check"></i><b>12.8.1</b> Barplots via <code>geom_bar</code> or <code>geom_col</code></a></li>
+<li class="chapter" data-level="12.8.2" data-path="12-viz.html"><a href="12-viz.html#must-avoid-pie-charts"><i class="fa fa-check"></i><b>12.8.2</b> Must avoid pie charts!</a></li>
+<li class="chapter" data-level="12.8.3" data-path="12-viz.html"><a href="12-viz.html#two-categ-barplot"><i class="fa fa-check"></i><b>12.8.3</b> Two categorical variables</a></li>
+<li class="chapter" data-level="12.8.4" data-path="12-viz.html"><a href="12-viz.html#summary-4"><i class="fa fa-check"></i><b>12.8.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="12-viz.html"><a href="12-viz.html#data-vis-conclusion"><i class="fa fa-check"></i><b>12.9</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="12-viz.html"><a href="12-viz.html#summary-table"><i class="fa fa-check"></i><b>12.9.1</b> Summary table</a></li>
+<li class="chapter" data-level="12.9.2" data-path="12-viz.html"><a href="12-viz.html#function-argument-specification"><i class="fa fa-check"></i><b>12.9.2</b> Function argument specification</a></li>
+<li class="chapter" data-level="12.9.3" data-path="12-viz.html"><a href="12-viz.html#additional-resources"><i class="fa fa-check"></i><b>12.9.3</b> Additional resources</a></li>
+<li class="chapter" data-level="12.9.4" data-path="12-viz.html"><a href="12-viz.html#whats-to-come-3"><i class="fa fa-check"></i><b>12.9.4</b> What’s to come</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="13-wrangling.html"><a href="13-wrangling.html"><i class="fa fa-check"></i><b>13</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="" data-path="13-wrangling.html"><a href="13-wrangling.html#wrangling-packages"><i class="fa fa-check"></i>Needed packages</a></li>
+<li class="chapter" data-level="13.1" data-path="13-wrangling.html"><a href="13-wrangling.html#piping"><i class="fa fa-check"></i><b>13.1</b> The pipe operator: <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="13.2" data-path="13-wrangling.html"><a href="13-wrangling.html#filter"><i class="fa fa-check"></i><b>13.2</b> <code>filter</code> rows</a></li>
+<li class="chapter" data-level="13.3" data-path="13-wrangling.html"><a href="13-wrangling.html#summarize"><i class="fa fa-check"></i><b>13.3</b> <code>summarize</code> variables</a></li>
+<li class="chapter" data-level="13.4" data-path="13-wrangling.html"><a href="13-wrangling.html#groupby"><i class="fa fa-check"></i><b>13.4</b> <code>group_by</code> rows</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="13-wrangling.html"><a href="13-wrangling.html#grouping-by-more-than-one-variable"><i class="fa fa-check"></i><b>13.4.1</b> Grouping by more than one variable</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="13-wrangling.html"><a href="13-wrangling.html#mutate"><i class="fa fa-check"></i><b>13.5</b> <code>mutate</code> existing variables</a></li>
+<li class="chapter" data-level="13.6" data-path="13-wrangling.html"><a href="13-wrangling.html#arrange"><i class="fa fa-check"></i><b>13.6</b> <code>arrange</code> and sort rows</a></li>
+<li class="chapter" data-level="13.7" data-path="13-wrangling.html"><a href="13-wrangling.html#joins"><i class="fa fa-check"></i><b>13.7</b> <code>join</code> data frames</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="13-wrangling.html"><a href="13-wrangling.html#matching-key-variable-names"><i class="fa fa-check"></i><b>13.7.1</b> Matching “key” variable names</a></li>
+<li class="chapter" data-level="13.7.2" data-path="13-wrangling.html"><a href="13-wrangling.html#diff-key"><i class="fa fa-check"></i><b>13.7.2</b> Different “key” variable names</a></li>
+<li class="chapter" data-level="13.7.3" data-path="13-wrangling.html"><a href="13-wrangling.html#multiple-key-variables"><i class="fa fa-check"></i><b>13.7.3</b> Multiple “key” variables</a></li>
+<li class="chapter" data-level="13.7.4" data-path="13-wrangling.html"><a href="13-wrangling.html#normal-forms"><i class="fa fa-check"></i><b>13.7.4</b> Normal forms</a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="13-wrangling.html"><a href="13-wrangling.html#other-verbs"><i class="fa fa-check"></i><b>13.8</b> Other verbs</a>
+<ul>
+<li class="chapter" data-level="13.8.1" data-path="13-wrangling.html"><a href="13-wrangling.html#select"><i class="fa fa-check"></i><b>13.8.1</b> <code>select</code> variables</a></li>
+<li class="chapter" data-level="13.8.2" data-path="13-wrangling.html"><a href="13-wrangling.html#rename"><i class="fa fa-check"></i><b>13.8.2</b> <code>rename</code> variables</a></li>
+<li class="chapter" data-level="13.8.3" data-path="13-wrangling.html"><a href="13-wrangling.html#top_n-values-of-a-variable"><i class="fa fa-check"></i><b>13.8.3</b> <code>top_n</code> values of a variable</a></li>
+</ul></li>
+<li class="chapter" data-level="13.9" data-path="13-wrangling.html"><a href="13-wrangling.html#wrangling-conclusion"><i class="fa fa-check"></i><b>13.9</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="13.9.1" data-path="13-wrangling.html"><a href="13-wrangling.html#summary-table-1"><i class="fa fa-check"></i><b>13.9.1</b> Summary table</a></li>
+<li class="chapter" data-level="13.9.2" data-path="13-wrangling.html"><a href="13-wrangling.html#additional-resources-1"><i class="fa fa-check"></i><b>13.9.2</b> Additional resources</a></li>
+<li class="chapter" data-level="13.9.3" data-path="13-wrangling.html"><a href="13-wrangling.html#whats-to-come"><i class="fa fa-check"></i><b>13.9.3</b> What’s to come?</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Statistical Inference with infer</b></span></li>
+<li class="chapter" data-level="14" data-path="14-sampling.html"><a href="14-sampling.html"><i class="fa fa-check"></i><b>14</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="" data-path="14-sampling.html"><a href="14-sampling.html#sampling-packages"><i class="fa fa-check"></i>Needed packages</a></li>
+<li class="chapter" data-level="14.1" data-path="14-sampling.html"><a href="14-sampling.html#sampling-activity"><i class="fa fa-check"></i><b>14.1</b> Sampling bowl activity</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="14-sampling.html"><a href="14-sampling.html#what-proportion-of-this-bowls-balls-are-red"><i class="fa fa-check"></i><b>14.1.1</b> What proportion of this bowl’s balls are red?</a></li>
+<li class="chapter" data-level="14.1.2" data-path="14-sampling.html"><a href="14-sampling.html#using-the-shovel-once"><i class="fa fa-check"></i><b>14.1.2</b> Using the shovel once</a></li>
+<li class="chapter" data-level="14.1.3" data-path="14-sampling.html"><a href="14-sampling.html#student-shovels"><i class="fa fa-check"></i><b>14.1.3</b> Using the shovel 33 times</a></li>
+<li class="chapter" data-level="14.1.4" data-path="14-sampling.html"><a href="14-sampling.html#sampling-what-did-we-just-do"><i class="fa fa-check"></i><b>14.1.4</b> What did we just do?</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="14-sampling.html"><a href="14-sampling.html#sampling-simulation"><i class="fa fa-check"></i><b>14.2</b> Virtual sampling</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="14-sampling.html"><a href="14-sampling.html#using-the-virtual-shovel-once"><i class="fa fa-check"></i><b>14.2.1</b> Using the virtual shovel once</a></li>
+<li class="chapter" data-level="14.2.2" data-path="14-sampling.html"><a href="14-sampling.html#using-the-virtual-shovel-33-times"><i class="fa fa-check"></i><b>14.2.2</b> Using the virtual shovel 33 times</a></li>
+<li class="chapter" data-level="14.2.3" data-path="14-sampling.html"><a href="14-sampling.html#shovel-1000-times"><i class="fa fa-check"></i><b>14.2.3</b> Using the virtual shovel 1000 times</a></li>
+<li class="chapter" data-level="14.2.4" data-path="14-sampling.html"><a href="14-sampling.html#different-shovels"><i class="fa fa-check"></i><b>14.2.4</b> Using different shovels</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="14-sampling.html"><a href="14-sampling.html#sampling-framework"><i class="fa fa-check"></i><b>14.3</b> Sampling framework</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="14-sampling.html"><a href="14-sampling.html#terminology-and-notation"><i class="fa fa-check"></i><b>14.3.1</b> Terminology and notation</a></li>
+<li class="chapter" data-level="14.3.2" data-path="14-sampling.html"><a href="14-sampling.html#sampling-definitions"><i class="fa fa-check"></i><b>14.3.2</b> Statistical definitions</a></li>
+<li class="chapter" data-level="14.3.3" data-path="14-sampling.html"><a href="14-sampling.html#moral-of-the-story"><i class="fa fa-check"></i><b>14.3.3</b> The moral of the story</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="14-sampling.html"><a href="14-sampling.html#sampling-case-study"><i class="fa fa-check"></i><b>14.4</b> Case study: Polls</a></li>
+<li class="chapter" data-level="14.5" data-path="14-sampling.html"><a href="14-sampling.html#sampling-conclusion-central-limit-theorem"><i class="fa fa-check"></i><b>14.5</b> Central Limit Theorem</a></li>
+<li class="chapter" data-level="14.6" data-path="14-sampling.html"><a href="14-sampling.html#sampling-conclusion"><i class="fa fa-check"></i><b>14.6</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="14.6.1" data-path="14-sampling.html"><a href="14-sampling.html#sampling-conclusion-table"><i class="fa fa-check"></i><b>14.6.1</b> Sampling scenarios</a></li>
+<li class="chapter" data-level="14.6.2" data-path="14-sampling.html"><a href="14-sampling.html#theory-se"><i class="fa fa-check"></i><b>14.6.2</b> Theory-based standard-errors</a></li>
+<li class="chapter" data-level="14.6.3" data-path="14-sampling.html"><a href="14-sampling.html#additional-resources-2"><i class="fa fa-check"></i><b>14.6.3</b> Additional resources</a></li>
+<li class="chapter" data-level="14.6.4" data-path="14-sampling.html"><a href="14-sampling.html#whats-to-come-1"><i class="fa fa-check"></i><b>14.6.4</b> What’s to come?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html"><i class="fa fa-check"></i><b>15</b> Bootstrapping and Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#CI-packages"><i class="fa fa-check"></i>Needed packages</a></li>
+<li class="chapter" data-level="15.1" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#resampling-tactile"><i class="fa fa-check"></i><b>15.1</b> Pennies activity</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#what-is-the-average-year-on-us-pennies-in-2019"><i class="fa fa-check"></i><b>15.1.1</b> What is the average year on US pennies in 2019?</a></li>
+<li class="chapter" data-level="15.1.2" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#resampling-once"><i class="fa fa-check"></i><b>15.1.2</b> Resampling once</a></li>
+<li class="chapter" data-level="15.1.3" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#student-resamples"><i class="fa fa-check"></i><b>15.1.3</b> Resampling 35 times</a></li>
+<li class="chapter" data-level="15.1.4" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#ci-what-did-we-just-do"><i class="fa fa-check"></i><b>15.1.4</b> What did we just do?</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#resampling-simulation"><i class="fa fa-check"></i><b>15.2</b> Computer simulation of resampling</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#virtually-resampling-once"><i class="fa fa-check"></i><b>15.2.1</b> Virtually resampling once</a></li>
+<li class="chapter" data-level="15.2.2" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#bootstrap-35-replicates"><i class="fa fa-check"></i><b>15.2.2</b> Virtually resampling 35 times</a></li>
+<li class="chapter" data-level="15.2.3" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#bootstrap-1000-replicates"><i class="fa fa-check"></i><b>15.2.3</b> Virtually resampling 1000 times</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#ci-build-up"><i class="fa fa-check"></i><b>15.3</b> Understanding confidence intervals</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#percentile-method"><i class="fa fa-check"></i><b>15.3.1</b> Percentile method</a></li>
+<li class="chapter" data-level="15.3.2" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#se-method"><i class="fa fa-check"></i><b>15.3.2</b> Standard error method</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#bootstrap-process"><i class="fa fa-check"></i><b>15.4</b> Constructing confidence intervals</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#original-workflow"><i class="fa fa-check"></i><b>15.4.1</b> Original workflow</a></li>
+<li class="chapter" data-level="15.4.2" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#infer-workflow"><i class="fa fa-check"></i><b>15.4.2</b> <code>infer</code> package workflow</a></li>
+<li class="chapter" data-level="15.4.3" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#percentile-method-infer"><i class="fa fa-check"></i><b>15.4.3</b> Percentile method with <code>infer</code></a></li>
+<li class="chapter" data-level="15.4.4" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#infer-se"><i class="fa fa-check"></i><b>15.4.4</b> Standard error method with <code>infer</code></a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#one-prop-ci"><i class="fa fa-check"></i><b>15.5</b> Interpreting confidence intervals</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#ilyas-yohan"><i class="fa fa-check"></i><b>15.5.1</b> Did the net capture the fish?</a></li>
+<li class="chapter" data-level="15.5.2" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#shorthand"><i class="fa fa-check"></i><b>15.5.2</b> Precise and shorthand interpretation</a></li>
+<li class="chapter" data-level="15.5.3" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#ci-width"><i class="fa fa-check"></i><b>15.5.3</b> Width of confidence intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#case-study-two-prop-ci"><i class="fa fa-check"></i><b>15.6</b> Case study: Is yawning contagious?</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#mythbusters-study-data"><i class="fa fa-check"></i><b>15.6.1</b> <em>Mythbusters</em> study data</a></li>
+<li class="chapter" data-level="15.6.2" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#sampling-scenario"><i class="fa fa-check"></i><b>15.6.2</b> Sampling scenario</a></li>
+<li class="chapter" data-level="15.6.3" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#ci-build"><i class="fa fa-check"></i><b>15.6.3</b> Constructing the confidence interval</a></li>
+<li class="chapter" data-level="15.6.4" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#interpreting-the-confidence-interval"><i class="fa fa-check"></i><b>15.6.4</b> Interpreting the confidence interval</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#ci-conclusion"><i class="fa fa-check"></i><b>15.7</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#bootstrap-vs-sampling"><i class="fa fa-check"></i><b>15.7.1</b> Comparing bootstrap and sampling distributions</a></li>
+<li class="chapter" data-level="15.7.2" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#theory-ci"><i class="fa fa-check"></i><b>15.7.2</b> Theory-based confidence intervals</a></li>
+<li class="chapter" data-level="15.7.3" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#additional-resources-3"><i class="fa fa-check"></i><b>15.7.3</b> Additional resources</a></li>
+<li class="chapter" data-level="15.7.4" data-path="15-confidence-intervals.html"><a href="15-confidence-intervals.html#whats-to-come-2"><i class="fa fa-check"></i><b>15.7.4</b> What’s to come?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html"><i class="fa fa-check"></i><b>16</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#nhst-packages"><i class="fa fa-check"></i>Needed packages</a></li>
+<li class="chapter" data-level="16.1" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#ht-activity"><i class="fa fa-check"></i><b>16.1</b> Promotions activity</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#does-gender-affect-promotions-at-a-bank"><i class="fa fa-check"></i><b>16.1.1</b> Does gender affect promotions at a bank?</a></li>
+<li class="chapter" data-level="16.1.2" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#shuffling-once"><i class="fa fa-check"></i><b>16.1.2</b> Shuffling once</a></li>
+<li class="chapter" data-level="16.1.3" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#shuffling-16-times"><i class="fa fa-check"></i><b>16.1.3</b> Shuffling 16 times</a></li>
+<li class="chapter" data-level="16.1.4" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#ht-what-did-we-just-do"><i class="fa fa-check"></i><b>16.1.4</b> What did we just do?</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#understanding-ht"><i class="fa fa-check"></i><b>16.2</b> Understanding hypothesis tests</a></li>
+<li class="chapter" data-level="16.3" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#ht-infer"><i class="fa fa-check"></i><b>16.3</b> Conducting hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#infer-workflow-ht"><i class="fa fa-check"></i><b>16.3.1</b> <code>infer</code> package workflow</a></li>
+<li class="chapter" data-level="16.3.2" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#comparing-infer-workflows"><i class="fa fa-check"></i><b>16.3.2</b> Comparison with confidence intervals</a></li>
+<li class="chapter" data-level="16.3.3" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#only-one-test"><i class="fa fa-check"></i><b>16.3.3</b> “There is only one test”</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#ht-interpretation"><i class="fa fa-check"></i><b>16.4</b> Interpreting hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="16.4.1" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#trial"><i class="fa fa-check"></i><b>16.4.1</b> Two possible outcomes</a></li>
+<li class="chapter" data-level="16.4.2" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#types-of-errors"><i class="fa fa-check"></i><b>16.4.2</b> Types of errors</a></li>
+<li class="chapter" data-level="16.4.3" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#choosing-alpha"><i class="fa fa-check"></i><b>16.4.3</b> How do we choose alpha?</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#ht-case-study"><i class="fa fa-check"></i><b>16.5</b> Case study: Are action or romance movies rated higher?</a>
+<ul>
+<li class="chapter" data-level="16.5.1" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#imdb-data"><i class="fa fa-check"></i><b>16.5.1</b> IMDb ratings data</a></li>
+<li class="chapter" data-level="16.5.2" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#sampling-scenario-1"><i class="fa fa-check"></i><b>16.5.2</b> Sampling scenario</a></li>
+<li class="chapter" data-level="16.5.3" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#conducting-the-hypothesis-test"><i class="fa fa-check"></i><b>16.5.3</b> Conducting the hypothesis test</a></li>
+</ul></li>
+<li class="chapter" data-level="16.6" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#nhst-conclusion"><i class="fa fa-check"></i><b>16.6</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="16.6.1" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#theory-hypo"><i class="fa fa-check"></i><b>16.6.1</b> Theory-based hypothesis tests</a></li>
+<li class="chapter" data-level="16.6.2" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#when-inference-is-not-needed"><i class="fa fa-check"></i><b>16.6.2</b> When inference is not needed</a></li>
+<li class="chapter" data-level="16.6.3" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#problems-with-p-values"><i class="fa fa-check"></i><b>16.6.3</b> Problems with p-values</a></li>
+<li class="chapter" data-level="16.6.4" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#additional-resources-4"><i class="fa fa-check"></i><b>16.6.4</b> Additional resources</a></li>
+<li class="chapter" data-level="16.6.5" data-path="16-hypothesis-testing.html"><a href="16-hypothesis-testing.html#whats-to-come-4"><i class="fa fa-check"></i><b>16.6.5</b> What’s to come</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Data Modeling with moderndive</b></span></li>
+<li class="chapter" data-level="17" data-path="17-regression.html"><a href="17-regression.html"><i class="fa fa-check"></i><b>17</b> Basic Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="17-regression.html"><a href="17-regression.html#reg-packages"><i class="fa fa-check"></i>Needed packages</a></li>
+<li class="chapter" data-level="17.1" data-path="17-regression.html"><a href="17-regression.html#model1"><i class="fa fa-check"></i><b>17.1</b> One numerical explanatory variable</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="17-regression.html"><a href="17-regression.html#model1EDA"><i class="fa fa-check"></i><b>17.1.1</b> Exploratory data analysis</a></li>
+<li class="chapter" data-level="17.1.2" data-path="17-regression.html"><a href="17-regression.html#model1table"><i class="fa fa-check"></i><b>17.1.2</b> Simple linear regression</a></li>
+<li class="chapter" data-level="17.1.3" data-path="17-regression.html"><a href="17-regression.html#model1points"><i class="fa fa-check"></i><b>17.1.3</b> Observed/fitted values and residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="17-regression.html"><a href="17-regression.html#model2"><i class="fa fa-check"></i><b>17.2</b> One categorical explanatory variable</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="17-regression.html"><a href="17-regression.html#model2EDA"><i class="fa fa-check"></i><b>17.2.1</b> Exploratory data analysis</a></li>
+<li class="chapter" data-level="17.2.2" data-path="17-regression.html"><a href="17-regression.html#model2table"><i class="fa fa-check"></i><b>17.2.2</b> Linear regression</a></li>
+<li class="chapter" data-level="17.2.3" data-path="17-regression.html"><a href="17-regression.html#model2points"><i class="fa fa-check"></i><b>17.2.3</b> Observed/fitted values and residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="17-regression.html"><a href="17-regression.html#reg-related-topics"><i class="fa fa-check"></i><b>17.3</b> Related topics</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="17-regression.html"><a href="17-regression.html#correlation-is-not-causation"><i class="fa fa-check"></i><b>17.3.1</b> Correlation is not necessarily causation</a></li>
+<li class="chapter" data-level="17.3.2" data-path="17-regression.html"><a href="17-regression.html#leastsquares"><i class="fa fa-check"></i><b>17.3.2</b> Best-fitting line</a></li>
+<li class="chapter" data-level="17.3.3" data-path="17-regression.html"><a href="17-regression.html#underthehood"><i class="fa fa-check"></i><b>17.3.3</b> <code>get_regression_x()</code> functions</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="17-regression.html"><a href="17-regression.html#reg-conclusion"><i class="fa fa-check"></i><b>17.4</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="17-regression.html"><a href="17-regression.html#additional-resources-basic-regression"><i class="fa fa-check"></i><b>17.4.1</b> Additional resources</a></li>
+<li class="chapter" data-level="17.4.2" data-path="17-regression.html"><a href="17-regression.html#whats-to-come-5"><i class="fa fa-check"></i><b>17.4.2</b> What’s to come?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html"><i class="fa fa-check"></i><b>18</b> Inference for Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#inf-packages"><i class="fa fa-check"></i>Needed packages</a></li>
+<li class="chapter" data-level="18.1" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#regression-refresher"><i class="fa fa-check"></i><b>18.1</b> Regression refresher</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#teaching-evaluations-analysis"><i class="fa fa-check"></i><b>18.1.1</b> Teaching evaluations analysis</a></li>
+<li class="chapter" data-level="18.1.2" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#sampling-scenario-2"><i class="fa fa-check"></i><b>18.1.2</b> Sampling scenario</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#regression-interp"><i class="fa fa-check"></i><b>18.2</b> Interpreting regression tables</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#regression-se"><i class="fa fa-check"></i><b>18.2.1</b> Standard error</a></li>
+<li class="chapter" data-level="18.2.2" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#regression-test-statistic"><i class="fa fa-check"></i><b>18.2.2</b> Test statistic</a></li>
+<li class="chapter" data-level="18.2.3" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#p-value"><i class="fa fa-check"></i><b>18.2.3</b> p-value</a></li>
+<li class="chapter" data-level="18.2.4" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#confidence-interval"><i class="fa fa-check"></i><b>18.2.4</b> Confidence interval</a></li>
+<li class="chapter" data-level="18.2.5" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#regression-table-computation"><i class="fa fa-check"></i><b>18.2.5</b> How does R compute the table?</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#regression-conditions"><i class="fa fa-check"></i><b>18.3</b> Conditions for inference for regression</a>
+<ul>
+<li class="chapter" data-level="18.3.1" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#residuals-refresher"><i class="fa fa-check"></i><b>18.3.1</b> Residuals refresher</a></li>
+<li class="chapter" data-level="18.3.2" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#linearity-of-relationship"><i class="fa fa-check"></i><b>18.3.2</b> Linearity of relationship</a></li>
+<li class="chapter" data-level="18.3.3" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#independence-of-residuals"><i class="fa fa-check"></i><b>18.3.3</b> Independence of residuals</a></li>
+<li class="chapter" data-level="18.3.4" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#normality-of-residuals"><i class="fa fa-check"></i><b>18.3.4</b> Normality of residuals</a></li>
+<li class="chapter" data-level="18.3.5" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#equality-of-variance"><i class="fa fa-check"></i><b>18.3.5</b> Equality of variance</a></li>
+<li class="chapter" data-level="18.3.6" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#what-is-the-conclusion"><i class="fa fa-check"></i><b>18.3.6</b> What’s the conclusion?</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#infer-regression"><i class="fa fa-check"></i><b>18.4</b> Simulation-based inference for regression</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#confidence-interval-for-slope"><i class="fa fa-check"></i><b>18.4.1</b> Confidence interval for slope</a></li>
+<li class="chapter" data-level="18.4.2" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#hypothesis-test-for-slope"><i class="fa fa-check"></i><b>18.4.2</b> Hypothesis test for slope</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#inference-conclusion"><i class="fa fa-check"></i><b>18.5</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="18.5.1" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#theory-regression"><i class="fa fa-check"></i><b>18.5.1</b> Theory-based inference for regression</a></li>
+<li class="chapter" data-level="18.5.2" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#summary-of-statistical-inference"><i class="fa fa-check"></i><b>18.5.2</b> Summary of statistical inference</a></li>
+<li class="chapter" data-level="18.5.3" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#additional-resources-5"><i class="fa fa-check"></i><b>18.5.3</b> Additional resources</a></li>
+<li class="chapter" data-level="18.5.4" data-path="18-inference-for-regression.html"><a href="18-inference-for-regression.html#whats-to-come-6"><i class="fa fa-check"></i><b>18.5.4</b> What’s to come</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html"><i class="fa fa-check"></i><b>19</b> Multiple Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#mult-reg-packages"><i class="fa fa-check"></i>Needed packages</a></li>
+<li class="chapter" data-level="19.1" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model4"><i class="fa fa-check"></i><b>19.1</b> One numerical and one categorical explanatory variable</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model4EDA"><i class="fa fa-check"></i><b>19.1.1</b> Exploratory data analysis</a></li>
+<li class="chapter" data-level="19.1.2" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model4interactiontable"><i class="fa fa-check"></i><b>19.1.2</b> Interaction model</a></li>
+<li class="chapter" data-level="19.1.3" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model4table"><i class="fa fa-check"></i><b>19.1.3</b> Parallel slopes model</a></li>
+<li class="chapter" data-level="19.1.4" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model4points"><i class="fa fa-check"></i><b>19.1.4</b> Observed/fitted values and residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model3"><i class="fa fa-check"></i><b>19.2</b> Two numerical explanatory variables</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model3EDA"><i class="fa fa-check"></i><b>19.2.1</b> Exploratory data analysis</a></li>
+<li class="chapter" data-level="19.2.2" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model3table"><i class="fa fa-check"></i><b>19.2.2</b> Regression plane</a></li>
+<li class="chapter" data-level="19.2.3" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model3points"><i class="fa fa-check"></i><b>19.2.3</b> Observed/fitted values and residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#mult-reg-related-topics"><i class="fa fa-check"></i><b>19.3</b> Related topics</a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#model-selection"><i class="fa fa-check"></i><b>19.3.1</b> Model selection using visualizations</a></li>
+<li class="chapter" data-level="19.3.2" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#rsquared"><i class="fa fa-check"></i><b>19.3.2</b> Model selection using R-squared</a></li>
+<li class="chapter" data-level="19.3.3" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#correlationcoefficient2"><i class="fa fa-check"></i><b>19.3.3</b> Correlation coefficient</a></li>
+<li class="chapter" data-level="19.3.4" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#simpsonsparadox"><i class="fa fa-check"></i><b>19.3.4</b> Simpson’s Paradox</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#mult-reg-conclusion"><i class="fa fa-check"></i><b>19.4</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="19.4.1" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#additional-resources-6"><i class="fa fa-check"></i><b>19.4.1</b> Additional resources</a></li>
+<li class="chapter" data-level="19.4.2" data-path="19-multiple-regression.html"><a href="19-multiple-regression.html#whats-to-come-7"><i class="fa fa-check"></i><b>19.4.2</b> What’s to come?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Inference via Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<html>
+<img src='https://moderndive.com/wide_format.png' alt="ModernDive">
+</html>
+<div id="PROBRULES" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Probability Rules<a href="2-PROBRULES.html#PROBRULES" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="objectives-1" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Objectives<a href="2-PROBRULES.html#objectives-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Define and use properly in context all new terminology related to probability, including: <em>sample space</em>, <em>outcome</em>, <em>event</em>, <em>subset</em>, <em>intersection</em>, <em>union</em>, <em>complement</em>, <em>probability</em>, <em>mutually exclusive</em>, <em>exhaustive</em>, <em>independent</em>, <em>multiplication rule</em>, <em>permutation</em>, <em>combination</em>.</p></li>
+<li><p>Apply basic probability and counting rules to find probabilities.</p></li>
+<li><p>Describe the basic axioms of probability.</p></li>
+<li><p>Use <code>R</code> to calculate and simulate probabilities of events.</p></li>
+</ol>
+</div>
+<div id="probability-vs-statistics" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Probability vs Statistics<a href="2-PROBRULES.html#probability-vs-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As a review, remember this book is divided into four general blocks: data collection/summary, probability models, inference and statistical modeling/prediction. This second block, probability, is the study of stochastic (random) processes and their properties. Specifically, we will explore random experiments. As its name suggests, a random experiment is an experiment whose outcome is not predictable with exact certainty. In the statistical models we develop in the last two blocks of this book, we will use other variables to explain the variance of the outcome of interest. Any remaining variance is modeled with probability models.</p>
+<p>Even though an outcome is determined by chance, this does not mean that we know nothing about the random experiment. Our favorite simple example is that of a coin flip. If we flip a coin, the possible outcomes are heads and tails. We don’t know for sure what outcome will occur, but this doesn’t mean we don’t know anything about the experiment. If we assume the coin is fair, we know that each outcome is equally likely. Also, we know that if we flip the coin 100 times (independently), we are likely, the highest frequency event, to see around 50 heads, and very unlikely to see 10 heads or fewer.</p>
+<p>It is important to distinguish probability from inference and modeling. In probability, we consider a known random experiment, including knowing the parameters, and answer questions about what we expect to see from this random experiment. In statistics (inference and modeling), we consider data (the results of a mysterious random experiment) and infer about the underlying process. For example, suppose we have a coin and we are unsure whether this coin is fair or unfair, the parameter is unknown. We flipped it 20 times and it landed on heads 14 times. Inferential statistics will help us answer questions about the underlying process (could this coin be unfair?).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:prob-stats"></span>
+<img src="figures/Prob_Stats.png" alt="A graphical representation of probability and statistics. In probability, we describe what we expect to happen if we know that underlying process; in statistics, we don't know the underlying process, and must infer based on representative samples." width="\textwidth" />
+<p class="caption">
+FIGURE 2.1: A graphical representation of probability and statistics. In probability, we describe what we expect to happen if we know that underlying process; in statistics, we don’t know the underlying process, and must infer based on representative samples.
+</p>
+</div>
+<p>This block (10 chapters or so) is devoted to the study of random experiments. First, we will explore simple experiments, counting rule problems, and conditional probability. Next, we will introduce the concept of a random variable and the properties of random variables. Following this, we will cover common distributions of discrete and continuous random variables. We will end the block on multivariate probability (joint distributions and covariance).</p>
+</div>
+<div id="basic-probability-terms" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Basic probability terms<a href="2-PROBRULES.html#basic-probability-terms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will start our work with some definitions and examples.</p>
+<div id="sample-space" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Sample space<a href="2-PROBRULES.html#sample-space" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose we have a random experiment. The <em>sample space</em> of this experiment, <span class="math inline">\(S\)</span>, is the set of all possible results of that experiment. For example, in the case of a coin flip, we could write <span class="math inline">\(S=\{H,T\}\)</span>. Each element of the sample space is considered an <em>outcome</em>. An <em>event</em> is a set of outcomes, it is a subset of the sample space.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Let’s let <code>R</code> flip a coin for us and record the number of heads and tails. We will have <code>R</code> flip the coin twice. What is the sample space, what is an example of an outcome, and what is an example of an event.</p>
+</blockquote>
+<p>We will load the <strong>mosaic</strong> package as it has a function <code>rflip()</code> that will simulate flipping a coin.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="2-PROBRULES.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaic)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="2-PROBRULES.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">18</span>)</span>
+<span id="cb68-2"><a href="2-PROBRULES.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rflip</span>(<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>
+Flipping 2 coins [ Prob(Heads) = 0.5 ] ...
+
+H H
+
+Number of Heads: 2 [Proportion Heads: 1]</code></pre>
+<p>The sample space is <span class="math inline">\(S=\{HH, TH, HT, TT\}\)</span>, an example of an outcome is <span class="math inline">\(HH\)</span> which we see in the output from <code>R</code>, and finally an example of an event is the number of heads, which in this case takes on the values 0, 1, and 2. Another example of an event is “At least one heads”. In this case the event would be <span class="math inline">\(\{HH,TH, HT\}\)</span>. Also notice that <span class="math inline">\(TH\)</span> is different from <span class="math inline">\(HT\)</span> as an outcome; this is because those are different outcomes from flipping a coin twice.</p>
+<blockquote>
+<p><em>Example of Event</em>:<br />
+Suppose you arrive at a rental car counter and they show you a list of available vehicles, and one is picked for you at random. The sample space in this experiment is
+<span class="math display">\[
+S=\{\mbox{red sedan}, \mbox{blue sedan}, \mbox{red truck}, \mbox{grey truck}, \mbox{grey SUV}, \mbox{black SUV}, \mbox{blue SUV}\}.
+\]</span></p>
+</blockquote>
+<p>Each vehicle represents a possible outcome of the experiment. Let <span class="math inline">\(A\)</span> be the event that a blue vehicle is selected. This event contains the outcomes <code>blue sedan</code> and <code>blue SUV</code>.</p>
+</div>
+<div id="union-and-intersection" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Union and intersection<a href="2-PROBRULES.html#union-and-intersection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose we have two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(A\)</span> is considered a <em>subset</em> of <span class="math inline">\(B\)</span> if all of the outcomes of <span class="math inline">\(A\)</span> are also contained in <span class="math inline">\(B\)</span>. This is denoted as <span class="math inline">\(A \subset B\)</span>.</p></li>
+<li><p>The <em>intersection</em> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is all of the outcomes contained in both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. This is denoted as <span class="math inline">\(A \cap B\)</span>.</p></li>
+<li><p>The <em>union</em> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is all of the outcomes contained in either <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>, or both. This is denoted as <span class="math inline">\(A \cup B\)</span>.</p></li>
+<li><p>The <em>complement</em> of <span class="math inline">\(A\)</span> is all of the outcomes not contained in <span class="math inline">\(A\)</span>. This is denoted as <span class="math inline">\(A^C\)</span> or <span class="math inline">\(A&#39;\)</span>.</p></li>
+</ol>
+<p>Note: Here we are treating events as sets and the above definitions are basic set operations.</p>
+<p>It is sometimes helpful when reading probability notation to think of Union as an <em>or</em> and Intersection as an <em>and</em>.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Consider our rental car example above. Let <span class="math inline">\(A\)</span> be the event that a blue vehicle is selected, let <span class="math inline">\(B\)</span> be the event that a black vehicle is selected, and let <span class="math inline">\(C\)</span> be the event that an SUV is selected.</p>
+</blockquote>
+<p>First, let’s list all of the outcomes of each event. <span class="math inline">\(A = \{\mbox{blue sedan},\mbox{blue SUV}\}\)</span>, <span class="math inline">\(B=\{\mbox{black SUV}\}\)</span>, and <span class="math inline">\(C= \{\mbox{grey SUV}, \mbox{black SUV}, \mbox{blue SUV}\}\)</span>.</p>
+<p>Since all outcomes in <span class="math inline">\(B\)</span> are contained in <span class="math inline">\(C\)</span>, we know that <span class="math inline">\(B\)</span> is a subset of <span class="math inline">\(C\)</span>, or <span class="math inline">\(B\subset C\)</span>. Also, since <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have no outcomes in common, <span class="math inline">\(A \cap B = \emptyset\)</span>. Note that <span class="math inline">\(\emptyset = \{ \}\)</span> is the empty set and contains no elements. Further, <span class="math inline">\(A \cup C = \{\mbox{blue sedan}, \mbox{grey SUV}, \mbox{black SUV}, \mbox{blue SUV}\}\)</span>.</p>
+</div>
+</div>
+<div id="probability" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Probability<a href="2-PROBRULES.html#probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Probability</em> is a number assigned to an event or outcome that describes how likely it is to occur. A probability model assigns a probability to each element of the sample space. What makes a probability model is not just the values assigned to each element but the idea this model contains all the information about the outcomes and there are no other explanatory variables involved.</p>
+<p>A probability model can be thought of as a function that maps outcomes, or events, to a real number in the interval <span class="math inline">\([0,1]\)</span>.</p>
+<p>There are some basic axioms of probability you should know, although this list is not complete. Let <span class="math inline">\(S\)</span> be the sample space of a random experiment and let <span class="math inline">\(A\)</span> be an event where <span class="math inline">\(A\subset S\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\mbox{P}(A) \geq 0\)</span>.</p></li>
+<li><p><span class="math inline">\(\mbox{P}(S) = 1\)</span>.</p></li>
+</ol>
+<p>These two axioms essentially say that probability must be positive, and the probability of all outcomes must sum to 1.</p>
+<div id="probability-properties" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Probability properties<a href="2-PROBRULES.html#probability-properties" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be events in a random experiment. Most of these can be proven fairly easily.</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\mbox{P}(\emptyset) = 0\)</span></p></li>
+<li><p><span class="math inline">\(\mbox{P}(A&#39;) = 1 - \mbox{P}(A)\)</span> We used this in the case study.</p></li>
+<li><p>If <span class="math inline">\(A\subset B\)</span>, then <span class="math inline">\(\mbox{P}(A)\leq \mbox{P}(B)\)</span>.</p></li>
+<li><p><span class="math inline">\(\mbox{P}(A\cup B) = \mbox{P}(A)+\mbox{P}(B)-\mbox{P}(A\cap B)\)</span>. This property can be generalized to more than two events. The intersection is subtracted because outcomes in both events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> get counted twice in the first sum.</p></li>
+<li><p>Law of Total Probability: Let <span class="math inline">\(B_1, B_2,...,B_n\)</span> be <strong>mutually exclusive</strong>, this means disjoint or no outcomes in common, and <strong>exhaustive</strong>, this means the union of all the events labeled with a <span class="math inline">\(B\)</span> is the sample space. Then</p></li>
+</ol>
+<p><span class="math display">\[
+\mbox{P}(A)=\mbox{P}(A\cap B_1)+\mbox{P}(A\cap B_2)+...+\mbox{P}(A\cap B_n)
+\]</span></p>
+<p>A specific application of this law appears in Bayes’ Rule (more to follow). It says that <span class="math inline">\(\mbox{P}(A)=\mbox{P}(A \cap B)+\mbox{P}(A \cap B&#39;)\)</span>. Essentially, it points out that <span class="math inline">\(A\)</span> can be partitioned into two parts: 1) everything in <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> and 2) everything in <span class="math inline">\(A\)</span> and not in <span class="math inline">\(B\)</span>.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Consider rolling a six sided die. Let event <span class="math inline">\(A\)</span> be the number showing is less than 5. Let event <span class="math inline">\(B\)</span> be the number is even. Then</p>
+</blockquote>
+<p><span class="math display">\[\mbox{P}(A)=\mbox{P}(A \cap B) + \mbox{P}(A \cap B&#39;)\]</span></p>
+<p><span class="math display">\[
+\mbox{P}(&lt; 5) = \mbox{P}(&lt;5 \cap Even) + \mbox{P}(&lt;5 \cap Odd)
+\]</span></p>
+<ol start="6" style="list-style-type: decimal">
+<li>DeMorgan’s Laws:
+<span class="math display">\[
+\mbox{P}((A \cup B)&#39;) = \mbox{P}(A&#39; \cap B&#39;)
+\]</span>
+<span class="math display">\[
+\mbox{P}((A \cap B)&#39;) = \mbox{P}(A&#39; \cup B&#39;)
+\]</span></li>
+</ol>
+</div>
+<div id="equally-likely-scenarios" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Equally likely scenarios<a href="2-PROBRULES.html#equally-likely-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In some random experiments, outcomes can be defined such that each individual outcome is equally likely. In this case, probability becomes a counting problem. Let <span class="math inline">\(A\)</span> be an event in an experiment where each outcome is equally likely.
+<span class="math display">\[
+\mbox{P}(A)=\frac{\mbox{\# of outcomes in A}}{\mbox{\# of outcomes in S}}
+\]</span></p>
+<blockquote>
+<p><em>Example</em>:<br />
+Suppose a family has three children, with each child being either a boy (B) or girl (G). Assume that the likelihood of boys and girls are equal and <strong>independent</strong>, this is the idea that the probability of the gender of the second child does not change based on the gender of the first child. The sample space can be written as:
+<span class="math display">\[
+S=\{\mbox{BBB},\mbox{BBG},\mbox{BGB},\mbox{BGG},\mbox{GBB},\mbox{GBG},\mbox{GGB},\mbox{GGG}\}
+\]</span>
+What is the probability that the family has exactly 2 girls?</p>
+</blockquote>
+<p>This only happens in three ways: BGG, GBG, and GGB. Thus, the probability of exactly 2 girls is 3/8 or 0.375.</p>
+</div>
+<div id="using-r-equally-likely-scenarios" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Using <code>R</code> (Equally likely scenarios)<a href="2-PROBRULES.html#using-r-equally-likely-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The previous example above is an example of an “Equally Likely” scenario, where the sample space of a random experiment contains a list of outcomes that are equally likely. In these cases, we can sometimes use <code>R</code> to list out the possible outcomes and count them to determine probability. We can also use <code>R</code> to simulate.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Use <code>R</code> to simulate the family of three children where each child has the same probability of being a boy or a girl.</p>
+</blockquote>
+<p>Instead of writing our own function, we can use <code>rflip()</code> in the <strong>mosaic</strong> package. We will let <span class="math inline">\(H\)</span> stand for girl.</p>
+<p>First simulate one family.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="2-PROBRULES.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">73</span>)</span>
+<span id="cb70-2"><a href="2-PROBRULES.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rflip</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>
+Flipping 3 coins [ Prob(Heads) = 0.5 ] ...
+
+T T H
+
+Number of Heads: 1 [Proportion Heads: 0.333333333333333]</code></pre>
+<p>In this case we got 1 girl. Next we will use the <code>do()</code> function to repeat this simulation.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="2-PROBRULES.html#cb72-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">10000</span>)<span class="sc">*</span><span class="fu">rflip</span>(<span class="dv">3</span>)</span>
+<span id="cb72-2"><a href="2-PROBRULES.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
+<pre><code>  n heads tails      prop
+1 3     1     2 0.3333333
+2 3     3     0 1.0000000
+3 3     3     0 1.0000000
+4 3     3     0 1.0000000
+5 3     1     2 0.3333333
+6 3     1     2 0.3333333</code></pre>
+<p>Next we can visualize the distribution of the number of girls, heads, in Figure <a href="2-PROBRULES.html#fig:bar81-fig">2.2</a>.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="2-PROBRULES.html#cb74-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="2-PROBRULES.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_bar</span>(<span class="sc">~</span>heads) <span class="sc">%&gt;%</span></span>
+<span id="cb74-3"><a href="2-PROBRULES.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb74-4"><a href="2-PROBRULES.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x =</span> <span class="st">&quot;NUmber of girls&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:bar81-fig"></span>
+<img src="ModernDive_files/figure-html/bar81-fig-1.png" alt="Number of girls in a family of size 3." width="\textwidth" />
+<p class="caption">
+FIGURE 2.2: Number of girls in a family of size 3.
+</p>
+</div>
+<p>Finally we can estimate the probability of exactly 2 girls. We need the <strong>tidyverse</strong> library.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="2-PROBRULES.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="2-PROBRULES.html#cb76-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="2-PROBRULES.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(heads <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb76-3"><a href="2-PROBRULES.html#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="dv">10000</span>)</span></code></pre></div>
+<pre><code>    prob
+1 0.3782</code></pre>
+<p>Or slightly different code.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="2-PROBRULES.html#cb78-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb78-2"><a href="2-PROBRULES.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(heads) <span class="sc">%&gt;%</span></span>
+<span id="cb78-3"><a href="2-PROBRULES.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<pre><code>  heads    n   prop
+1     0 1241 0.1241
+2     1 3786 0.3786
+3     2 3782 0.3782
+4     3 1191 0.1191</code></pre>
+<p>Not a bad estimate of the exact probability.</p>
+<p>Let’s now use an example of cards to simulate some probabilities as well as learning more about counting. The file <code>Cards.csv</code> contains the data for cards from a 52 card deck. Let’s read it in and summarize.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="2-PROBRULES.html#cb80-1" aria-hidden="true" tabindex="-1"></a>Cards <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/Cards.csv&quot;</span>)</span>
+<span id="cb80-2"><a href="2-PROBRULES.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(Cards)</span></code></pre></div>
+<pre><code>
+categorical variables:  
+  name     class levels  n missing
+1 rank character     13 52       0
+2 suit character      4 52       0
+                                   distribution
+1 10 (7.7%), 2 (7.7%), 3 (7.7%) ...            
+2 Club (25%), Diamond (25%) ...                
+
+quantitative variables:  
+   name   class        min         Q1     median         Q3        max
+1 probs numeric 0.01923077 0.01923077 0.01923077 0.01923077 0.01923077
+        mean sd  n missing
+1 0.01923077  0 52       0</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="2-PROBRULES.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Cards)</span></code></pre></div>
+<pre><code># A tibble: 6 × 3
+  rank  suit   probs
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+1 2     Club  0.0192
+2 3     Club  0.0192
+3 4     Club  0.0192
+4 5     Club  0.0192
+5 6     Club  0.0192
+6 7     Club  0.0192</code></pre>
+<p>We can see 4 suits, and 13 ranks, the value on the face of the card.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Suppose we draw one card out of a standard deck. Let <span class="math inline">\(A\)</span> be the event that we draw a Club. Let <span class="math inline">\(B\)</span> be the event that we draw a 10 or a face card (Jack, Queen, King or Ace). We can use <code>R</code> to define these events and find probabilities.</p>
+</blockquote>
+<p>Let’s find all the Clubs.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="2-PROBRULES.html#cb84-1" aria-hidden="true" tabindex="-1"></a>Cards <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="2-PROBRULES.html#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(suit <span class="sc">==</span> <span class="st">&quot;Club&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb84-3"><a href="2-PROBRULES.html#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rank, suit)</span></code></pre></div>
+<pre><code># A tibble: 13 × 2
+   rank  suit 
+   &lt;chr&gt; &lt;chr&gt;
+ 1 2     Club 
+ 2 3     Club 
+ 3 4     Club 
+ 4 5     Club 
+ 5 6     Club 
+ 6 7     Club 
+ 7 8     Club 
+ 8 9     Club 
+ 9 10    Club 
+10 J     Club 
+11 Q     Club 
+12 K     Club 
+13 A     Club </code></pre>
+<p>So just by counting, we find the probability of drawing a Club is <span class="math inline">\(\frac{13}{52}\)</span> or 0.25.</p>
+<p>We can do this by simulation, this is over kill but gets the idea of simulation across.</p>
+<p>Remember, ask what do we want <code>R</code> to do and what does <code>R</code> need to do this?</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="2-PROBRULES.html#cb86-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">10000</span>)<span class="sc">*</span><span class="fu">sample</span>(Cards, <span class="dv">1</span>)</span>
+<span id="cb86-2"><a href="2-PROBRULES.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
+<pre><code># A tibble: 6 × 6
+  rank  suit   probs orig.id  .row .index
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;
+1 9     Spade 0.0192 47          1      1
+2 5     Club  0.0192 4           1      2
+3 5     Spade 0.0192 43          1      3
+4 7     Heart 0.0192 32          1      4
+5 4     Club  0.0192 3           1      5
+6 A     Spade 0.0192 52          1      6</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="2-PROBRULES.html#cb88-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb88-2"><a href="2-PROBRULES.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(suit <span class="sc">==</span> <span class="st">&quot;Club&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb88-3"><a href="2-PROBRULES.html#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="dv">10000</span>)</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
+   prob
+  &lt;dbl&gt;
+1 0.243</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="2-PROBRULES.html#cb90-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="2-PROBRULES.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(suit) <span class="sc">%&gt;%</span></span>
+<span id="cb90-3"><a href="2-PROBRULES.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<pre><code># A tibble: 4 × 3
+  suit        n  prob
+  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt;
+1 Club     2432 0.243
+2 Diamond  2558 0.256
+3 Heart    2417 0.242
+4 Spade    2593 0.259</code></pre>
+<p>Now let’s count the number of outcomes in <span class="math inline">\(B\)</span>.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="2-PROBRULES.html#cb92-1" aria-hidden="true" tabindex="-1"></a>Cards <span class="sc">%&gt;%</span></span>
+<span id="cb92-2"><a href="2-PROBRULES.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb92-3"><a href="2-PROBRULES.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rank, suit)</span></code></pre></div>
+<pre><code># A tibble: 20 × 2
+   rank  suit   
+   &lt;chr&gt; &lt;chr&gt;  
+ 1 10    Club   
+ 2 J     Club   
+ 3 Q     Club   
+ 4 K     Club   
+ 5 A     Club   
+ 6 10    Diamond
+ 7 J     Diamond
+ 8 Q     Diamond
+ 9 K     Diamond
+10 A     Diamond
+11 10    Heart  
+12 J     Heart  
+13 Q     Heart  
+14 K     Heart  
+15 A     Heart  
+16 10    Spade  
+17 J     Spade  
+18 Q     Spade  
+19 K     Spade  
+20 A     Spade  </code></pre>
+<p>So just by counting, we find the probability of drawing a 10 or greater is <span class="math inline">\(\frac{20}{52}\)</span> or 0.3846154.</p>
+<blockquote>
+<p><strong>Exercise</strong>:<br />
+Using simulation to estimate the probability of 10 or higher.</p>
+</blockquote>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="2-PROBRULES.html#cb94-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">10000</span>)<span class="sc">*</span><span class="fu">sample</span>(Cards, <span class="dv">1</span>)</span>
+<span id="cb94-2"><a href="2-PROBRULES.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
+<pre><code># A tibble: 6 × 6
+  rank  suit   probs orig.id  .row .index
+  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;
+1 10    Heart 0.0192 35          1      1
+2 6     Heart 0.0192 31          1      2
+3 8     Spade 0.0192 46          1      3
+4 J     Heart 0.0192 36          1      4
+5 Q     Spade 0.0192 50          1      5
+6 10    Club  0.0192 9           1      6</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="2-PROBRULES.html#cb96-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb96-2"><a href="2-PROBRULES.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb96-3"><a href="2-PROBRULES.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="dv">10000</span>)</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
+   prob
+  &lt;dbl&gt;
+1 0.389</code></pre>
+<p>Notice that this code is not robust to change the number of simulations. If we change from 10000, then we have to change the denominator in the <code>summarize()</code> function. We can change this by using <code>mutate()</code> instead of <code>filter()</code>.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="2-PROBRULES.html#cb98-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="2-PROBRULES.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">face =</span> rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb98-3"><a href="2-PROBRULES.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">mean</span>(face))</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
+   prob
+  &lt;dbl&gt;
+1 0.389</code></pre>
+<p>Notice that in the <code>mutate()</code> function, we are creating a new logical variable called <code>face</code>. This variable takes on the values of TRUE and FALSE. In the next line we use a <code>summarize()</code> command with the function <code>mean()</code>. In <code>R</code> a function that requires numeric input takes a logical variable and converts the TRUE into 1 and the FALSE into 0. Thus the <code>mean()</code> will find the proportion of TRUE values and that is why we report it as a probability.</p>
+<p>Next, let’s find a card that is 10 or greater <strong>and</strong> a club.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="2-PROBRULES.html#cb100-1" aria-hidden="true" tabindex="-1"></a>Cards <span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="2-PROBRULES.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>), suit <span class="sc">==</span> <span class="st">&quot;Club&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb100-3"><a href="2-PROBRULES.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rank, suit)</span></code></pre></div>
+<pre><code># A tibble: 5 × 2
+  rank  suit 
+  &lt;chr&gt; &lt;chr&gt;
+1 10    Club 
+2 J     Club 
+3 Q     Club 
+4 K     Club 
+5 A     Club </code></pre>
+<p>We find the probability of drawing a 10 or greater club is <span class="math inline">\(\frac{5}{52}\)</span> or 0.0961538.</p>
+<blockquote>
+<p><strong>Exercise</strong>:<br />
+Simulate drawing one card and estimate the probability of a club that is 10 or greater.</p>
+</blockquote>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="2-PROBRULES.html#cb102-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="2-PROBRULES.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">face =</span> (rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>)) <span class="sc">&amp;</span> </span>
+<span id="cb102-3"><a href="2-PROBRULES.html#cb102-3" aria-hidden="true" tabindex="-1"></a>           (suit <span class="sc">==</span> <span class="st">&quot;Club&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb102-4"><a href="2-PROBRULES.html#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">mean</span>(face))</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
+    prob
+   &lt;dbl&gt;
+1 0.0963</code></pre>
+</div>
+<div id="note" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> Note<a href="2-PROBRULES.html#note" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We have been using <code>R</code> to count the number of outcomes in an event. This helped us to determine probabilities. We limited the problems to simple ones. In our cards example, it would be more interesting for us to explore more complex events such as drawing 5 cards from a standard deck. Each draw of 5 cards is equally likely, so in order to find the probability of a flush (5 cards of the same suit), we could simply list all the possible flushes and compare that to the sample space. Because of the large number of possible outcomes, this becomes difficult. Thus we need to explore counting rules in more detail to help us solve more complex problems. In this book, we will limit our discussion to three basic cases. You should know that there are entire courses on discrete math and counting rules, so we will still be limited in our methods and the type of problems we can solve in this book.</p>
+</div>
+</div>
+<div id="counting-rules" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Counting rules<a href="2-PROBRULES.html#counting-rules" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are three types of counting problems we will consider. In each case, the multiplication rule is being used and all that changes is whether an element is allowed to be reused, replacement, and whether the order of selection matters. This latter question is difficult. Each case will be demonstrated with an example.</p>
+<div id="multiplication-rule-1-order-matters-sample-with-replacement" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Multiplication rule 1: Order matters, sample with replacement<a href="2-PROBRULES.html#multiplication-rule-1-order-matters-sample-with-replacement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The multiplication rule is at the center of each of the three methods. In this first case we are using the idea that order matters and items can be reused. Let’s use an example to help.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+A license plate consists of three numeric digits (0-9) followed by three single letters (A-Z). How many possible license plates exist?</p>
+</blockquote>
+<p>We can divide this problem into two sections. In the numeric section, we are selecting 3 objects from 10, with replacement. This means that a number can be used more than once. Order clearly matters because a license plate starting with “432” is distinct from a license plate starting with “234”. There are <span class="math inline">\(10^3 = 1000\)</span> ways to select the first three digits; 10 for the first, 10 for the second, and 10 for the third. Why do you multiply and not add?<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p>In the alphabet section, we are selecting 3 objects from 26, where order matters. Thus, there are <span class="math inline">\(26^3=17576\)</span> ways to select the last three letters of the plate. Combined, there are <span class="math inline">\(10^3 \times 26^3 = 17576000\)</span> ways to select license plates. Visually,
+<span class="math display">\[
+\underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} = 17,576,000
+\]</span></p>
+<p>Next we are going to use this new counting method to find a probability.</p>
+<blockquote>
+<p><em>Exercise</em>:<br />
+What is the probability a license plate starts with the number “8” or “0” and ends with the letter “B”?</p>
+</blockquote>
+<p>In order to find this probability, we simply need to determine the number of ways to select a license plate starting with “8” or “0” and ending with the letter “B”. We can visually represent this event:
+<span class="math display">\[
+\underbrace{\underline{\quad 2 \quad }}_\text{8 or 0} \times \underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} \times \underbrace{\underline{\quad 1 \quad }}_\text{B} = 135,200
+\]</span></p>
+<p>Dividing this number by the total number of possible license plates yields the probability of this event occurring.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="2-PROBRULES.html#cb104-1" aria-hidden="true" tabindex="-1"></a>denom <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">26</span></span>
+<span id="cb104-2"><a href="2-PROBRULES.html#cb104-2" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">1</span></span>
+<span id="cb104-3"><a href="2-PROBRULES.html#cb104-3" aria-hidden="true" tabindex="-1"></a>num<span class="sc">/</span>denom</span></code></pre></div>
+<pre><code>[1] 0.007692308</code></pre>
+<p>The probability of obtaining a license plate starting with “8” or “0” and ending with “B” is 0.0077. Simulating this would be difficult because we would need special functions to check the first number and last letter. This gets into <strong>text mining</strong> an important subject in data science but unfortunately we don’t have much time in this book for the topic.</p>
+</div>
+<div id="multiplication-rule-2-permutation-order-matters-sampling-without-replacement" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Multiplication rule 2 (Permutation): Order Matters, Sampling Without Replacement<a href="2-PROBRULES.html#multiplication-rule-2-permutation-order-matters-sampling-without-replacement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a random experiment where we sample from a group of size <span class="math inline">\(n\)</span>, <strong>without</strong> replacement, and the outcome of the experiment depends on the order of the outcomes. The number of ways to select <span class="math inline">\(k\)</span> objects is given by <span class="math inline">\(n(n-1)(n-2)...(n-k+1)\)</span>. This is known as a permutation and is sometimes written as
+<span class="math display">\[
+{}_nP_{k} = \frac{n!}{(n-k)!}
+\]</span></p>
+<p>Recall that <span class="math inline">\(n!\)</span> is read as <span class="math inline">\(n\)</span> factorial and represents the number of ways to arrange <span class="math inline">\(n\)</span> objects.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Twenty-five friends participate in a Halloween costume party. Three prizes are given during the party: most creative costume, scariest costume, and funniest costume. No one can win more than one prize. How many possible ways can the prizes by distributed?</p>
+</blockquote>
+<p>There are <span class="math inline">\(k=3\)</span> prizes to be assigned to <span class="math inline">\(n=25\)</span> people. Once someone is selected for a prize, they are removed from the pool of eligibles. In other words, we are sampling without replacement. Also, order matters. For example, if Tom, Mike, and Jane, win most creative, scariest and funniest costume, respectively, this is a different outcome than if Mike won creative, Jane won scariest and Tom won funniest. Thus, the number of ways the prizes can be distributed is given by <span class="math inline">\({}_{25}P_3 = \frac{25!}{22!} = 13,800\)</span>. A more visually pleasing way to express this would be:
+<span class="math display">\[
+\underbrace{\underline{\quad 25 \quad }}_\text{most creative} \times \underbrace{\underline{\quad 24 \quad }}_\text{scariest} \times \underbrace{\underline{\quad 23 \quad }}_\text{funniest} = 13,800
+\]</span></p>
+<p>Notice that it is sometime difficult to determine if order matters or not in a problem, but in this example the name of the prize was a hint that indeed order matters.</p>
+<p>Let’s use the idea of a permutation to calculate a probability.</p>
+<blockquote>
+<p><em>Exercise</em>:<br />
+Assume that all 25 participants are equally likely to win any one of the three prizes. What is the probability that Tom doesn’t win any of them?</p>
+</blockquote>
+<p>Just like in the previous probability calculation, we simply need to count the number of ways Tom doesn’t win any prize. In other words, we need to count the number of ways that prizes are distributed without Tom. So, remove Tom from the group of 25 eligible participants. The number of ways Tom doesn’t get a prize is <span class="math inline">\({}_{24}P_3 = \frac{24!}{21!}=12,144\)</span>. Again visually:
+<span class="math display">\[
+\underbrace{\underline{\quad 24 \quad }}_\text{most creative} \times \underbrace{\underline{\quad 23 \quad }}_\text{scariest} \times \underbrace{\underline{\quad 22 \quad }}_\text{funniest} = 12,144
+\]</span></p>
+<p>The probability Tom doesn’t get a prize is simply the second number divided by the first:</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="2-PROBRULES.html#cb106-1" aria-hidden="true" tabindex="-1"></a>denom <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">25</span>)<span class="sc">/</span><span class="fu">factorial</span>(<span class="dv">25</span> <span class="sc">-</span> <span class="dv">3</span>)</span>
+<span id="cb106-2"><a href="2-PROBRULES.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Or, denom&lt;-25*24*23</span></span>
+<span id="cb106-3"><a href="2-PROBRULES.html#cb106-3" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">24</span><span class="sc">*</span><span class="dv">23</span><span class="sc">*</span><span class="dv">22</span></span>
+<span id="cb106-4"><a href="2-PROBRULES.html#cb106-4" aria-hidden="true" tabindex="-1"></a>num<span class="sc">/</span>denom</span></code></pre></div>
+<pre><code>[1] 0.88</code></pre>
+</div>
+<div id="multiplication-rule-3-combination-order-does-not-matter-sampling-without-replacement" class="section level3 hasAnchor" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> Multiplication rule 3 (Combination): Order Does Not Matter, Sampling Without Replacement<a href="2-PROBRULES.html#multiplication-rule-3-combination-order-does-not-matter-sampling-without-replacement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a random experiment where we sample from a group of size <span class="math inline">\(n\)</span>, without replacement, and the outcome of the experiment does not depend on the order of the outcomes. The number of ways to select <span class="math inline">\(k\)</span> objects is given by <span class="math inline">\(\frac{n!} {(n-k)!k!}\)</span>. This is known as a combination and is written as:
+<span class="math display">\[
+\binom{n}{k} = \frac{n!}{(n-k)!k!}
+\]</span></p>
+<p>This is read as “<span class="math inline">\(n\)</span> choose <span class="math inline">\(k\)</span>”. Take a moment to compare combinations to permutations, discussed in Rule 2. The difference between these two rules is that in a combination, order no longer matters. A combination is equivalent to a permutation divided by <span class="math inline">\(k!\)</span>, the number of ways to arrange the <span class="math inline">\(k\)</span> objects selected.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Suppose we draw 5 cards out of a standard deck (52 cards, no jokers). How many possible 5 card hands are there?</p>
+</blockquote>
+<p>In this example, order does not matter. I don’t care if I receive 3 jacks then 2 queens or 2 queens then 3 jacks. Either way, it’s the same collection of 5 cards. Also, we are drawing without replacement. Once a card is selected, it cannot be selected again. Thus, the number of ways to select 5 cards is given by:
+<span class="math display">\[
+\binom{52}{5} = \frac{52!}{(52-5)!5!} = 2,598,960
+\]</span></p>
+<blockquote>
+<p><em>Example</em>:<br />
+When drawing 5 cards, what is the probability of drawing a “flush” (5 cards of the same suit)?</p>
+</blockquote>
+<p>Let’s determine how many ways to draw a flush. There are four suits (clubs, hearts, diamonds and spades). Each suit has 13 cards. We would like to pick 5 of those 13 cards and 0 of the remaining 39. Let’s consider just one of those suits (clubs):
+<span class="math display">\[
+\mbox{P}(\mbox{5 clubs})=\frac{\binom{13}{5}\binom{39}{0}}{\binom{52}{5}}
+\]</span></p>
+<p>The second part of the numerator (<span class="math inline">\(\binom{39}{0}\)</span>) isn’t necessary, since it simply represents the number of ways to select 0 objects from a group (1 way), but it helps clearly lay out the events. This brings up the point of what <span class="math inline">\(0!\)</span> equals. By definition it is 1. This allows us to use <span class="math inline">\(0!\)</span> in our work.</p>
+<p>Now, we expand this to all four suits by multiplying by 4, or <span class="math inline">\(\binom{4}{1}\)</span> since we are selecting 1 suit out of the 4:
+<span class="math display">\[
+\mbox{P}(\mbox{flush})=\frac{\binom{4}{1}\binom{13}{5}\binom{39}{0}}{\binom{52}{5}}
+\]</span></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="2-PROBRULES.html#cb108-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">4</span><span class="sc">*</span><span class="fu">choose</span>(<span class="dv">13</span>, <span class="dv">5</span>)<span class="sc">*</span><span class="dv">1</span></span>
+<span id="cb108-2"><a href="2-PROBRULES.html#cb108-2" aria-hidden="true" tabindex="-1"></a>denom <span class="ot">&lt;-</span> <span class="fu">choose</span>(<span class="dv">52</span>, <span class="dv">5</span>)</span>
+<span id="cb108-3"><a href="2-PROBRULES.html#cb108-3" aria-hidden="true" tabindex="-1"></a>num<span class="sc">/</span>denom</span></code></pre></div>
+<pre><code>[1] 0.001980792</code></pre>
+<p>There is a probability of 0.0020 of drawing a flush in a draw of 5 cards from a standard deck of cards.</p>
+<blockquote>
+<p><strong>Exercise</strong>:<br />
+When drawing 5 cards, what is the probability of drawing a “full house” (3 cards of the same rank and the other 2 of the same rank)?</p>
+</blockquote>
+<p>This problem uses several ideas from this chapter. We need to pick the rank of the three of a kind. Then pick 3 cards from the 4 possible. Next we pick the rank of the pair from the remaining 12 ranks. Finally pick 2 cards of that rank from the 4 possible.</p>
+<p><span class="math display">\[
+\mbox{P}(\mbox{full house})=\frac{\binom{13}{1}\binom{4}{3}\binom{12}{1}\binom{4}{2}}{\binom{52}{5}}
+\]</span></p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="2-PROBRULES.html#cb110-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fu">choose</span>(<span class="dv">13</span>, <span class="dv">1</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">3</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">12</span>, <span class="dv">1</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">2</span>)</span>
+<span id="cb110-2"><a href="2-PROBRULES.html#cb110-2" aria-hidden="true" tabindex="-1"></a>denom <span class="ot">&lt;-</span> <span class="fu">choose</span>(<span class="dv">52</span>, <span class="dv">5</span>)</span>
+<span id="cb110-3"><a href="2-PROBRULES.html#cb110-3" aria-hidden="true" tabindex="-1"></a>num<span class="sc">/</span>denom</span></code></pre></div>
+<pre><code>[1] 0.001440576</code></pre>
+<p>Why not use <span class="math inline">\(\binom{13}{2}\)</span> instead of <span class="math inline">\(\binom{13}{1}\binom{12}{1}\)</span>?<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p>We have just determined that a full house has a lower probability of occurring than a flush. This is why in gambling, a flush is valued less than a full house.</p>
+</div>
+</div>
+<div id="homework-problems-1" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Homework Problems<a href="2-PROBRULES.html#homework-problems-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> be events such that <span class="math inline">\(\mbox{P}(A)=0.5\)</span>, <span class="math inline">\(\mbox{P}(B)=0.3\)</span>, and <span class="math inline">\(\mbox{P}(C)=0.4\)</span>. Also, we know that <span class="math inline">\(\mbox{P}(A \cap B)=0.2\)</span>, <span class="math inline">\(\mbox{P}(B \cap C)=0.12\)</span>, <span class="math inline">\(\mbox{P}(A \cap C)=0.1\)</span>, and <span class="math inline">\(\mbox{P}(A \cap B \cap C)=0.05\)</span>. Find the following:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\mbox{P}(A\cup B)\)</span><br />
+</li>
+<li><span class="math inline">\(\mbox{P}(A\cup B \cup C)\)</span><br />
+</li>
+<li><span class="math inline">\(\mbox{P}(B&#39;\cap C&#39;)\)</span><br />
+</li>
+<li><span class="math inline">\(\mbox{P}(A\cup (B\cap C))\)</span><br />
+</li>
+<li><span class="math inline">\(\mbox{P}((A\cup B \cup C)\cap (A\cap B \cap C)&#39;)\)</span></li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Consider the example of the family in the reading. What is the probability that the family has at least one boy?</p></li>
+<li><p>The Birthday Problem Revisited.</p></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Suppose there are <span class="math inline">\(n=20\)</span> students in a classroom. My birthday, the instructor, is April 3rd. What is the probability that at least one student shares my birthday? Assume only 365 days in a year and assume that all birthdays are equally likely.<br />
+</li>
+<li>In <code>R</code>, find the probability that at least one other person shares my birthday for each value of <span class="math inline">\(n\)</span> from 1 to 300. Plot these probabilities with <span class="math inline">\(n\)</span> on the <span class="math inline">\(x\)</span>-axis and probability on the <span class="math inline">\(y\)</span>-axis. At what value of <span class="math inline">\(n\)</span> would the probability be at least 50%?</li>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li>Thinking of the cards again. Answer the following questions:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Define two events that are mutually exclusive.<br />
+</li>
+<li>Define two events that are independent.<br />
+</li>
+<li>Define an event and its complement.</li>
+</ol>
+<ol start="5" style="list-style-type: decimal">
+<li>Consider the license plate example from the reading.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that a license plate contains <strong>exactly</strong> one “B”?<br />
+</li>
+<li>What is the probability that a license plate contains <strong>at least one</strong> “B”?</li>
+</ol>
+<ol start="6" style="list-style-type: decimal">
+<li>Consider the party example in the reading.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Suppose 8 people showed up to the party dressed as zombies. What is the probability that all three awards are won by people dressed as zombies?<br />
+</li>
+<li>What is the probability that zombies win “most creative” and “funniest” but not “scariest”?</li>
+</ol>
+<ol start="7" style="list-style-type: decimal">
+<li>Consider the cards example from the reading.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>How many ways can we obtain a “two pairs” (2 of one number, 2 of another, and the final different)?<br />
+</li>
+<li>What is the probability of drawing a “four of a kind” (four cards of the same value)?</li>
+</ol>
+<ol start="8" style="list-style-type: decimal">
+<li>Advanced Question: Consider rolling 5 dice. What is the <strong>probability</strong> of a pour resulting in a full house?</li>
+</ol>
+</div>
+<div id="solutions-manual-1" class="section level2 unnumbered hasAnchor">
+<h2><a href="https://ds-usafa.github.io/PSSE-Solutions-Manual/PROBRULES.html">Solutions Manual</a><a href="2-PROBRULES.html#solutions-manual-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>Multiplication is repeated adding so in a sense we are adding. However in a more serious tone, for this problem for every first number there are 10 possibilities for the second number and for every second number there are 10 possibilities for the third numbers. This is multiplication.<a href="2-PROBRULES.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Because this implies the order selection of the ranks does not matter. In other words, this assumes that for example 3 Kings and 2 fours is the same full house as 3 fours and 2 Kings. This is not true so we break the rank selection about essentially making it a permutation.<a href="2-PROBRULES.html#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="1-CS2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="3-CONDPROB.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/moderndive/moderndive_book/edit/master/PSSE_additions/08-Probability-Rules.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
