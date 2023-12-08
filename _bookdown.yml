@@ -15,6 +15,9 @@ rmd_files:
    "PSSE_additions/11-Continuous-Random-Variables.Rmd",
    "PSSE_additions/12-Named-Discrete-Distributions.Rmd",
    "PSSE_additions/13-Named-Continuous-Distributions.Rmd",
+   "PSSE_additions/14-Multivariate-Distributions.Rmd",
+   "PSSE_additions/15-Multivariate-Expectation.Rmd",
+   
 
    # Block 2: Data with Tidyverse, IPS (PSSE), Modern Dive Injections
    "PSSE_additions/01-Data-Case-Study.Rmd",
@@ -48,6 +51,8 @@ rmd_files:
    "PSSE_additions/11-Continuous-Random-Variables.Rmd",
    "PSSE_additions/12-Named-Discrete-Distributions.Rmd",
    "PSSE_additions/13-Named-Continuous-Distributions.Rmd",
+   "PSSE_additions/14-Multivariate-Distributions.Rmd",
+   "PSSE_additions/15-Multivariate-Expectation.Rmd",
 
    # Block 2: Data with Tidyverse, IPS (PSSE), Modern Dive Injections
    "PSSE_additions/01-Data-Case-Study.Rmd",
