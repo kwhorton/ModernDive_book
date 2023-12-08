@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Probability Rules | Statistical Inference via Data Science</title>
+  <title>Chapter 11 Overview of Data Collection Principles | Statistical Inference via Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Probability Rules | Statistical Inference via Data Science" />
+  <meta property="og:title" content="Chapter 11 Overview of Data Collection Principles | Statistical Inference via Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://moderndive.com//images/logos/book_cover.png" />
   <meta property="og:description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
   <meta name="github-repo" content="moderndive/ModernDive_book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Probability Rules | Statistical Inference via Data Science" />
+  <meta name="twitter:title" content="Chapter 11 Overview of Data Collection Principles | Statistical Inference via Data Science" />
   <meta name="twitter:site" content="@ModernDive" />
   <meta name="twitter:description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
   <meta name="twitter:image" content="https://moderndive.com//images/logos/book_cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/logos/favicons/apple-touch-icon.png" />
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="1-CS2.html"/>
-<link rel="next" href="3-CONDPROB.html"/>
+<link rel="prev" href="10-DB.html"/>
+<link rel="next" href="12-STUDY.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -673,541 +673,161 @@ div.csl-indent {
 <html>
 <img src='https://moderndive.com/wide_format.png' alt="ModernDive">
 </html>
-<div id="PROBRULES" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Probability Rules<a href="2-PROBRULES.html#PROBRULES" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="probability-vs-statistics" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Probability vs Statistics<a href="2-PROBRULES.html#probability-vs-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As a review, remember this book is divided into four general blocks: data collection/summary, probability models, inference and statistical modeling/prediction. This second block, probability, is the study of stochastic (random) processes and their properties. Specifically, we will explore random experiments. As its name suggests, a random experiment is an experiment whose outcome is not predictable with exact certainty. In the statistical models we develop in the last two blocks of this book, we will use other variables to explain the variance of the outcome of interest. Any remaining variance is modeled with probability models.</p>
-<p>Even though an outcome is determined by chance, this does not mean that we know nothing about the random experiment. Our favorite simple example is that of a coin flip. If we flip a coin, the possible outcomes are heads and tails. We don’t know for sure what outcome will occur, but this doesn’t mean we don’t know anything about the experiment. If we assume the coin is fair, we know that each outcome is equally likely. Also, we know that if we flip the coin 100 times (independently), we are likely, the highest frequency event, to see around 50 heads, and very unlikely to see 10 heads or fewer.</p>
-<p>It is important to distinguish probability from inference and modeling. In probability, we consider a known random experiment, including knowing the parameters, and answer questions about what we expect to see from this random experiment. In statistics (inference and modeling), we consider data (the results of a mysterious random experiment) and infer about the underlying process. For example, suppose we have a coin and we are unsure whether this coin is fair or unfair, the parameter is unknown. We flipped it 20 times and it landed on heads 14 times. Inferential statistics will help us answer questions about the underlying process (could this coin be unfair?).</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:prob-stats"></span>
-<img src="figures/Prob_Stats.png" alt="A graphical representation of probability and statistics. In probability, we describe what we expect to happen if we know that underlying process; in statistics, we don't know the underlying process, and must infer based on representative samples." width="\textwidth" />
+<div id="ODCP" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Overview of Data Collection Principles<a href="11-ODCP.html#ODCP" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview-of-data-collection-principles" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Overview of data collection principles<a href="11-ODCP.html#overview-of-data-collection-principles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the last chapter, we briefly introduced data and some language around it. In short, data often are presented in <em>data frames</em>, where <em>cases</em> or <em>observational units</em> are presented in rows, and <em>variables</em> are presented in columns. Too often, much attention is given to analysis of existing data, but not enough attention is given to where the data came from, why it was collected, and what research question are we addressing. Over the next two chapters, we will introduce some data collection principles and some various types of random sampling.</p>
+<p>The first step in conducting research is to identify topics or questions that are to be investigated. A clearly laid out research question is helpful in identifying what subjects or cases should be studied and what variables are important. It is also important to consider <em>how</em> data are collected so that they are reliable and help achieve the research goals.</p>
+<div id="populations-and-samples" class="section level3 hasAnchor" number="11.1.1">
+<h3><span class="header-section-number">11.1.1</span> Populations and samples<a href="11-ODCP.html#populations-and-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider the following three research questions:</p>
+<ol style="list-style-type: decimal">
+<li>What is the average mercury content in swordfish in the Atlantic Ocean?<br />
+</li>
+<li>Over the last 5 years, what is the average time to complete a degree for Duke undergraduate students?<br />
+</li>
+<li>Does a new drug reduce the number of deaths in patients with severe heart disease?</li>
+</ol>
+<p>Each research question refers to a target <strong>population</strong>, the entire collection of individuals about which we want information. In the first question, the target population is all swordfish in the Atlantic Ocean, and each fish represents a case. It is usually too expensive to collect data for every case in a population. Instead, a sample is taken. A <strong>sample</strong> represents a subset of the cases and is often a small fraction of the population. For instance, 60 swordfish (or some other number) in the population might be selected, and this sample data may be used to provide an estimate of the population average and answer the research question.</p>
+<blockquote>
+<p><strong>Exercise</strong>:<br />
+For the second and third questions above, identify the target population and what represents an individual case.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
+</blockquote>
+</div>
+<div id="anecdotal-evidence" class="section level3 hasAnchor" number="11.1.2">
+<h3><span class="header-section-number">11.1.2</span> Anecdotal evidence<a href="11-ODCP.html#anecdotal-evidence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider the following possible responses to the three research questions:</p>
+<ol style="list-style-type: decimal">
+<li>A man on the news got mercury poisoning from eating swordfish, so the average mercury concentration in swordfish must be dangerously high.</li>
+<li>I met two students who took more than 7 years to graduate from Duke, so it must take longer to graduate at Duke than at many other colleges.</li>
+<li>My friend’s dad had a heart attack and died after they gave him a new heart disease drug, so the drug must not work.</li>
+</ol>
+<p>Each conclusion is based on data. However, there are two problems. First, the data only represent one or two cases. Second, and more importantly, it is unclear whether these cases are actually representative of the population. Data collected in this haphazard fashion are called <strong>anecdotal evidence</strong>.</p>
+
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-127"></span>
+<img src="figures/mnWinter.JPG" alt="In February 2010, some media pundits cited one large snow storm as evidence against global warming. As comedian Jon Stewart pointed out, ‘It’s one storm, in one region, of one country.’" width="\textwidth" />
 <p class="caption">
-FIGURE 2.1: A graphical representation of probability and statistics. In probability, we describe what we expect to happen if we know that underlying process; in statistics, we don’t know the underlying process, and must infer based on representative samples.
+FIGURE 11.1: In February 2010, some media pundits cited one large snow storm as evidence against global warming. As comedian Jon Stewart pointed out, <em>‘It’s one storm, in one region, of one country.’</em>
 </p>
 </div>
-<p>This block (10 chapters or so) is devoted to the study of random experiments. First, we will explore simple experiments, counting rule problems, and conditional probability. Next, we will introduce the concept of a random variable and the properties of random variables. Following this, we will cover common distributions of discrete and continuous random variables. We will end the block on multivariate probability (joint distributions and covariance).</p>
-</div>
-<div id="basic-probability-terms" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Basic probability terms<a href="2-PROBRULES.html#basic-probability-terms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We will start our work with some definitions and examples.</p>
-<div id="sample-space" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Sample space<a href="2-PROBRULES.html#sample-space" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Suppose we have a random experiment. The <em>sample space</em> of this experiment, <span class="math inline">\(S\)</span>, is the set of all possible results of that experiment. For example, in the case of a coin flip, we could write <span class="math inline">\(S=\{H,T\}\)</span>. Each element of the sample space is considered an <em>outcome</em>. An <em>event</em> is a set of outcomes, it is a subset of the sample space.</p>
 <blockquote>
-<p><em>Example</em>:<br />
-Let’s let <code>R</code> flip a coin for us and record the number of heads and tails. We will have <code>R</code> flip the coin twice. What is the sample space, what is an example of an outcome, and what is an example of an event.</p>
+<p><strong>Anecdotal evidence</strong>:
+Be careful of data collected haphazardly. Such evidence may be true and verifiable, but it may only represent extraordinary cases.</p>
 </blockquote>
-<p>We will load the <strong>mosaic</strong> package as it has a function <code>rflip()</code> that will simulate flipping a coin.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="2-PROBRULES.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaic)</span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="2-PROBRULES.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">18</span>)</span>
-<span id="cb68-2"><a href="2-PROBRULES.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rflip</span>(<span class="dv">2</span>)</span></code></pre></div>
-<pre><code>
-Flipping 2 coins [ Prob(Heads) = 0.5 ] ...
-
-H H
-
-Number of Heads: 2 [Proportion Heads: 1]</code></pre>
-<p>The sample space is <span class="math inline">\(S=\{HH, TH, HT, TT\}\)</span>, an example of an outcome is <span class="math inline">\(HH\)</span> which we see in the output from <code>R</code>, and finally an example of an event is the number of heads, which in this case takes on the values 0, 1, and 2. Another example of an event is “At least one heads”. In this case the event would be <span class="math inline">\(\{HH,TH, HT\}\)</span>. Also notice that <span class="math inline">\(TH\)</span> is different from <span class="math inline">\(HT\)</span> as an outcome; this is because those are different outcomes from flipping a coin twice.</p>
-<blockquote>
-<p><em>Example of Event</em>:<br />
-Suppose you arrive at a rental car counter and they show you a list of available vehicles, and one is picked for you at random. The sample space in this experiment is
-<span class="math display">\[
-S=\{\mbox{red sedan}, \mbox{blue sedan}, \mbox{red truck}, \mbox{grey truck}, \mbox{grey SUV}, \mbox{black SUV}, \mbox{blue SUV}\}.
-\]</span></p>
-</blockquote>
-<p>Each vehicle represents a possible outcome of the experiment. Let <span class="math inline">\(A\)</span> be the event that a blue vehicle is selected. This event contains the outcomes <code>blue sedan</code> and <code>blue SUV</code>.</p>
+<p>Anecdotal evidence typically is composed of unusual cases that we recall based on their striking characteristics. For instance, we are more likely to remember the two people we met who took 7 years to graduate than the six others who graduated in four years. Instead of looking at the most unusual cases, we should examine a sample of many cases that represent the population.</p>
 </div>
-<div id="union-and-intersection" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Union and intersection<a href="2-PROBRULES.html#union-and-intersection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Suppose we have two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li><p><span class="math inline">\(A\)</span> is considered a <em>subset</em> of <span class="math inline">\(B\)</span> if all of the outcomes of <span class="math inline">\(A\)</span> are also contained in <span class="math inline">\(B\)</span>. This is denoted as <span class="math inline">\(A \subset B\)</span>.</p></li>
-<li><p>The <em>intersection</em> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is all of the outcomes contained in both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. This is denoted as <span class="math inline">\(A \cap B\)</span>.</p></li>
-<li><p>The <em>union</em> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is all of the outcomes contained in either <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>, or both. This is denoted as <span class="math inline">\(A \cup B\)</span>.</p></li>
-<li><p>The <em>complement</em> of <span class="math inline">\(A\)</span> is all of the outcomes not contained in <span class="math inline">\(A\)</span>. This is denoted as <span class="math inline">\(A^C\)</span> or <span class="math inline">\(A&#39;\)</span>.</p></li>
-</ol>
-<p>Note: Here we are treating events as sets and the above definitions are basic set operations.</p>
-<p>It is sometimes helpful when reading probability notation to think of Union as an <em>or</em> and Intersection as an <em>and</em>.</p>
-<blockquote>
-<p><em>Example</em>:<br />
-Consider our rental car example above. Let <span class="math inline">\(A\)</span> be the event that a blue vehicle is selected, let <span class="math inline">\(B\)</span> be the event that a black vehicle is selected, and let <span class="math inline">\(C\)</span> be the event that an SUV is selected.</p>
-</blockquote>
-<p>First, let’s list all of the outcomes of each event. <span class="math inline">\(A = \{\mbox{blue sedan},\mbox{blue SUV}\}\)</span>, <span class="math inline">\(B=\{\mbox{black SUV}\}\)</span>, and <span class="math inline">\(C= \{\mbox{grey SUV}, \mbox{black SUV}, \mbox{blue SUV}\}\)</span>.</p>
-<p>Since all outcomes in <span class="math inline">\(B\)</span> are contained in <span class="math inline">\(C\)</span>, we know that <span class="math inline">\(B\)</span> is a subset of <span class="math inline">\(C\)</span>, or <span class="math inline">\(B\subset C\)</span>. Also, since <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have no outcomes in common, <span class="math inline">\(A \cap B = \emptyset\)</span>. Note that <span class="math inline">\(\emptyset = \{ \}\)</span> is the empty set and contains no elements. Further, <span class="math inline">\(A \cup C = \{\mbox{blue sedan}, \mbox{grey SUV}, \mbox{black SUV}, \mbox{blue SUV}\}\)</span>.</p>
-</div>
-</div>
-<div id="probability" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Probability<a href="2-PROBRULES.html#probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><em>Probability</em> is a number assigned to an event or outcome that describes how likely it is to occur. A probability model assigns a probability to each element of the sample space. What makes a probability model is not just the values assigned to each element but the idea this model contains all the information about the outcomes and there are no other explanatory variables involved.</p>
-<p>A probability model can be thought of as a function that maps outcomes, or events, to a real number in the interval <span class="math inline">\([0,1]\)</span>.</p>
-<p>There are some basic axioms of probability you should know, although this list is not complete. Let <span class="math inline">\(S\)</span> be the sample space of a random experiment and let <span class="math inline">\(A\)</span> be an event where <span class="math inline">\(A\subset S\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li><p><span class="math inline">\(\mbox{P}(A) \geq 0\)</span>.</p></li>
-<li><p><span class="math inline">\(\mbox{P}(S) = 1\)</span>.</p></li>
-</ol>
-<p>These two axioms essentially say that probability must be positive, and the probability of all outcomes must sum to 1.</p>
-<div id="probability-properties" class="section level3 hasAnchor" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Probability properties<a href="2-PROBRULES.html#probability-properties" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be events in a random experiment. Most of these can be proven fairly easily.</p>
-<ol style="list-style-type: decimal">
-<li><p><span class="math inline">\(\mbox{P}(\emptyset) = 0\)</span></p></li>
-<li><p><span class="math inline">\(\mbox{P}(A&#39;) = 1 - \mbox{P}(A)\)</span> We used this in the case study.</p></li>
-<li><p>If <span class="math inline">\(A\subset B\)</span>, then <span class="math inline">\(\mbox{P}(A)\leq \mbox{P}(B)\)</span>.</p></li>
-<li><p><span class="math inline">\(\mbox{P}(A\cup B) = \mbox{P}(A)+\mbox{P}(B)-\mbox{P}(A\cap B)\)</span>. This property can be generalized to more than two events. The intersection is subtracted because outcomes in both events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> get counted twice in the first sum.</p></li>
-<li><p>Law of Total Probability: Let <span class="math inline">\(B_1, B_2,...,B_n\)</span> be <strong>mutually exclusive</strong>, this means disjoint or no outcomes in common, and <strong>exhaustive</strong>, this means the union of all the events labeled with a <span class="math inline">\(B\)</span> is the sample space. Then</p></li>
-</ol>
-<p><span class="math display">\[
-\mbox{P}(A)=\mbox{P}(A\cap B_1)+\mbox{P}(A\cap B_2)+...+\mbox{P}(A\cap B_n)
-\]</span></p>
-<p>A specific application of this law appears in Bayes’ Rule (more to follow). It says that <span class="math inline">\(\mbox{P}(A)=\mbox{P}(A \cap B)+\mbox{P}(A \cap B&#39;)\)</span>. Essentially, it points out that <span class="math inline">\(A\)</span> can be partitioned into two parts: 1) everything in <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> and 2) everything in <span class="math inline">\(A\)</span> and not in <span class="math inline">\(B\)</span>.</p>
-<blockquote>
-<p><em>Example</em>:<br />
-Consider rolling a six sided die. Let event <span class="math inline">\(A\)</span> be the number showing is less than 5. Let event <span class="math inline">\(B\)</span> be the number is even. Then</p>
-</blockquote>
-<p><span class="math display">\[\mbox{P}(A)=\mbox{P}(A \cap B) + \mbox{P}(A \cap B&#39;)\]</span></p>
-<p><span class="math display">\[
-\mbox{P}(&lt; 5) = \mbox{P}(&lt;5 \cap Even) + \mbox{P}(&lt;5 \cap Odd)
-\]</span></p>
-<ol start="6" style="list-style-type: decimal">
-<li>DeMorgan’s Laws:
-<span class="math display">\[
-\mbox{P}((A \cup B)&#39;) = \mbox{P}(A&#39; \cap B&#39;)
-\]</span>
-<span class="math display">\[
-\mbox{P}((A \cap B)&#39;) = \mbox{P}(A&#39; \cup B&#39;)
-\]</span></li>
-</ol>
-</div>
-<div id="equally-likely-scenarios" class="section level3 hasAnchor" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Equally likely scenarios<a href="2-PROBRULES.html#equally-likely-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In some random experiments, outcomes can be defined such that each individual outcome is equally likely. In this case, probability becomes a counting problem. Let <span class="math inline">\(A\)</span> be an event in an experiment where each outcome is equally likely.
-<span class="math display">\[
-\mbox{P}(A)=\frac{\mbox{\# of outcomes in A}}{\mbox{\# of outcomes in S}}
-\]</span></p>
-<blockquote>
-<p><em>Example</em>:<br />
-Suppose a family has three children, with each child being either a boy (B) or girl (G). Assume that the likelihood of boys and girls are equal and <strong>independent</strong>, this is the idea that the probability of the gender of the second child does not change based on the gender of the first child. The sample space can be written as:
-<span class="math display">\[
-S=\{\mbox{BBB},\mbox{BBG},\mbox{BGB},\mbox{BGG},\mbox{GBB},\mbox{GBG},\mbox{GGB},\mbox{GGG}\}
-\]</span>
-What is the probability that the family has exactly 2 girls?</p>
-</blockquote>
-<p>This only happens in three ways: BGG, GBG, and GGB. Thus, the probability of exactly 2 girls is 3/8 or 0.375.</p>
-</div>
-<div id="using-r-equally-likely-scenarios" class="section level3 hasAnchor" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> Using <code>R</code> (Equally likely scenarios)<a href="2-PROBRULES.html#using-r-equally-likely-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The previous example above is an example of an “Equally Likely” scenario, where the sample space of a random experiment contains a list of outcomes that are equally likely. In these cases, we can sometimes use <code>R</code> to list out the possible outcomes and count them to determine probability. We can also use <code>R</code> to simulate.</p>
-<blockquote>
-<p><em>Example</em>:<br />
-Use <code>R</code> to simulate the family of three children where each child has the same probability of being a boy or a girl.</p>
-</blockquote>
-<p>Instead of writing our own function, we can use <code>rflip()</code> in the <strong>mosaic</strong> package. We will let <span class="math inline">\(H\)</span> stand for girl.</p>
-<p>First simulate one family.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="2-PROBRULES.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">73</span>)</span>
-<span id="cb70-2"><a href="2-PROBRULES.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rflip</span>(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>
-Flipping 3 coins [ Prob(Heads) = 0.5 ] ...
-
-T T H
-
-Number of Heads: 1 [Proportion Heads: 0.333333333333333]</code></pre>
-<p>In this case we got 1 girl. Next we will use the <code>do()</code> function to repeat this simulation.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="2-PROBRULES.html#cb72-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">10000</span>)<span class="sc">*</span><span class="fu">rflip</span>(<span class="dv">3</span>)</span>
-<span id="cb72-2"><a href="2-PROBRULES.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
-<pre><code>  n heads tails      prop
-1 3     1     2 0.3333333
-2 3     3     0 1.0000000
-3 3     3     0 1.0000000
-4 3     3     0 1.0000000
-5 3     1     2 0.3333333
-6 3     1     2 0.3333333</code></pre>
-<p>Next we can visualize the distribution of the number of girls, heads, in Figure <a href="2-PROBRULES.html#fig:bar81-fig">2.2</a>.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="2-PROBRULES.html#cb74-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb74-2"><a href="2-PROBRULES.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_bar</span>(<span class="sc">~</span>heads) <span class="sc">%&gt;%</span></span>
-<span id="cb74-3"><a href="2-PROBRULES.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb74-4"><a href="2-PROBRULES.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x =</span> <span class="st">&quot;NUmber of girls&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:bar81-fig"></span>
-<img src="ModernDive_files/figure-html/bar81-fig-1.png" alt="Number of girls in a family of size 3." width="\textwidth" />
+<div id="sampling-from-a-population" class="section level3 hasAnchor" number="11.1.3">
+<h3><span class="header-section-number">11.1.3</span> Sampling from a population<a href="11-ODCP.html#sampling-from-a-population" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We might try to estimate the time to graduation for Duke undergraduates in the last 5 years by collecting a sample of students. All graduates in the last 5 years represent the <em>population</em>, and graduates who are selected for review are collectively called the <em>sample</em>. In general, we always seek to <em>randomly</em> select a sample from a population. The most basic type of random selection is equivalent to how raffles are conducted. For example, in selecting graduates, we could write each graduate’s name on a raffle ticket and draw 100 tickets. The selected names would represent a random sample of 100 graduates. This is illustrated in Figure <a href="11-ODCP.html#fig:randsamp-fig">11.2</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:randsamp-fig"></span>
+<img src="ModernDive_files/figure-html/randsamp-fig-1.png" alt="In this graphic, five graduates are randomly selected from the population to be included in the sample." width="\textwidth" />
 <p class="caption">
-FIGURE 2.2: Number of girls in a family of size 3.
+FIGURE 11.2: In this graphic, five graduates are randomly selected from the population to be included in the sample.
 </p>
 </div>
-<p>Finally we can estimate the probability of exactly 2 girls. We need the <strong>tidyverse</strong> library.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="2-PROBRULES.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="2-PROBRULES.html#cb76-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb76-2"><a href="2-PROBRULES.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(heads <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb76-3"><a href="2-PROBRULES.html#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="dv">10000</span>)</span></code></pre></div>
-<pre><code>    prob
-1 0.3782</code></pre>
-<p>Or slightly different code.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="2-PROBRULES.html#cb78-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb78-2"><a href="2-PROBRULES.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(heads) <span class="sc">%&gt;%</span></span>
-<span id="cb78-3"><a href="2-PROBRULES.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
-<pre><code>  heads    n   prop
-1     0 1241 0.1241
-2     1 3786 0.3786
-3     2 3782 0.3782
-4     3 1191 0.1191</code></pre>
-<p>Not a bad estimate of the exact probability.</p>
-<p>Let’s now use an example of cards to simulate some probabilities as well as learning more about counting. The file <code>Cards.csv</code> contains the data for cards from a 52 card deck. Let’s read it in and summarize.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="2-PROBRULES.html#cb80-1" aria-hidden="true" tabindex="-1"></a>Cards <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/Cards.csv&quot;</span>)</span>
-<span id="cb80-2"><a href="2-PROBRULES.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(Cards)</span></code></pre></div>
-<pre><code>
-categorical variables:  
-  name     class levels  n missing
-1 rank character     13 52       0
-2 suit character      4 52       0
-                                   distribution
-1 10 (7.7%), 2 (7.7%), 3 (7.7%) ...            
-2 Club (25%), Diamond (25%) ...                
-
-quantitative variables:  
-   name   class        min         Q1     median         Q3        max
-1 probs numeric 0.01923077 0.01923077 0.01923077 0.01923077 0.01923077
-        mean sd  n missing
-1 0.01923077  0 52       0</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="2-PROBRULES.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Cards)</span></code></pre></div>
-<pre><code># A tibble: 6 × 3
-  rank  suit   probs
-  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
-1 2     Club  0.0192
-2 3     Club  0.0192
-3 4     Club  0.0192
-4 5     Club  0.0192
-5 6     Club  0.0192
-6 7     Club  0.0192</code></pre>
-<p>We can see 4 suits, and 13 ranks, the value on the face of the card.</p>
+<p>Why pick a sample randomly? Why not just pick a sample by hand? Consider the following scenario.</p>
 <blockquote>
-<p><em>Example</em>:<br />
-Suppose we draw one card out of a standard deck. Let <span class="math inline">\(A\)</span> be the event that we draw a Club. Let <span class="math inline">\(B\)</span> be the event that we draw a 10 or a face card (Jack, Queen, King or Ace). We can use <code>R</code> to define these events and find probabilities.</p>
+<p><strong>Example</strong>:<br />
+Suppose we ask a student who happens to be majoring in nutrition to select several graduates for the study. What kind of students do you think she might collect? Do you think her sample would be representative of all graduates?
+<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 </blockquote>
-<p>Let’s find all the Clubs.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="2-PROBRULES.html#cb84-1" aria-hidden="true" tabindex="-1"></a>Cards <span class="sc">%&gt;%</span></span>
-<span id="cb84-2"><a href="2-PROBRULES.html#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(suit <span class="sc">==</span> <span class="st">&quot;Club&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb84-3"><a href="2-PROBRULES.html#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rank, suit)</span></code></pre></div>
-<pre><code># A tibble: 13 × 2
-   rank  suit 
-   &lt;chr&gt; &lt;chr&gt;
- 1 2     Club 
- 2 3     Club 
- 3 4     Club 
- 4 5     Club 
- 5 6     Club 
- 6 7     Club 
- 7 8     Club 
- 8 9     Club 
- 9 10    Club 
-10 J     Club 
-11 Q     Club 
-12 K     Club 
-13 A     Club </code></pre>
-<p>So just by counting, we find the probability of drawing a Club is <span class="math inline">\(\frac{13}{52}\)</span> or 0.25.</p>
-<p>We can do this by simulation, this is over kill but gets the idea of simulation across.</p>
-<p>Remember, ask what do we want <code>R</code> to do and what does <code>R</code> need to do this?</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="2-PROBRULES.html#cb86-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">10000</span>)<span class="sc">*</span><span class="fu">sample</span>(Cards, <span class="dv">1</span>)</span>
-<span id="cb86-2"><a href="2-PROBRULES.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
-<pre><code># A tibble: 6 × 6
-  rank  suit   probs orig.id  .row .index
-  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;
-1 9     Spade 0.0192 47          1      1
-2 5     Club  0.0192 4           1      2
-3 5     Spade 0.0192 43          1      3
-4 7     Heart 0.0192 32          1      4
-5 4     Club  0.0192 3           1      5
-6 A     Spade 0.0192 52          1      6</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="2-PROBRULES.html#cb88-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb88-2"><a href="2-PROBRULES.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(suit <span class="sc">==</span> <span class="st">&quot;Club&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb88-3"><a href="2-PROBRULES.html#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="dv">10000</span>)</span></code></pre></div>
-<pre><code># A tibble: 1 × 1
-   prob
-  &lt;dbl&gt;
-1 0.243</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="2-PROBRULES.html#cb90-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb90-2"><a href="2-PROBRULES.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(suit) <span class="sc">%&gt;%</span></span>
-<span id="cb90-3"><a href="2-PROBRULES.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
-<pre><code># A tibble: 4 × 3
-  suit        n  prob
-  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt;
-1 Club     2432 0.243
-2 Diamond  2558 0.256
-3 Heart    2417 0.242
-4 Spade    2593 0.259</code></pre>
-<p>Now let’s count the number of outcomes in <span class="math inline">\(B\)</span>.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="2-PROBRULES.html#cb92-1" aria-hidden="true" tabindex="-1"></a>Cards <span class="sc">%&gt;%</span></span>
-<span id="cb92-2"><a href="2-PROBRULES.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb92-3"><a href="2-PROBRULES.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rank, suit)</span></code></pre></div>
-<pre><code># A tibble: 20 × 2
-   rank  suit   
-   &lt;chr&gt; &lt;chr&gt;  
- 1 10    Club   
- 2 J     Club   
- 3 Q     Club   
- 4 K     Club   
- 5 A     Club   
- 6 10    Diamond
- 7 J     Diamond
- 8 Q     Diamond
- 9 K     Diamond
-10 A     Diamond
-11 10    Heart  
-12 J     Heart  
-13 Q     Heart  
-14 K     Heart  
-15 A     Heart  
-16 10    Spade  
-17 J     Spade  
-18 Q     Spade  
-19 K     Spade  
-20 A     Spade  </code></pre>
-<p>So just by counting, we find the probability of drawing a 10 or greater is <span class="math inline">\(\frac{20}{52}\)</span> or 0.3846154.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:biased-fig"></span>
+<img src="ModernDive_files/figure-html/biased-fig-1.png" alt="Instead of sampling from all graduates equally, a nutrition major might inadvertently pick graduates with health-related majors disproportionately often." width="\textwidth" />
+<p class="caption">
+FIGURE 11.3: Instead of sampling from all graduates equally, a nutrition major might inadvertently pick graduates with health-related majors disproportionately often.
+</p>
+</div>
+<p>If someone was permitted to pick and choose exactly which graduates were included in the sample, it is entirely possible that the sample could be skewed to that person’s interests, which may be entirely unintentional. This introduces <strong>sampling bias</strong> (see Figure <a href="11-ODCP.html#fig:biased-fig">11.3</a>), where some individuals in the population are more likely to be sampled than others. Sampling randomly helps resolve this problem. The most basic random sample is called a <strong>simple random sample</strong>, which is equivalent to using a raffle to select cases. This means that each case in the population has an equal chance of being included and there is no implied connection between the cases in the sample.</p>
+<p>Sometimes a simple random sample is difficult to implement and an alternative method is helpful. One such substitute is a <strong>systematic sample</strong>, where one case is sampled after letting a fixed number of others, say 10 other cases, pass by. Since this approach uses a mechanism that is not easily subject to personal biases, it often yields a reasonably representative sample. This book will focus on simple random samples since the use of systematic samples is uncommon and requires additional considerations of the context.</p>
+<p>The act of taking a simple random sample helps minimize bias. However, bias can crop up in other ways. Even when people are picked at random, e.g. for surveys, caution must be exercised if the non-response is high. For instance, if only 30% of the people randomly sampled for a survey actually respond, and it is unclear whether the respondents are <strong>representative</strong><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> of the entire population, the survey might suffer from <strong>non-response bias</strong><a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:convsamp-fig"></span>
+<img src="ModernDive_files/figure-html/convsamp-fig-1.png" alt="Due to the possibility of non-response, surveys studies may only reach a certain group within the population. It is difficult, and often impossible, to completely fix this problem" width="\textwidth" />
+<p class="caption">
+FIGURE 11.4: Due to the possibility of non-response, surveys studies may only reach a certain group within the population. It is difficult, and often impossible, to completely fix this problem
+</p>
+</div>
+<p>Another common pitfall is a <strong>convenience sample</strong>, where individuals who are easily accessible are more likely to be included in the sample, see Figure <a href="11-ODCP.html#fig:convsamp-fig">11.4</a> . For instance, if a political survey is done by stopping people walking in the Bronx, it will not represent all of New York City. It is often difficult to discern what sub-population a convenience sample represents.</p>
 <blockquote>
 <p><strong>Exercise</strong>:<br />
-Using simulation to estimate the probability of 10 or higher.</p>
+We can easily access ratings for products, sellers, and companies through websites. These ratings are based only on those people who go out of their way to provide a rating. If 50% of online reviews for a product are negative, do you think this means that 50% of buyers are dissatisfied with the product?<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></p>
 </blockquote>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="2-PROBRULES.html#cb94-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">10000</span>)<span class="sc">*</span><span class="fu">sample</span>(Cards, <span class="dv">1</span>)</span>
-<span id="cb94-2"><a href="2-PROBRULES.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code></pre></div>
-<pre><code># A tibble: 6 × 6
-  rank  suit   probs orig.id  .row .index
-  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;
-1 10    Heart 0.0192 35          1      1
-2 6     Heart 0.0192 31          1      2
-3 8     Spade 0.0192 46          1      3
-4 J     Heart 0.0192 36          1      4
-5 Q     Spade 0.0192 50          1      5
-6 10    Club  0.0192 9           1      6</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="2-PROBRULES.html#cb96-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb96-2"><a href="2-PROBRULES.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb96-3"><a href="2-PROBRULES.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="dv">10000</span>)</span></code></pre></div>
-<pre><code># A tibble: 1 × 1
-   prob
-  &lt;dbl&gt;
-1 0.389</code></pre>
-<p>Notice that this code is not robust to change the number of simulations. If we change from 10000, then we have to change the denominator in the <code>summarize()</code> function. We can change this by using <code>mutate()</code> instead of <code>filter()</code>.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="2-PROBRULES.html#cb98-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb98-2"><a href="2-PROBRULES.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">face =</span> rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb98-3"><a href="2-PROBRULES.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">mean</span>(face))</span></code></pre></div>
-<pre><code># A tibble: 1 × 1
-   prob
-  &lt;dbl&gt;
-1 0.389</code></pre>
-<p>Notice that in the <code>mutate()</code> function, we are creating a new logical variable called <code>face</code>. This variable takes on the values of TRUE and FALSE. In the next line we use a <code>summarize()</code> command with the function <code>mean()</code>. In <code>R</code> a function that requires numeric input takes a logical variable and converts the TRUE into 1 and the FALSE into 0. Thus the <code>mean()</code> will find the proportion of TRUE values and that is why we report it as a probability.</p>
-<p>Next, let’s find a card that is 10 or greater <strong>and</strong> a club.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="2-PROBRULES.html#cb100-1" aria-hidden="true" tabindex="-1"></a>Cards <span class="sc">%&gt;%</span></span>
-<span id="cb100-2"><a href="2-PROBRULES.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>), suit <span class="sc">==</span> <span class="st">&quot;Club&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb100-3"><a href="2-PROBRULES.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rank, suit)</span></code></pre></div>
-<pre><code># A tibble: 5 × 2
-  rank  suit 
-  &lt;chr&gt; &lt;chr&gt;
-1 10    Club 
-2 J     Club 
-3 Q     Club 
-4 K     Club 
-5 A     Club </code></pre>
-<p>We find the probability of drawing a 10 or greater club is <span class="math inline">\(\frac{5}{52}\)</span> or 0.0961538.</p>
-<blockquote>
-<p><strong>Exercise</strong>:<br />
-Simulate drawing one card and estimate the probability of a club that is 10 or greater.</p>
-</blockquote>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="2-PROBRULES.html#cb102-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb102-2"><a href="2-PROBRULES.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">face =</span> (rank <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">&quot;J&quot;</span>, <span class="st">&quot;Q&quot;</span>, <span class="st">&quot;K&quot;</span>, <span class="st">&quot;A&quot;</span>)) <span class="sc">&amp;</span> </span>
-<span id="cb102-3"><a href="2-PROBRULES.html#cb102-3" aria-hidden="true" tabindex="-1"></a>           (suit <span class="sc">==</span> <span class="st">&quot;Club&quot;</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb102-4"><a href="2-PROBRULES.html#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prob =</span> <span class="fu">mean</span>(face))</span></code></pre></div>
-<pre><code># A tibble: 1 × 1
-    prob
-   &lt;dbl&gt;
-1 0.0963</code></pre>
 </div>
-<div id="note" class="section level3 hasAnchor" number="2.3.4">
-<h3><span class="header-section-number">2.3.4</span> Note<a href="2-PROBRULES.html#note" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We have been using <code>R</code> to count the number of outcomes in an event. This helped us to determine probabilities. We limited the problems to simple ones. In our cards example, it would be more interesting for us to explore more complex events such as drawing 5 cards from a standard deck. Each draw of 5 cards is equally likely, so in order to find the probability of a flush (5 cards of the same suit), we could simply list all the possible flushes and compare that to the sample space. Because of the large number of possible outcomes, this becomes difficult. Thus we need to explore counting rules in more detail to help us solve more complex problems. In this book, we will limit our discussion to three basic cases. You should know that there are entire courses on discrete math and counting rules, so we will still be limited in our methods and the type of problems we can solve in this book.</p>
+<div id="explanatory-and-response-variables" class="section level3 hasAnchor" number="11.1.4">
+<h3><span class="header-section-number">11.1.4</span> Explanatory and response variables<a href="11-ODCP.html#explanatory-and-response-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider the following question for the <code>county</code> data set:</p>
+<p>Is federal spending, on average, higher or lower in counties with high rates of poverty?</p>
+<p>If we suspect poverty might affect spending in a county, then poverty is the <strong>explanatory</strong> variable and federal spending is the <strong>response</strong> variable in the relationship.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> If there are many variables, it may be possible to consider a number of them as explanatory variables.</p>
+<blockquote>
+<p><strong>Explanatory</strong> and <strong>response</strong> variables<br />
+To identify the explanatory variable in a pair of variables, identify which of the two variables is suspected as explaining or causing changes in the other. In data sets with more than two variables, it is possible to have multiple explanatory variables. The response variable is the outcome or result of interest.</p>
+</blockquote>
+<blockquote>
+<p><strong>Caution</strong>:
+Association does not imply causation. Labeling variables as <em>explanatory</em> and <em>response</em> does not guarantee the relationship between the two is actually causal, even if there is an association identified between the two variables. We use these labels only to keep track of which variable we suspect affects the other. We also use this language to help in our use of <code>R</code> and the formula notation.</p>
+</blockquote>
+<p>In some cases, there is no explanatory or response variable. Consider the following question:</p>
+<p>If homeownership in a particular county is lower than the national average, will the percent of multi-unit structures in that county likely be above or below the national average?</p>
+<p>It is difficult to decide which of these variables should be considered the explanatory and response variable; i.e. the direction is ambiguous, so no explanatory or response labels are suggested here.</p>
+</div>
+<div id="introducing-observational-studies-and-experiments" class="section level3 hasAnchor" number="11.1.5">
+<h3><span class="header-section-number">11.1.5</span> Introducing observational studies and experiments<a href="11-ODCP.html#introducing-observational-studies-and-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are two primary types of data collection: observational studies and experiments.</p>
+<p>Researchers perform an <strong>observational study</strong> when they collect data in a way that does not directly interfere with how the data arise. For instance, researchers may collect information via surveys, review medical or company records, or follow a <strong>cohort</strong><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> of many similar individuals to study why certain diseases might develop. In each of these situations, researchers merely observe what happens. In general, observational studies can provide evidence of a naturally occurring association between variables, but by themselves, they cannot show a causal connection.</p>
+<p>When researchers want to investigate the possibility of a causal connection, they conduct an <strong>experiment</strong>, a study in which the explanatory variables are assigned rather than observed. For instance, we may suspect administering a drug will reduce mortality in heart attack patients over the following year. To check if there really is a causal connection between the explanatory variable and the response, researchers will collect a sample of individuals and split them into groups. The individuals in each group are <em>assigned</em> a treatment. When individuals are <em>randomly</em> assigned to a treatment group, and we are <em>comparing</em> at least two treatments, the experiment is called a <strong>randomized comparative experiment</strong>. For example, each heart attack patient in the drug trial could be randomly assigned, perhaps by flipping a coin, into one of two groups: the first group receives a <strong>placebo</strong> (fake treatment) and the second group receives the drug. The case study at the beginning of the book is another example of an experiment, though that study did not employ a placebo. Math 359 is a course on the design and analysis of experimental data, DOE, at USAFA. In the Air Force, these types of experiments are an important part of test and evaluation. Many Air Force analysts are expert practitioners of DOE. In this book though, we will minimize our discussion of DOE.</p>
+<blockquote>
+<p><strong>Association <span class="math inline">\(\neq\)</span> Causation</strong><br />
+Again, association does not imply causation. In a data analysis, association does not imply causation, and causation can only be inferred from a randomized experiment. Although, a hot field is the analysis of causal relationships in observational data. This is important because consider cigarette smoking, how do we know it causes lung cancer? We only have observational data and clearly cannot do an experiment. We think analysts will be charged in the near future with using causal reasoning on observational data.</p>
+</blockquote>
 </div>
 </div>
-<div id="counting-rules" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Counting rules<a href="2-PROBRULES.html#counting-rules" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are three types of counting problems we will consider. In each case, the multiplication rule is being used and all that changes is whether an element is allowed to be reused, replacement, and whether the order of selection matters. This latter question is difficult. Each case will be demonstrated with an example.</p>
-<div id="multiplication-rule-1-order-matters-sample-with-replacement" class="section level3 hasAnchor" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Multiplication rule 1: Order matters, sample with replacement<a href="2-PROBRULES.html#multiplication-rule-1-order-matters-sample-with-replacement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The multiplication rule is at the center of each of the three methods. In this first case we are using the idea that order matters and items can be reused. Let’s use an example to help.</p>
-<blockquote>
-<p><em>Example</em>:<br />
-A license plate consists of three numeric digits (0-9) followed by three single letters (A-Z). How many possible license plates exist?</p>
-</blockquote>
-<p>We can divide this problem into two sections. In the numeric section, we are selecting 3 objects from 10, with replacement. This means that a number can be used more than once. Order clearly matters because a license plate starting with “432” is distinct from a license plate starting with “234”. There are <span class="math inline">\(10^3 = 1000\)</span> ways to select the first three digits; 10 for the first, 10 for the second, and 10 for the third. Why do you multiply and not add?<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
-<p>In the alphabet section, we are selecting 3 objects from 26, where order matters. Thus, there are <span class="math inline">\(26^3=17576\)</span> ways to select the last three letters of the plate. Combined, there are <span class="math inline">\(10^3 \times 26^3 = 17576000\)</span> ways to select license plates. Visually,
-<span class="math display">\[
-\underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} = 17,576,000
-\]</span></p>
-<p>Next we are going to use this new counting method to find a probability.</p>
-<blockquote>
-<p><em>Exercise</em>:<br />
-What is the probability a license plate starts with the number “8” or “0” and ends with the letter “B”?</p>
-</blockquote>
-<p>In order to find this probability, we simply need to determine the number of ways to select a license plate starting with “8” or “0” and ending with the letter “B”. We can visually represent this event:
-<span class="math display">\[
-\underbrace{\underline{\quad 2 \quad }}_\text{8 or 0} \times \underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 10 \quad }}_\text{number} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} \times \underbrace{\underline{\quad 26 \quad }}_\text{letter} \times \underbrace{\underline{\quad 1 \quad }}_\text{B} = 135,200
-\]</span></p>
-<p>Dividing this number by the total number of possible license plates yields the probability of this event occurring.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="2-PROBRULES.html#cb104-1" aria-hidden="true" tabindex="-1"></a>denom <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">26</span></span>
-<span id="cb104-2"><a href="2-PROBRULES.html#cb104-2" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">10</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">26</span><span class="sc">*</span><span class="dv">1</span></span>
-<span id="cb104-3"><a href="2-PROBRULES.html#cb104-3" aria-hidden="true" tabindex="-1"></a>num<span class="sc">/</span>denom</span></code></pre></div>
-<pre><code>[1] 0.007692308</code></pre>
-<p>The probability of obtaining a license plate starting with “8” or “0” and ending with “B” is 0.0077. Simulating this would be difficult because we would need special functions to check the first number and last letter. This gets into <strong>text mining</strong> an important subject in data science but unfortunately we don’t have much time in this book for the topic.</p>
-</div>
-<div id="multiplication-rule-2-permutation-order-matters-sampling-without-replacement" class="section level3 hasAnchor" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> Multiplication rule 2 (Permutation): Order Matters, Sampling Without Replacement<a href="2-PROBRULES.html#multiplication-rule-2-permutation-order-matters-sampling-without-replacement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Consider a random experiment where we sample from a group of size <span class="math inline">\(n\)</span>, <strong>without</strong> replacement, and the outcome of the experiment depends on the order of the outcomes. The number of ways to select <span class="math inline">\(k\)</span> objects is given by <span class="math inline">\(n(n-1)(n-2)...(n-k+1)\)</span>. This is known as a permutation and is sometimes written as
-<span class="math display">\[
-{}_nP_{k} = \frac{n!}{(n-k)!}
-\]</span></p>
-<p>Recall that <span class="math inline">\(n!\)</span> is read as <span class="math inline">\(n\)</span> factorial and represents the number of ways to arrange <span class="math inline">\(n\)</span> objects.</p>
-<blockquote>
-<p><em>Example</em>:<br />
-Twenty-five friends participate in a Halloween costume party. Three prizes are given during the party: most creative costume, scariest costume, and funniest costume. No one can win more than one prize. How many possible ways can the prizes by distributed?</p>
-</blockquote>
-<p>There are <span class="math inline">\(k=3\)</span> prizes to be assigned to <span class="math inline">\(n=25\)</span> people. Once someone is selected for a prize, they are removed from the pool of eligibles. In other words, we are sampling without replacement. Also, order matters. For example, if Tom, Mike, and Jane, win most creative, scariest and funniest costume, respectively, this is a different outcome than if Mike won creative, Jane won scariest and Tom won funniest. Thus, the number of ways the prizes can be distributed is given by <span class="math inline">\({}_{25}P_3 = \frac{25!}{22!} = 13,800\)</span>. A more visually pleasing way to express this would be:
-<span class="math display">\[
-\underbrace{\underline{\quad 25 \quad }}_\text{most creative} \times \underbrace{\underline{\quad 24 \quad }}_\text{scariest} \times \underbrace{\underline{\quad 23 \quad }}_\text{funniest} = 13,800
-\]</span></p>
-<p>Notice that it is sometime difficult to determine if order matters or not in a problem, but in this example the name of the prize was a hint that indeed order matters.</p>
-<p>Let’s use the idea of a permutation to calculate a probability.</p>
-<blockquote>
-<p><em>Exercise</em>:<br />
-Assume that all 25 participants are equally likely to win any one of the three prizes. What is the probability that Tom doesn’t win any of them?</p>
-</blockquote>
-<p>Just like in the previous probability calculation, we simply need to count the number of ways Tom doesn’t win any prize. In other words, we need to count the number of ways that prizes are distributed without Tom. So, remove Tom from the group of 25 eligible participants. The number of ways Tom doesn’t get a prize is <span class="math inline">\({}_{24}P_3 = \frac{24!}{21!}=12,144\)</span>. Again visually:
-<span class="math display">\[
-\underbrace{\underline{\quad 24 \quad }}_\text{most creative} \times \underbrace{\underline{\quad 23 \quad }}_\text{scariest} \times \underbrace{\underline{\quad 22 \quad }}_\text{funniest} = 12,144
-\]</span></p>
-<p>The probability Tom doesn’t get a prize is simply the second number divided by the first:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="2-PROBRULES.html#cb106-1" aria-hidden="true" tabindex="-1"></a>denom <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">25</span>)<span class="sc">/</span><span class="fu">factorial</span>(<span class="dv">25</span> <span class="sc">-</span> <span class="dv">3</span>)</span>
-<span id="cb106-2"><a href="2-PROBRULES.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Or, denom&lt;-25*24*23</span></span>
-<span id="cb106-3"><a href="2-PROBRULES.html#cb106-3" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">24</span><span class="sc">*</span><span class="dv">23</span><span class="sc">*</span><span class="dv">22</span></span>
-<span id="cb106-4"><a href="2-PROBRULES.html#cb106-4" aria-hidden="true" tabindex="-1"></a>num<span class="sc">/</span>denom</span></code></pre></div>
-<pre><code>[1] 0.88</code></pre>
-</div>
-<div id="multiplication-rule-3-combination-order-does-not-matter-sampling-without-replacement" class="section level3 hasAnchor" number="2.4.3">
-<h3><span class="header-section-number">2.4.3</span> Multiplication rule 3 (Combination): Order Does Not Matter, Sampling Without Replacement<a href="2-PROBRULES.html#multiplication-rule-3-combination-order-does-not-matter-sampling-without-replacement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Consider a random experiment where we sample from a group of size <span class="math inline">\(n\)</span>, without replacement, and the outcome of the experiment does not depend on the order of the outcomes. The number of ways to select <span class="math inline">\(k\)</span> objects is given by <span class="math inline">\(\frac{n!} {(n-k)!k!}\)</span>. This is known as a combination and is written as:
-<span class="math display">\[
-\binom{n}{k} = \frac{n!}{(n-k)!k!}
-\]</span></p>
-<p>This is read as “<span class="math inline">\(n\)</span> choose <span class="math inline">\(k\)</span>”. Take a moment to compare combinations to permutations, discussed in Rule 2. The difference between these two rules is that in a combination, order no longer matters. A combination is equivalent to a permutation divided by <span class="math inline">\(k!\)</span>, the number of ways to arrange the <span class="math inline">\(k\)</span> objects selected.</p>
-<blockquote>
-<p><em>Example</em>:<br />
-Suppose we draw 5 cards out of a standard deck (52 cards, no jokers). How many possible 5 card hands are there?</p>
-</blockquote>
-<p>In this example, order does not matter. I don’t care if I receive 3 jacks then 2 queens or 2 queens then 3 jacks. Either way, it’s the same collection of 5 cards. Also, we are drawing without replacement. Once a card is selected, it cannot be selected again. Thus, the number of ways to select 5 cards is given by:
-<span class="math display">\[
-\binom{52}{5} = \frac{52!}{(52-5)!5!} = 2,598,960
-\]</span></p>
-<blockquote>
-<p><em>Example</em>:<br />
-When drawing 5 cards, what is the probability of drawing a “flush” (5 cards of the same suit)?</p>
-</blockquote>
-<p>Let’s determine how many ways to draw a flush. There are four suits (clubs, hearts, diamonds and spades). Each suit has 13 cards. We would like to pick 5 of those 13 cards and 0 of the remaining 39. Let’s consider just one of those suits (clubs):
-<span class="math display">\[
-\mbox{P}(\mbox{5 clubs})=\frac{\binom{13}{5}\binom{39}{0}}{\binom{52}{5}}
-\]</span></p>
-<p>The second part of the numerator (<span class="math inline">\(\binom{39}{0}\)</span>) isn’t necessary, since it simply represents the number of ways to select 0 objects from a group (1 way), but it helps clearly lay out the events. This brings up the point of what <span class="math inline">\(0!\)</span> equals. By definition it is 1. This allows us to use <span class="math inline">\(0!\)</span> in our work.</p>
-<p>Now, we expand this to all four suits by multiplying by 4, or <span class="math inline">\(\binom{4}{1}\)</span> since we are selecting 1 suit out of the 4:
-<span class="math display">\[
-\mbox{P}(\mbox{flush})=\frac{\binom{4}{1}\binom{13}{5}\binom{39}{0}}{\binom{52}{5}}
-\]</span></p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="2-PROBRULES.html#cb108-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">4</span><span class="sc">*</span><span class="fu">choose</span>(<span class="dv">13</span>, <span class="dv">5</span>)<span class="sc">*</span><span class="dv">1</span></span>
-<span id="cb108-2"><a href="2-PROBRULES.html#cb108-2" aria-hidden="true" tabindex="-1"></a>denom <span class="ot">&lt;-</span> <span class="fu">choose</span>(<span class="dv">52</span>, <span class="dv">5</span>)</span>
-<span id="cb108-3"><a href="2-PROBRULES.html#cb108-3" aria-hidden="true" tabindex="-1"></a>num<span class="sc">/</span>denom</span></code></pre></div>
-<pre><code>[1] 0.001980792</code></pre>
-<p>There is a probability of 0.0020 of drawing a flush in a draw of 5 cards from a standard deck of cards.</p>
-<blockquote>
-<p><strong>Exercise</strong>:<br />
-When drawing 5 cards, what is the probability of drawing a “full house” (3 cards of the same rank and the other 2 of the same rank)?</p>
-</blockquote>
-<p>This problem uses several ideas from this chapter. We need to pick the rank of the three of a kind. Then pick 3 cards from the 4 possible. Next we pick the rank of the pair from the remaining 12 ranks. Finally pick 2 cards of that rank from the 4 possible.</p>
-<p><span class="math display">\[
-\mbox{P}(\mbox{full house})=\frac{\binom{13}{1}\binom{4}{3}\binom{12}{1}\binom{4}{2}}{\binom{52}{5}}
-\]</span></p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="2-PROBRULES.html#cb110-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fu">choose</span>(<span class="dv">13</span>, <span class="dv">1</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">3</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">12</span>, <span class="dv">1</span>)<span class="sc">*</span><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">2</span>)</span>
-<span id="cb110-2"><a href="2-PROBRULES.html#cb110-2" aria-hidden="true" tabindex="-1"></a>denom <span class="ot">&lt;-</span> <span class="fu">choose</span>(<span class="dv">52</span>, <span class="dv">5</span>)</span>
-<span id="cb110-3"><a href="2-PROBRULES.html#cb110-3" aria-hidden="true" tabindex="-1"></a>num<span class="sc">/</span>denom</span></code></pre></div>
-<pre><code>[1] 0.001440576</code></pre>
-<p>Why not use <span class="math inline">\(\binom{13}{2}\)</span> instead of <span class="math inline">\(\binom{13}{1}\binom{12}{1}\)</span>?<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
-<p>We have just determined that a full house has a lower probability of occurring than a flush. This is why in gambling, a flush is valued less than a full house.</p>
-</div>
-</div>
-<div id="homework-problems-1" class="section level2 hasAnchor" number="2.5">
-<h2><span class="header-section-number">2.5</span> Homework Problems<a href="2-PROBRULES.html#homework-problems-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="homework-problems-9" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Homework Problems<a href="11-ODCP.html#homework-problems-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
-<li>Let <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> be events such that <span class="math inline">\(\mbox{P}(A)=0.5\)</span>, <span class="math inline">\(\mbox{P}(B)=0.3\)</span>, and <span class="math inline">\(\mbox{P}(C)=0.4\)</span>. Also, we know that <span class="math inline">\(\mbox{P}(A \cap B)=0.2\)</span>, <span class="math inline">\(\mbox{P}(B \cap C)=0.12\)</span>, <span class="math inline">\(\mbox{P}(A \cap C)=0.1\)</span>, and <span class="math inline">\(\mbox{P}(A \cap B \cap C)=0.05\)</span>. Find the following:</li>
+<li><strong>Generalizability and causality</strong>. Identify the population of interest and the sample in the studies described below. These are the same studies from the previous chapter. Also comment on whether or not the results of the study can be generalized to the population and if the findings of the study can be used to establish causal relationships.</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li><span class="math inline">\(\mbox{P}(A\cup B)\)</span><br />
-</li>
-<li><span class="math inline">\(\mbox{P}(A\cup B \cup C)\)</span><br />
-</li>
-<li><span class="math inline">\(\mbox{P}(B&#39;\cap C&#39;)\)</span><br />
-</li>
-<li><span class="math inline">\(\mbox{P}(A\cup (B\cap C))\)</span><br />
-</li>
-<li><span class="math inline">\(\mbox{P}((A\cup B \cup C)\cap (A\cap B \cap C)&#39;)\)</span></li>
+<li><p>Researchers collected data to examine the relationship between pollutants and preterm births in Southern California. During the study, air pollution levels were measured by air quality monitoring stations. Specifically, levels of carbon monoxide were recorded in parts per million, nitrogen dioxide and ozone in parts per hundred million, and coarse particulate matter (PM<span class="math inline">\(_{10}\)</span>) in <span class="math inline">\(\mu g/m^3\)</span>. Length of gestation data were collected on 143,196 births between the years 1989 and 1993, and air pollution exposure during gestation was calculated for each birth. The analysis suggests that increased ambient PM<span class="math inline">\(_{10}\)</span> and, to a lesser degree, CO concentrations may be associated with the occurrence of preterm births.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p></li>
+<li><p>The Buteyko method is a shallow breathing technique developed by Konstantin Buteyko, a Russian doctor, in 1952. Anecdotal evidence suggests that the Buteyko method can reduce asthma symptoms and improve quality of life. In a scientific study to determine the effectiveness of this method, researchers recruited 600 asthma patients aged 18-69 who relied on medication for asthma treatment. These patients were split into two research groups: patients who practiced the Buteyko method and those who did not. Patients were scored on quality of life, activity, asthma symptoms, and medication reduction on a scale from 0 to 10. On average, the participants in the Buteyko group experienced a significant reduction in asthma symptoms and an improvement in quality of life.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p></li>
 </ol>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Consider the example of the family in the reading. What is the probability that the family has at least one boy?</p></li>
-<li><p>The Birthday Problem Revisited.</p></li>
+<li><strong>GPA and study time</strong>. A survey was conducted on 193 undergraduates who took an introductory statistics course at a private US university in 2012. This survey asked them about their GPA and the number of hours they spent studying per week. The scatterplot below displays the relationship between these two variables.</li>
 </ol>
+<p><img src="ModernDive_files/figure-html/unnamed-chunk-128-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: lower-alpha">
-<li>Suppose there are <span class="math inline">\(n=20\)</span> students in a classroom. My birthday, the instructor, is April 3rd. What is the probability that at least one student shares my birthday? Assume only 365 days in a year and assume that all birthdays are equally likely.<br />
-</li>
-<li>In <code>R</code>, find the probability that at least one other person shares my birthday for each value of <span class="math inline">\(n\)</span> from 1 to 300. Plot these probabilities with <span class="math inline">\(n\)</span> on the <span class="math inline">\(x\)</span>-axis and probability on the <span class="math inline">\(y\)</span>-axis. At what value of <span class="math inline">\(n\)</span> would the probability be at least 50%?</li>
+<li><p>What is the explanatory variable and what is the response variable?</p></li>
+<li><p>Describe the relationship between the two variables. Make sure to discuss unusual observations, if any.</p></li>
+<li><p>Is this an experiment or an observational study?</p></li>
+<li><p>Can we conclude that studying longer hours leads to higher GPAs?</p></li>
 </ol>
-<ol start="4" style="list-style-type: decimal">
-<li>Thinking of the cards again. Answer the following questions:</li>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Income and education</strong> The scatterplot below shows the relationship between per capita income (in thousands of dollars) and percent of population with a bachelor’s degree in 3,143 counties in the US in 2010.</li>
 </ol>
+<p><img src="ModernDive_files/figure-html/unnamed-chunk-129-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: lower-alpha">
-<li>Define two events that are mutually exclusive.<br />
-</li>
-<li>Define two events that are independent.<br />
-</li>
-<li>Define an event and its complement.</li>
-</ol>
-<ol start="5" style="list-style-type: decimal">
-<li>Consider the license plate example from the reading.</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>What is the probability that a license plate contains <strong>exactly</strong> one “B”?<br />
-</li>
-<li>What is the probability that a license plate contains <strong>at least one</strong> “B”?</li>
-</ol>
-<ol start="6" style="list-style-type: decimal">
-<li>Consider the party example in the reading.</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>Suppose 8 people showed up to the party dressed as zombies. What is the probability that all three awards are won by people dressed as zombies?<br />
-</li>
-<li>What is the probability that zombies win “most creative” and “funniest” but not “scariest”?</li>
-</ol>
-<ol start="7" style="list-style-type: decimal">
-<li>Consider the cards example from the reading.</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>How many ways can we obtain a “two pairs” (2 of one number, 2 of another, and the final different)?<br />
-</li>
-<li>What is the probability of drawing a “four of a kind” (four cards of the same value)?</li>
-</ol>
-<ol start="8" style="list-style-type: decimal">
-<li>Advanced Question: Consider rolling 5 dice. What is the <strong>probability</strong> of a pour resulting in a full house?</li>
+<li><p>What are the explanatory and response variables?</p></li>
+<li><p>Describe the relationship between the two variables. Make sure to discuss unusual observations, if any.</p></li>
+<li><p>Can we conclude that having a bachelor’s degree increases one’s income?</p></li>
 </ol>
 </div>
-<div id="solutions-manual-1" class="section level2 unnumbered hasAnchor">
-<h2><a href="https://ds-usafa.github.io/PSSE-Solutions-Manual/PROBRULES.html">Solutions Manual</a><a href="2-PROBRULES.html#solutions-manual-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="solutions-manual-10" class="section level2 unnumbered hasAnchor">
+<h2><a href="https://ds-usafa.github.io/PSSE-Solutions-Manual/ODCP.html">Solutions Manual</a><a href="11-ODCP.html#solutions-manual-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="4">
-<li id="fn4"><p>Multiplication is repeated adding so in a sense we are adding. However in a more serious tone, for this problem for every first number there are 10 possibilities for the second number and for every second number there are 10 possibilities for the third numbers. This is multiplication.<a href="2-PROBRULES.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Because this implies the order selection of the ranks does not matter. In other words, this assumes that for example 3 Kings and 2 fours is the same full house as 3 fours and 2 Kings. This is not true so we break the rank selection about essentially making it a permutation.<a href="2-PROBRULES.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<ol start="10">
+<li id="fn10"><p>2) Notice that the second question is only relevant to students who complete their degree; the average cannot be computed using a student who never finished her degree. Thus, only Duke undergraduate students who have graduated in the last five years represent cases in the population under consideration. Each such student would represent an individual case. 3) A person with severe heart disease represents a case. The population includes all people with severe heart disease.<a href="11-ODCP.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>Perhaps she would pick a disproportionate number of graduates from health-related fields. Or perhaps her selection would be well-representative of the population. When selecting samples by hand, we run the risk of picking a <em>biased</em> sample, even if that bias is unintentional or difficult to discern.<a href="11-ODCP.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>A representative sample accurately reflects the characteristics of the population.<a href="11-ODCP.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>Non-response bias is bias that can be introduced when subjects elect not to participate in a study. Often, the individuals that do participate are systematically different from the individuals who do not.<a href="11-ODCP.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>Answers will vary. From our own anecdotal experiences, we believe people tend to rant more about products that fell below expectations than rave about those that perform as expected. For this reason, we suspect there is a negative bias in product ratings on sites like Amazon. However, since our experiences may not be representative, we also keep an open mind.<a href="11-ODCP.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>Sometimes the explanatory variable is called the <strong>independent</strong> variable and the response variable is called the <strong>dependent</strong> variable. However, this becomes confusing since a <em>pair</em> of variables might be independent or dependent, so be careful and consider the context when using or reading these words.<a href="11-ODCP.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>A cohort is a group of individuals who are similar in some way.<a href="11-ODCP.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>B. Ritz et al. <a href="http://journals.lww.com/epidem/Abstract/2000/09000/Effect_of_Air_Pollution_on_Preterm_Birth_Among.4.aspx">“Effect of air pollution on preterm birth among children born in Southern California
+between 1989 and 1993”</a>. In: Epidemiology 11.5 (2000), pp. 502–511.<a href="11-ODCP.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>J. McGowan. “Health Education: Does the Buteyko Institute Method make a difference?” In: Thorax 58 (2003).<a href="11-ODCP.html#fnref18" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -1215,8 +835,8 @@ When drawing 5 cards, what is the probability of drawing a “full house” (3 c
           </div>
         </div>
       </div>
-<a href="1-CS2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="3-CONDPROB.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="10-DB.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="12-STUDY.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1247,7 +867,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/moderndive/moderndive_book/edit/master/PSSE_additions/08-Probability-Rules.Rmd",
+"link": "https://github.com/moderndive/moderndive_book/edit/master/PSSE_additions/03-Overview-of-Data-Collection-Principles.Rmd",
 "text": "Edit"
 },
 "history": {

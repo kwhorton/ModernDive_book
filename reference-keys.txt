@@ -29,7 +29,7 @@ fig:first-fig
 fig:split-fig
 fig:cs1-fig
 fig:tax-fig
-fig:unnamed-chunk-124
+fig:unnamed-chunk-127
 fig:randsamp-fig
 fig:biased-fig
 fig:convsamp-fig
@@ -222,7 +222,7 @@ fig:p-value-slope
 tab:table-ch11
 tab:model4-data-preview
 fig:numxcatxplot1
-tab:unnamed-chunk-532
+tab:unnamed-chunk-535
 tab:regtable-interaction
 tab:interaction-summary
 fig:numxcatx-parallel
@@ -327,6 +327,12 @@ normal-distribution
 standard-normal
 beta-distribution
 homework-problems-6
+MULTIDISTS
+multivariate-distributions
+joint-probability
+discrete-random-variables
+continuous-random-variables-1
+homework-problems-7
 CS1
 introduction-to-data-unleashing-the-power-of-information-in-r
 case-study-1
@@ -337,7 +343,7 @@ explore-data
 visualize-the-data
 more-advanced-graphics
 conclusion
-homework-problems-7
+homework-problems-8
 DB
 introduction-to-data-unleashing-the-power-of-information-in-r-1
 the-data-analysis-process
@@ -353,7 +359,7 @@ anecdotal-evidence
 sampling-from-a-population
 explanatory-and-response-variables
 introducing-observational-studies-and-experiments
-homework-problems-8
+homework-problems-9
 STUDY
 observation-studies-sampling-strategies-and-experiments
 observational-studies
@@ -361,7 +367,7 @@ three-sampling-methods
 experiments
 principles-of-experimental-design
 reducing-bias-in-human-experiments
-homework-problems-9
+homework-problems-10
 viz
 grammarofgraphics
 components-of-the-grammar
