@@ -1,13 +1,5 @@
 # Named Discrete Distributions {#DISCRETENAMED}
 
-
-## Objectives
-
-1) Recognize and set up for use common discrete distributions (Uniform, Binomial, Poisson, Hypergeometric) to include parameters, assumptions, and moments.   
-
-2) Use `R` to calculate probabilities and quantiles involving random variables with common discrete distributions. 
-
-
 ## Named distributions
 
 In the previous two chapters, we introduced the concept of random variables, distribution functions, and expectations. In some cases, the nature of an experiment may yield random variables with common distributions. In these cases, we can rely on easy-to-use distribution functions and built-in `R` functions in order to calculate probabilities and quantiles. 
