@@ -2,6 +2,7 @@
 
 
 ```{r setup, include=FALSE}
+library(tidyverse)
 library(MASS)
 library(cubature)
 library(mosaicCalc)
