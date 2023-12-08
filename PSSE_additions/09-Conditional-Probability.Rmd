@@ -1,13 +1,6 @@
 # Conditional Probability {#CONDPROB}
 
 
-## Objectives
-
-1) Define conditional probability and distinguish it from joint probability.  
-2) Find a conditional probability using its definition.   
-3) Using conditional probability, determine whether two events are independent.   
-4) Apply Bayes' Rule mathematically and via simulation. 
-
 ## Conditional Probability
 
 So far, we've covered the basic axioms of probability, the properties of events (set theory) and counting rules. Another important concept, perhaps one of the most important, is conditional probability. Often, we know a certain event or sequence of events has occurred and we are interested in the probability of another event. 
