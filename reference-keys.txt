@@ -262,7 +262,6 @@ general-solution
 data-science-approach
 homework-problems
 PROBRULES
-objectives-1
 probability-vs-statistics
 basic-probability-terms
 sample-space
@@ -278,7 +277,7 @@ multiplication-rule-2-permutation-order-matters-sampling-without-replacement
 multiplication-rule-3-combination-order-does-not-matter-sampling-without-replacement
 homework-problems-1
 CONDPROB
-objectives-2
+objectives-1
 conditional-probability
 independence
 bayes-rule
@@ -287,7 +286,7 @@ mathematical-approach
 simulation
 homework-problems-2
 RANDVAR
-objectives-3
+objectives-2
 random-variables
 how-does-this-help
 discrete-vs-continuous
@@ -302,7 +301,7 @@ variance
 mean-and-variance-of-linear-transformations
 homework-problems-3
 CONRANDVAR
-objectives-4
+objectives-3
 continuous-random-variables
 continuous-distribution-functions
 probability-density-function
@@ -312,7 +311,7 @@ moments-1
 mean-and-variance
 homework-problems-4
 DISCRETENAMED
-objectives-5
+objectives-4
 named-distributions
 discrete-uniform-distribution
 simulating
@@ -322,7 +321,7 @@ poisson-distribution
 hypergeometric
 homework-problems-5
 CONTNNAMED
-objectives-6
+objectives-5
 continuous-distributions
 uniform-distribution
 exponential-distribution
