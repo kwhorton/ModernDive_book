@@ -9,17 +9,6 @@ library(mosaicCalc)
 
 
 
-## Objectives
-
-1) Given a joint pmf/pdf, obtain means and variances of random variables and functions of random variables.  
-
-2) Define the terms *covariance* and *correlation*, and given a joint pmf/pdf, obtain the covariance and correlation between two random variables.  
-
-3) Given a joint pmf/pdf, determine whether random variables are *independent* of one another.   
-
-4) Find conditional expectations.  
-
-
 ## Expectation - moments
 
 Computing expected values of random variables in the joint context is similar to the univariate case. Let $X$ and $Y$ be discrete random variables with joint pmf $f_{X,Y}(x,y)$. Let $g(X,Y)$ be some function of $X$ and $Y$. Then:
