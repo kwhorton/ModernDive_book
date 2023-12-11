@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Continuous Random Variables | Statistical Inference via Data Science</title>
+  <title>Chapter 9 Multivariate Expectation | Statistical Inference via Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Continuous Random Variables | Statistical Inference via Data Science" />
+  <meta property="og:title" content="Chapter 9 Multivariate Expectation | Statistical Inference via Data Science" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://moderndive.com//images/logos/book_cover.png" />
   <meta property="og:description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
   <meta name="github-repo" content="moderndive/ModernDive_book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Continuous Random Variables | Statistical Inference via Data Science" />
+  <meta name="twitter:title" content="Chapter 9 Multivariate Expectation | Statistical Inference via Data Science" />
   <meta name="twitter:site" content="@ModernDive" />
   <meta name="twitter:description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
   <meta name="twitter:image" content="https://moderndive.com//images/logos/book_cover.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/logos/favicons/apple-touch-icon.png" />
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="4-RANDVAR.html"/>
-<link rel="next" href="6-DISCRETENAMED.html"/>
+<link rel="prev" href="8-MULTIDISTS.html"/>
+<link rel="next" href="10-CS1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -703,231 +703,471 @@ div.csl-indent {
 <html>
 <img src='https://moderndive.com/wide_format.png' alt="ModernDive">
 </html>
-<div id="CONRANDVAR" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Continuous Random Variables<a href="5-CONRANDVAR.html#CONRANDVAR" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="continuous-random-variables" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Continuous random variables<a href="5-CONRANDVAR.html#continuous-random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the last chapter, we introduced random variables, and explored discrete random variables. In this chapter, we will move into continuous random variables, their properties, their distribution functions, and how they differ from discrete random variables.</p>
-<p>Recall that a continuous random variable has a domain that is a continuous interval (or possibly a group of intervals). For example, let <span class="math inline">\(Y\)</span> be the random variable corresponding to the height of a randomly selected individual. While our measurement will necessitate “discretizing” height to some degree, technically, height is a continuous random variable since a person could measure 67.3 inches or 67.4 inches or anything in between.</p>
-<div id="continuous-distribution-functions" class="section level3 hasAnchor" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Continuous distribution functions<a href="5-CONRANDVAR.html#continuous-distribution-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>So how do we describe the randomness of continuous random variables? In the case of discrete random variables, the probability mass function (pmf) and the cumulative distribution function (cdf) are used to describe randomness. However, recall that the pmf is a function that returns the probability that the random variable takes the inputted value. Due to the nature of continuous random variables, the probability that a continuous random variable takes on any one individual value is technically 0. Thus, a pmf cannot apply to a continuous random variable.</p>
-<p>Rather, we describe the randomness of continuous random variables with the <em>probability density function</em> (pdf) and the <em>cumulative distribution function</em> (cdf). Note that the cdf has the same interpretation and application as in the discrete case.</p>
-<div style="page-break-after: always;"></div>
-</div>
-<div id="probability-density-function" class="section level3 hasAnchor" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Probability density function<a href="5-CONRANDVAR.html#probability-density-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let <span class="math inline">\(X\)</span> be a continuous random variable. The probability density function (pdf) of <span class="math inline">\(X\)</span>, given by <span class="math inline">\(f_X(x)\)</span> is a function that describes the behavior of <span class="math inline">\(X\)</span>. It is important to note that in the continuous case, <span class="math inline">\(f_X(x)\neq \mbox{P}(X=x)\)</span>, as the probability of <span class="math inline">\(X\)</span> taking any one individual value is 0.</p>
-<p>The pdf is a <em>function</em>. The input of a pdf is any real number. The output is known as the density. The pdf has three main properties:</p>
-<ol style="list-style-type: decimal">
-<li><p><span class="math inline">\(f_X(x)\geq 0\)</span></p></li>
-<li><p><span class="math inline">\(\int_{S_X} f_X(x)\mathop{}\!\mathrm{d}x = 1\)</span></p></li>
-<li><p><span class="math inline">\(\mbox{P}(X\in A)=\int_{x\in A} f_X(x)\mathop{}\!\mathrm{d}x\)</span> or another way to write this <span class="math inline">\(\mbox{P}(a \leq X \leq b)=\int_{a}^{b} f_X(x)\mathop{}\!\mathrm{d}x\)</span></p></li>
-</ol>
-<p>Properties 2) and 3) imply that the area underneath a pdf represents probability. The pdf is a non-negative function, it cannot have negative values.</p>
-</div>
-<div id="cumulative-distribution-function-1" class="section level3 hasAnchor" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> Cumulative distribution function<a href="5-CONRANDVAR.html#cumulative-distribution-function-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The cumulative distribution function (cdf) of a continuous random variable has the same interpretation as it does for a discrete random variable. It is a <em>function</em>. The input of a cdf is any real number, and the output is the probability that the random variable takes a value less than or equal to the inputted value. It is denoted as <span class="math inline">\(F\)</span> and is given by:
+<div id="MULTIEXP" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Multivariate Expectation<a href="9-MULTIEXP.html#MULTIEXP" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="expectation---moments" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Expectation - moments<a href="9-MULTIEXP.html#expectation---moments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Computing expected values of random variables in the joint context is similar to the univariate case. Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be discrete random variables with joint pmf <span class="math inline">\(f_{X,Y}(x,y)\)</span>. Let <span class="math inline">\(g(X,Y)\)</span> be some function of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Then:
 <span class="math display">\[
-F_X(x)=\mbox{P}(X\leq x)=\int_{-\infty}^x f_x(t) \mathop{}\!\mathrm{d}t
+\mbox{E}[g(X,Y)]=\sum_x\sum_y g(x,y)f_{X,Y}(x,y)
 \]</span></p>
+<p>(Note that <span class="math inline">\(\sum\limits_{x}\)</span> is shorthand for the sum across all possible values of <span class="math inline">\(x\)</span>.)</p>
+<p>In the case of continuous random variables with a joint pdf <span class="math inline">\(f_{X,Y}(x,y)\)</span>, expectation becomes:
+<span class="math display">\[
+\mbox{E}[g(X,Y)]=\int_x\int_y g(x,y)f_{X,Y}(x,y)\mathop{}\!\mathrm{d}y \mathop{}\!\mathrm{d}x
+\]</span></p>
+<div id="expectation-of-discrete-random-variables" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Expectation of discrete random variables<a href="9-MULTIEXP.html#expectation-of-discrete-random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Given a joint pmf, one can find the mean of <span class="math inline">\(X\)</span> by using the joint function or by finding the marginal pmf first and then using that to find <span class="math inline">\(\mbox{E}(X)\)</span>. In the end, both ways are the same. For the discrete case:
+<span class="math display">\[
+\mbox{E}(X)=\sum_x\sum_y xf_{X,Y}(x,y) = \sum_x x \sum_y f_{X,Y}(x,y)
+\]</span></p>
+<p>The <span class="math inline">\(x\)</span> can be moved outside the inner sum since the inner sum is with respect to variable <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> is a constant with respect to <span class="math inline">\(y\)</span>. Note that the inner sum is the marginal pmf of <span class="math inline">\(X\)</span>. So,
+<span class="math display">\[
+\mbox{E}(X)=\sum_x x \sum_y f_{X,Y}(x,y)=\sum_x x f_X(x)
+\]</span></p>
+<div style="page-break-after: always;"></div>
 <blockquote>
 <p><em>Example</em>:<br />
-Let <span class="math inline">\(X\)</span> be a continuous random variable with <span class="math inline">\(f_X(x)=2x\)</span> where <span class="math inline">\(0 \leq x \leq 1\)</span>. Verify that <span class="math inline">\(f\)</span> is a valid pdf. Find the cdf of <span class="math inline">\(X\)</span>. Also, find the following probabilities: <span class="math inline">\(\mbox{P}(X&lt;0.5)\)</span>, <span class="math inline">\(\mbox{P}(X&gt;0.5)\)</span>, and <span class="math inline">\(\mbox{P}(0.1\leq X &lt; 0.75)\)</span>. Finally, find the median of <span class="math inline">\(X\)</span>.</p>
+Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be discrete random variables with joint pmf below.</p>
 </blockquote>
-<p>To verify that <span class="math inline">\(f\)</span> is a valid pdf, we simply note that <span class="math inline">\(f_X(x) \geq 0\)</span> on the range <span class="math inline">\(0 \leq x \leq 1\)</span>. Also, we note that <span class="math inline">\(\int_0^1 2x \mathop{}\!\mathrm{d}x = x^2\bigg|_0^1 = 1\)</span>.</p>
-<p>Using <code>R</code>, we find</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="5-CONRANDVAR.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(<span class="cf">function</span>(x)<span class="dv">2</span><span class="sc">*</span>x, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>1 with absolute error &lt; 1.1e-14</code></pre>
-<p>Or we can use the <strong>mosaicCalc</strong> package to find the anti-derivative. If the package is not installed, you can use the <code>Packages</code> tab in <code>RStudio</code> or type <code>install.packages("mosaicCalc")</code> at the command prompt. Load the library.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="5-CONRANDVAR.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaicCalc)</span></code></pre></div>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="5-CONRANDVAR.html#cb146-1" aria-hidden="true" tabindex="-1"></a>(Fx <span class="ot">&lt;-</span> <span class="fu">antiD</span>(<span class="dv">2</span><span class="sc">*</span>x <span class="sc">~</span> x))</span></code></pre></div>
-<pre><code>function (x, C = 0) 
-x^2 + C</code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="5-CONRANDVAR.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Fx</span>(<span class="dv">1</span>) <span class="sc">-</span> <span class="fu">Fx</span>(<span class="dv">0</span>)</span></code></pre></div>
-<pre><code>[1] 1</code></pre>
-Graphically, the pdf is displayed in Figure <a href="5-CONRANDVAR.html#fig:plot111-fig">5.1</a>:
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot111-fig"></span>
-<img src="ModernDive_files/figure-html/plot111-fig-1.png" alt="pdf of $X$" width="\textwidth" />
-<p class="caption">
-FIGURE 5.1: pdf of <span class="math inline">\(X\)</span>
-</p>
-</div>
-<div style="page-break-after: always;"></div>
-<p>The cdf of <span class="math inline">\(X\)</span> is found by
-<span class="math display">\[
-\int_0^x 2t \mathop{}\!\mathrm{d}t = t^2\bigg|_0^x = x^2
-\]</span>
-This is <code>antiD</code> found from the calculations above.</p>
-<p>So,
-<span class="math display">\[
-F_X(x)=\left\{ \begin{array}{ll} 0, &amp; x&lt;0 \\ x^2, &amp; 0\leq x \leq 1 \\ 1, &amp; x&gt;1 \end{array}\right.
-\]</span></p>
-<p>The plot of the cdf of <span class="math inline">\(X\)</span> is shown in Figure <a href="5-CONRANDVAR.html#fig:plot112-fig">5.2</a>.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot112-fig"></span>
-<img src="ModernDive_files/figure-html/plot112-fig-1.png" alt="cdf of $X$" width="\textwidth" />
-<p class="caption">
-FIGURE 5.2: cdf of <span class="math inline">\(X\)</span>
-</p>
-</div>
-<p>Probabilities are found either by integrating the pdf or using the cdf:</p>
-<p><span class="math inline">\(\mbox{P}(X &lt; 0.5)=\mbox{P}(X\leq 0.5)=F_X(0.5)=0.5^2=0.25\)</span>. See Figure <a href="5-CONRANDVAR.html#fig:plot113-fig">5.3</a>.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot113-fig"></span>
-<img src="ModernDive_files/figure-html/plot113-fig-1.png" alt="Probability represented by shaded area" width="\textwidth" />
-<p class="caption">
-FIGURE 5.3: Probability represented by shaded area
-</p>
-</div>
-<p><span class="math inline">\(\mbox{P}(X &gt; 0.5) = 1-\mbox{P}(X\leq 0.5)=1-0.25 = 0.75\)</span> See Figure <a href="5-CONRANDVAR.html#fig:plot114-fig">5.4</a>.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot114-fig"></span>
-<img src="ModernDive_files/figure-html/plot114-fig-1.png" alt="Probability represented by shaded area" width="\textwidth" />
-<p class="caption">
-FIGURE 5.4: Probability represented by shaded area
-</p>
-</div>
-<p><span class="math inline">\(\mbox{P}(0.1\leq X &lt; 0.75) = \int_{0.1}^{0.75}2x\mathop{}\!\mathrm{d}x = 0.75^2 - 0.1^2 = 0.5525\)</span> See Figure <a href="5-CONRANDVAR.html#fig:plot115-fig">5.5</a>.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="5-CONRANDVAR.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(<span class="cf">function</span>(x)<span class="dv">2</span><span class="sc">*</span>x, <span class="fl">0.1</span>, <span class="fl">0.75</span>)</span></code></pre></div>
-<pre><code>0.5525 with absolute error &lt; 6.1e-15</code></pre>
-<p>Alternatively, <span class="math inline">\(\mbox{P}(0.1\leq X &lt; 0.75) = \mbox{P}(X &lt; 0.75) -\mbox{P}(x \leq 0.1) = F(0.75)-F(0.1)=0.75^2-0.1^2 =0.5525\)</span></p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="5-CONRANDVAR.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Fx</span>(<span class="fl">0.75</span>) <span class="sc">-</span> <span class="fu">Fx</span>(<span class="fl">0.1</span>)</span></code></pre></div>
-<pre><code>[1] 0.5525</code></pre>
-<p>Notice for a continuous random variable, we are loose with the use of the <code>=</code> sign. This is because for a continuous random variable <span class="math inline">\(\mbox{P}(X=x)=0\)</span>. Do not get sloppy when working with discrete random variables.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot115-fig"></span>
-<img src="ModernDive_files/figure-html/plot115-fig-1.png" alt="Probability represented by shaded area" width="\textwidth" />
-<p class="caption">
-FIGURE 5.5: Probability represented by shaded area
-</p>
-</div>
-<p>The median of <span class="math inline">\(X\)</span> is the value <span class="math inline">\(x\)</span> such that <span class="math inline">\(\mbox{P}(X\leq x)=0.5\)</span>, the area under a single point is 0. So we simply solve <span class="math inline">\(x^2=0.5\)</span> for <span class="math inline">\(x\)</span>. Thus, the median of <span class="math inline">\(X\)</span> is <span class="math inline">\(\sqrt{0.5}=0.707\)</span>.</p>
-<p>Or using <code>R</code></p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="5-CONRANDVAR.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">uniroot</span>(<span class="cf">function</span>(x)(<span class="fu">Fx</span>(x) <span class="sc">-</span> <span class="fl">0.5</span>), <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))<span class="sc">$</span>root</span></code></pre></div>
-<pre><code>[1] 0.7071067</code></pre>
-</div>
-<div id="simulation-1" class="section level3 hasAnchor" number="5.1.4">
-<h3><span class="header-section-number">5.1.4</span> Simulation<a href="5-CONRANDVAR.html#simulation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>As in the case of the discrete random variable, we can simulate a continuous random variable if we have an inverse for the cdf. The range of the cdf is <span class="math inline">\([0,1]\)</span>, so we generate a random number in this interval and then apply the inverse cdf to obtain a random variable. In a similar manner, for a continuous random variable, we use the following pseudo code:<br />
-1. Generate a random number in the interval <span class="math inline">\([0,1]\)</span>, <span class="math inline">\(U\)</span>.<br />
-2. Find the random variable <span class="math inline">\(X\)</span> from <span class="math inline">\(F_{X}^{-1}(U)\)</span>.<br />
-In <code>R</code> for our example, this looks like the following.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="5-CONRANDVAR.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">runif</span>(<span class="dv">1</span>))</span></code></pre></div>
-<pre><code>[1] 0.6137365</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="5-CONRANDVAR.html#cb158-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">10000</span>)<span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">runif</span>(<span class="dv">1</span>))</span></code></pre></div>
-<div style="page-break-after: always;"></div>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="5-CONRANDVAR.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(results)</span></code></pre></div>
-<pre><code>
-quantitative variables:  
-  name   class         min        Q1    median        Q3       max      mean
-1 sqrt numeric 0.005321359 0.4977011 0.7084257 0.8656665 0.9999873 0.6669452
-         sd     n missing
-1 0.2358056 10000       0</code></pre>
-<div style="page-break-after: always;"></div>
-<p>Figure <a href="5-CONRANDVAR.html#fig:plot116-fig">5.6</a> is a density plot of the simulated density function.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="5-CONRANDVAR.html#cb161-1" aria-hidden="true" tabindex="-1"></a>results <span class="sc">%&gt;%</span></span>
-<span id="cb161-2"><a href="5-CONRANDVAR.html#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_density</span>(<span class="sc">~</span>sqrt, <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb161-3"><a href="5-CONRANDVAR.html#cb161-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_bw</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb161-4"><a href="5-CONRANDVAR.html#cb161-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x =</span> <span class="st">&quot;X&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot116-fig"></span>
-<img src="ModernDive_files/figure-html/plot116-fig-1.png" alt="Density plot of the simulated random variable." width="\textwidth" />
-<p class="caption">
-FIGURE 5.6: Density plot of the simulated random variable.
-</p>
-</div>
-</div>
-</div>
-<div id="moments-1" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Moments<a href="5-CONRANDVAR.html#moments-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As with discrete random variables, moments can be calculated to summarize characteristics such as center and spread. In the discrete case, expectation is found by multiplying each possible value by its associated probability and summing across the domain (<span class="math inline">\(\mbox{E}(X)=\sum_x x\cdot f_X(x)\)</span>). In the continuous case, the domain of <span class="math inline">\(X\)</span> consists of an infinite set of values. From your calculus days, recall that the sum across an infinite domain is represented by an integral.</p>
-<p>Let <span class="math inline">\(g(X)\)</span> be any function of <span class="math inline">\(X\)</span>. The expectation of <span class="math inline">\(g(X)\)</span> is found by:
-<span class="math display">\[
-\mbox{E}(g(X)) = \int_{S_X} g(x)f_X(x)\mathop{}\!\mathrm{d}x
-\]</span></p>
-<div id="mean-and-variance" class="section level3 hasAnchor" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Mean and variance<a href="5-CONRANDVAR.html#mean-and-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let <span class="math inline">\(X\)</span> be a continuous random variable. The mean of <span class="math inline">\(X\)</span>, or <span class="math inline">\(\mu_X\)</span>, is simply <span class="math inline">\(\mbox{E}(X)\)</span>. Thus,
-<span class="math display">\[
-\mbox{E}(X)=\int_{S_X}x\cdot f_X(x)\mathop{}\!\mathrm{d}x
-\]</span></p>
-<p>As in the discrete case, the variance of <span class="math inline">\(X\)</span> is the expected squared difference from the mean, or <span class="math inline">\(\mbox{E}[(X-\mu_X)^2]\)</span>. Thus,
-<span class="math display">\[
-\sigma^2_X = \mbox{Var}(X)=\mbox{E}[(X-\mu_X)^2]= \int_{S_X} (x-\mu_X)^2\cdot f_X(x) \mathop{}\!\mathrm{d}x
-\]</span></p>
-<p>Recall homework problem 6 from the last chapter. In this problem, you showed that <span class="math inline">\(\mbox{Var}(X)=\mbox{E}(X^2)-\mbox{E}(X)^2\)</span>. Thus,
-<span class="math display">\[
-\mbox{Var}(X)=\mbox{E}(X^2)-\mbox{E}(X)^2 = \int_{S_X} x^2\cdot f_X(x)\mathop{}\!\mathrm{d}x - \mu_X^2
-\]</span></p>
-<blockquote>
-<p><em>Example</em>:<br />
-Consider the random variable <span class="math inline">\(X\)</span> from above. Find the mean and variance of <span class="math inline">\(X\)</span>.
-<span class="math display">\[
-\mu_X= \mbox{E}(X)=\int_0^1 x\cdot 2x\mathop{}\!\mathrm{d}x = \frac{2x^3}{3}\bigg|_0^1 = \frac{2}{3}=0.667
-\]</span></p>
-</blockquote>
-<p>Side note: Since the mean of <span class="math inline">\(X\)</span> is smaller than the median of <span class="math inline">\(X\)</span>, we say that <span class="math inline">\(X\)</span> is skewed to the left, or negatively skewed.</p>
-<p>Using <code>R</code>.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="5-CONRANDVAR.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(<span class="cf">function</span>(x)x<span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>x, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>0.6666667 with absolute error &lt; 7.4e-15</code></pre>
-<p>Or using <code>antiD()</code></p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="5-CONRANDVAR.html#cb164-1" aria-hidden="true" tabindex="-1"></a>Ex <span class="ot">&lt;-</span> <span class="fu">antiD</span>(<span class="dv">2</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">~</span> x)</span>
-<span id="cb164-2"><a href="5-CONRANDVAR.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Ex</span>(<span class="dv">1</span>) <span class="sc">-</span> <span class="fu">Ex</span>(<span class="dv">0</span>)</span></code></pre></div>
-<pre><code>[1] 0.6666667</code></pre>
-<p>Using our simulation.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="5-CONRANDVAR.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="sc">~</span>sqrt, <span class="at">data =</span> results)</span></code></pre></div>
-<pre><code>[1] 0.6669452</code></pre>
 <p><span class="math display">\[
-\sigma^2_X = \mbox{Var}(X)= \mbox{E}(X^2)-\mbox{E}(X)^2 = \int_0^1 x^2\cdot 2x\mathop{}\!\mathrm{d}x - \left(\frac{2}{3}\right)^2 = \frac{2x^4}{4}\bigg|_0^1-\frac{4}{9}=\frac{1}{2}-\frac{4}{9}=\frac{1}{18}=0.056
+\begin{array}{cc|ccc} &amp; &amp; &amp; \textbf{Y} &amp;
+\\ &amp; &amp; 0 &amp; 1 &amp; 2  
+\\&amp;\hline0 &amp; 0.10 &amp; 0.08 &amp; 0.11  
+\\\textbf{X} &amp;1 &amp; 0.18 &amp; 0.20 &amp; 0.12  
+\\&amp;2 &amp; 0.07 &amp; 0.05 &amp; 0.09
+\end{array}
 \]</span></p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="5-CONRANDVAR.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(<span class="cf">function</span>(x)x<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>x, <span class="dv">0</span>, <span class="dv">1</span>)<span class="sc">$</span>value <span class="sc">-</span> (<span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
-<pre><code>[1] 0.05555556</code></pre>
-<p>or</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="5-CONRANDVAR.html#cb170-1" aria-hidden="true" tabindex="-1"></a>Vx <span class="ot">&lt;-</span> <span class="fu">antiD</span>(x<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>x <span class="sc">~</span> x)</span>
-<span id="cb170-2"><a href="5-CONRANDVAR.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Vx</span>(<span class="dv">1</span>) <span class="sc">-</span> <span class="fu">Vx</span>(<span class="dv">0</span>) <span class="sc">-</span> (<span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
-<pre><code>[1] 0.05555556</code></pre>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="5-CONRANDVAR.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(<span class="sc">~</span>sqrt, <span class="at">data =</span> results)<span class="sc">*</span><span class="dv">9999</span><span class="sc">/</span><span class="dv">10000</span></span></code></pre></div>
-<pre><code>[1] 0.05559873</code></pre>
-<p>And finally, the standard deviation of <span class="math inline">\(X\)</span> is <span class="math inline">\(\sigma_X = \sqrt{\sigma^2_X}=\sqrt{1/18}=0.236\)</span>.</p>
+<p>Find <span class="math inline">\(\mbox{E}(X)\)</span></p>
+<p>First we will use the joint pmf directly, then we find the marginal pmf of <span class="math inline">\(X\)</span> and use that as we would in a univariate case.</p>
+<p><span class="math display">\[
+\mbox{E}(X)=\sum_{x=0}^2 \sum_{y=0}^2 x f_{X,Y}(x,y)=0*0.10+0*0.08+0*0.11+1*0.18+...+2*0.09 = 0.92
+\]</span></p>
+<p>The marginal pmf of <span class="math inline">\(X\)</span> is
+<span class="math display">\[
+f_X(x)=\left\{\begin{array}{ll} 0.10+0.08+0.11, &amp; x=0 \\
+0.18+0.20+0.12, &amp; x=1 \\
+0.07+0.05+0.09, &amp; x=2 \\
+0, &amp; \mbox{otherwise}
+\end{array}\right. = \left\{\begin{array}{ll} 0.29, &amp; x=0 \\
+0.50, &amp; x=1 \\
+0.21, &amp; x=2 \\
+0, &amp; \mbox{otherwise}
+\end{array}\right.
+\]</span></p>
+<p>So, <span class="math inline">\(\mbox{E}(X)=0*0.29+1*0.5+2*0.21=0.92\)</span>.</p>
 </div>
 </div>
-<div id="homework-problems-4" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Homework Problems<a href="5-CONRANDVAR.html#homework-problems-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercises-to-apply-what-we-learned" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Exercises to apply what we learned<a href="9-MULTIEXP.html#exercises-to-apply-what-we-learned" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<p><strong>Exercise</strong>:
+Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be defined above. Find <span class="math inline">\(\mbox{E}(Y)\)</span>, <span class="math inline">\(\mbox{E}(X+Y)\)</span>, <span class="math inline">\(\mbox{E}(XY)\)</span>, and <span class="math inline">\(\mbox{E}\left(\frac{1}{2X+Y+1}\right)\)</span>.</p>
+</blockquote>
+<div id="ey" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> E(Y)<a href="9-MULTIEXP.html#ey" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As with <span class="math inline">\(\mbox{E}(X)\)</span>, <span class="math inline">\(\mbox{E}(Y)\)</span> can be found in two ways. We will use the marginal pmf of <span class="math inline">\(Y\)</span>, which we will not derive:</p>
+<p><span class="math display">\[
+\mbox{E}(Y)=\sum_{y=0}^2 y \cdot f_Y(y)=0*0.35+1*0.33+2*0.32 = 0.97
+\]</span></p>
+</div>
+<div id="exy" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> E(X+Y)<a href="9-MULTIEXP.html#exy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To find <span class="math inline">\(\mbox{E}(X+Y)\)</span> we will use the joint pmf. In the discrete case, it helps to first identify all of the possible values of <span class="math inline">\(X+Y\)</span> and then figure out what probabilities are associated with each value. This problem is really a transformation problem where we are finding the distribution of <span class="math inline">\(X+Y\)</span>. In this example, <span class="math inline">\(X+Y\)</span> can take on values 0, 1, 2, 3, and 4. The value 0 only happens when <span class="math inline">\(X=Y=0\)</span> and the probability of this outcome is 0.10. The value 1 occurs when <span class="math inline">\(X=0\)</span> and <span class="math inline">\(Y=1\)</span> or when <span class="math inline">\(X=1\)</span> and <span class="math inline">\(Y=0\)</span>. This occurs with probability 0.08 + 0.18. We continue in this manner:
+<span class="math display">\[
+\mbox{E}(X+Y)=\sum_{x=0}^2\sum_{y=0}^2 (x+y)f_{X,Y}(x,y) = 0*0.1+1*(0.18+0.08)+2*(0.11+0.07+0.20)
+\]</span>
+<span class="math display">\[
++3*(0.12+0.05)+4*0.09 = 1.89
+\]</span></p>
+<p>Note that <span class="math inline">\(\mbox{E}(X+Y)=\mbox{E}(X)+\mbox{E}(Y)\)</span>. (The proof of this is left to the reader.)</p>
+</div>
+<div id="exy-1" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> E(XY)<a href="9-MULTIEXP.html#exy-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[
+\mbox{E}(XY)=\sum_{x=0}^2\sum_{y=0}^2 xyf_{X,Y}(x,y) = 0*(0.1+0.08+0.11+0.18+0.07)+1*0.20
+\]</span>
+<span class="math display">\[
++2*(0.12+0.05)+4*0.09= 0.9
+\]</span></p>
+<p>Note that <span class="math inline">\(\mbox{E}(XY)\)</span> is not necessarily equal to <span class="math inline">\(\mbox{E}(X)\mbox{E}(Y)\)</span>.</p>
+</div>
+<div id="e12xy1" class="section level3 hasAnchor" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> E(1/2X+Y+1)<a href="9-MULTIEXP.html#e12xy1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[
+\mbox{E}\left(\frac{1}{2X+Y+1}\right) = \sum_{x=0}^2\sum_{y=0}^2 \frac{1}{2x+y+1}f_{X,Y}(x,y) = 1*0.1+\frac{1}{2}*0.08+\frac{1}{3}*(0.11+0.18)
+\]</span>
+<span class="math display">\[
++\frac{1}{4}*0.20+\frac{1}{5}*(0.12+0.07)+\frac{1}{6}*0.05+\frac{1}{7}*0.09 = 0.3125
+\]</span></p>
+</div>
+<div id="expectation-of-continuous-random-variables" class="section level3 hasAnchor" number="9.2.5">
+<h3><span class="header-section-number">9.2.5</span> Expectation of continuous random variables<a href="9-MULTIEXP.html#expectation-of-continuous-random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s consider an example with continuous random variables where summation is replaced with integration:</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be continuous random variables with joint pdf:
+<span class="math display">\[
+f_{X,Y}(x,y)=xy
+\]</span>
+for <span class="math inline">\(0\leq x \leq 2\)</span> and <span class="math inline">\(0 \leq y \leq 1\)</span>.</p>
+</blockquote>
+</div>
+</div>
+<div id="exercises-to-apply-what-we-learned-1" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Exercises to apply what we learned<a href="9-MULTIEXP.html#exercises-to-apply-what-we-learned-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<p><strong>Exercise</strong>:
+Find <span class="math inline">\(\mbox{E}(X)\)</span>, <span class="math inline">\(\mbox{E}(X+Y)\)</span>, <span class="math inline">\(\mbox{E}(XY)\)</span>, and <span class="math inline">\(\mbox{Var}(XY)\)</span>.</p>
+</blockquote>
+<div id="ex" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> E(X)<a href="9-MULTIEXP.html#ex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We found the marginal pdf of <span class="math inline">\(X\)</span> in a previous chapter, so we should use that now:
+<span class="math display">\[
+\mbox{E}(X)=\int_0^2 x\frac{x}{2}\mathop{}\!\mathrm{d}x = \frac{x^3}{6}\bigg|_0^2= \frac{4}{3}
+\]</span>
+Or using <code>R</code></p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="9-MULTIEXP.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fractions</span>(<span class="fu">integrate</span>(<span class="cf">function</span>(x){x<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span>},<span class="dv">0</span>,<span class="dv">2</span>)<span class="sc">$</span>value)</span></code></pre></div>
+<pre><code>[1] 4/3</code></pre>
+</div>
+<div id="exy-2" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> E(X+Y)<a href="9-MULTIEXP.html#exy-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To find <span class="math inline">\(\mbox{E}(X+Y)\)</span>, we could use the joint pdf directly, or use the marginal pdf of <span class="math inline">\(Y\)</span> to find <span class="math inline">\(\mbox{E}(Y)\)</span> and then add the result to <span class="math inline">\(\mbox{E}(X)\)</span>. The reason this is valid is because when we integrate <span class="math inline">\(x\)</span> with the joint pdf, integrating with respect to <span class="math inline">\(y\)</span> first, we can treat <span class="math inline">\(x\)</span> as a constant and bring it out side the integral. Then we are integrating the joint pdf with respect <span class="math inline">\(y\)</span> which results in the marginal pdf of <span class="math inline">\(X\)</span>.</p>
+<p>We’ll use the joint pdf:
+<span class="math display">\[
+\mbox{E}(X+Y)=\int_0^2\int_0^1 (x+y)xy\mathop{}\!\mathrm{d}y \mathop{}\!\mathrm{d}x=\int_0^2\int_0^1 (x^2y+xy^2)\mathop{}\!\mathrm{d}y \mathop{}\!\mathrm{d}x = \int_0^2 \frac{x^2y^2}{2}+\frac{xy^3}{3} \bigg|_{y=0}^{y=1}\mathop{}\!\mathrm{d}x
+\]</span></p>
+<p><span class="math display">\[
+= \int_0^2 \frac{x^2}{2}+\frac{x}{3} \mathop{}\!\mathrm{d}x= \frac{x^3}{6}+\frac{x^2}{6}\bigg|_0^2=\frac{8}{6}+\frac{4}{6}=2
+\]</span></p>
+<p>Or using <code>R</code>:</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="9-MULTIEXP.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adaptIntegrate</span>(<span class="cf">function</span>(x){(x[<span class="dv">1</span>]<span class="sc">+</span>x[<span class="dv">2</span>])<span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]},<span class="at">lowerLimit =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">upperLimit =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))<span class="sc">$</span>integral</span></code></pre></div>
+<pre><code>[1] 2</code></pre>
+<p>If we wanted to use simulation to find this expectation, we could simulate variables from the marginal of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> and then add them together to create a new variable.</p>
+<p>The cdf for <span class="math inline">\(X\)</span> is <span class="math inline">\(\frac{x^2}{4}\)</span> so we simulate a random variable from <span class="math inline">\(X\)</span> by sampling from a random uniform and then taking the inverse of the cdf. For <span class="math inline">\(Y\)</span> the cdf is <span class="math inline">\(y^2\)</span> and do a similar simulation.</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="9-MULTIEXP.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1820</span>)</span>
+<span id="cb278-2"><a href="9-MULTIEXP.html#cb278-2" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="dv">2</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">runif</span>(<span class="dv">10000</span>)),<span class="at">y=</span><span class="fu">sqrt</span>(<span class="fu">runif</span>(<span class="dv">10000</span>)))</span>
+<span id="cb278-3"><a href="9-MULTIEXP.html#cb278-3" aria-hidden="true" tabindex="-1"></a>new_data <span class="sc">%&gt;%</span></span>
+<span id="cb278-4"><a href="9-MULTIEXP.html#cb278-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">z=</span>x<span class="sc">+</span>y) <span class="sc">%&gt;%</span></span>
+<span id="cb278-5"><a href="9-MULTIEXP.html#cb278-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Ex=</span><span class="fu">mean</span>(x),<span class="at">Ey=</span><span class="fu">mean</span>(y),<span class="at">Explusy =</span> <span class="fu">mean</span>(z))</span></code></pre></div>
+<pre><code>        Ex        Ey  Explusy
+1 1.338196 0.6695514 2.007748</code></pre>
+<p>We can see that <span class="math inline">\(E(X + Y) = E(X) + E(Y)\)</span>.</p>
+</div>
+<div id="exy-3" class="section level3 hasAnchor" number="9.3.3">
+<h3><span class="header-section-number">9.3.3</span> E(XY)<a href="9-MULTIEXP.html#exy-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we have</p>
+<p><span class="math display">\[
+\mbox{E}(XY)=\int_0^2\int_0^1 xy*xy\mathop{}\!\mathrm{d}y \mathop{}\!\mathrm{d}x = \int_0^2 \frac{x^2y^3}{3}\bigg|_0^1 \mathop{}\!\mathrm{d}x = \int_0^2 \frac{x^2}{3}\mathop{}\!\mathrm{d}x
+\]</span>
+<span class="math display">\[
+=\frac{x^3}{9}\bigg|_0^2 = \frac{8}{9}
+\]</span></p>
+<p>Using <code>R</code>:</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="9-MULTIEXP.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fractions</span>(<span class="fu">adaptIntegrate</span>(<span class="cf">function</span>(x){(x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>])<span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]},<span class="at">lowerLimit =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">upperLimit =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))<span class="sc">$</span>integral)</span></code></pre></div>
+<pre><code>[1] 8/9</code></pre>
+<p>Or by simulating, we have:</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="9-MULTIEXP.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">191</span>)</span>
+<span id="cb282-2"><a href="9-MULTIEXP.html#cb282-2" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="dv">2</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">runif</span>(<span class="dv">10000</span>)),<span class="at">y=</span><span class="fu">sqrt</span>(<span class="fu">runif</span>(<span class="dv">10000</span>)))</span>
+<span id="cb282-3"><a href="9-MULTIEXP.html#cb282-3" aria-hidden="true" tabindex="-1"></a>new_data <span class="sc">%&gt;%</span></span>
+<span id="cb282-4"><a href="9-MULTIEXP.html#cb282-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">z=</span>x<span class="sc">*</span>y) <span class="sc">%&gt;%</span></span>
+<span id="cb282-5"><a href="9-MULTIEXP.html#cb282-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Ex=</span><span class="fu">mean</span>(x),<span class="at">Ey=</span><span class="fu">mean</span>(y),<span class="at">Extimesy =</span> <span class="fu">mean</span>(z))</span></code></pre></div>
+<pre><code>       Ex        Ey  Extimesy
+1 1.33096 0.6640436 0.8837552</code></pre>
+</div>
+<div id="vxy" class="section level3 hasAnchor" number="9.3.4">
+<h3><span class="header-section-number">9.3.4</span> V(XY)<a href="9-MULTIEXP.html#vxy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall that the variance of a random variable is the expected value of the squared difference from its mean. So,
+<span class="math display">\[
+\mbox{Var}(XY)=\mbox{E}\left[\left(XY-\mbox{E}(XY)\right)^2\right]=\mbox{E}\left[\left(XY-\frac{8}{9}\right)^2\right]
+\]</span>
+<span class="math display">\[
+=\int_0^2\int_0^1 \left(xy-\frac{8}{9}\right)^2 xy\mathop{}\!\mathrm{d}y \mathop{}\!\mathrm{d}x =\int_0^2\int_0^1 \left(x^2y^2-\frac{16xy}{9}+\frac{64}{81}\right)xy\mathop{}\!\mathrm{d}y \mathop{}\!\mathrm{d}x
+\]</span></p>
+<p>Yuck!! But we will continue because we are determined to integrate after so much Calculus in our core curriculum.</p>
+<p><span class="math display">\[
+=\int_0^2\int_0^1 \left(x^3y^3-\frac{16x^2y^2}{9}+\frac{64xy}{81}\right)\mathop{}\!\mathrm{d}y \mathop{}\!\mathrm{d}x
+\]</span></p>
+<p><span class="math display">\[
+=\int_0^2 \frac{x^3y^4}{4}-\frac{16x^2y^3}{27}+\frac{32xy^2}{81}\bigg|_0^1 \mathop{}\!\mathrm{d}x
+\]</span></p>
+<p><span class="math display">\[
+= \int_0^2 \frac{x^3}{4}-\frac{16x^2}{27}+\frac{32x}{81}\mathop{}\!\mathrm{d}x
+\]</span></p>
+<p><span class="math display">\[
+= \frac{x^4}{16}-\frac{16x^3}{81}+\frac{16x^2}{81}\bigg|_0^2
+\]</span>
+<span class="math display">\[
+=\frac{16}{16}-\frac{128}{81}+\frac{64}{81}=\frac{17}{81}
+\]</span></p>
+<p>Using <code>R</code>:</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="9-MULTIEXP.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fractions</span>(<span class="fu">adaptIntegrate</span>(<span class="cf">function</span>(x){(x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]<span class="sc">-</span><span class="dv">8</span><span class="sc">/</span><span class="dv">9</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>x[<span class="dv">1</span>]<span class="sc">*</span>x[<span class="dv">2</span>]},<span class="at">lowerLimit =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">upperLimit =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))<span class="sc">$</span>integral)</span></code></pre></div>
+<pre><code>[1] 17/81</code></pre>
+<p>Next we will estimate the variance using a simulation:</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="9-MULTIEXP.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">816</span>)</span>
+<span id="cb286-2"><a href="9-MULTIEXP.html#cb286-2" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="dv">2</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">runif</span>(<span class="dv">10000</span>)),<span class="at">y=</span><span class="fu">sqrt</span>(<span class="fu">runif</span>(<span class="dv">10000</span>)))</span>
+<span id="cb286-3"><a href="9-MULTIEXP.html#cb286-3" aria-hidden="true" tabindex="-1"></a>new_data <span class="sc">%&gt;%</span></span>
+<span id="cb286-4"><a href="9-MULTIEXP.html#cb286-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">z=</span>(x<span class="sc">*</span>y<span class="dv">-8</span><span class="sc">/</span><span class="dv">9</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb286-5"><a href="9-MULTIEXP.html#cb286-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Var =</span> <span class="fu">mean</span>(z))</span></code></pre></div>
+<pre><code>        Var
+1 0.2098769</code></pre>
+<p>That was much easier. Notice that we are really just estimating these expectations with the simulations. The mathematical answers are the true population values while our simulations are sample estimates. In a few chapters we will discuss estimators in more detail.</p>
+</div>
+</div>
+<div id="covariancecorrelation" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Covariance/Correlation<a href="9-MULTIEXP.html#covariancecorrelation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We have discussed expected values of random variables and functions of random variables in a joint context. It would be helpful to have some kind of consistent measure to describe <em>how</em> two random variables are related to one another. <em>Covariance</em> and <em>correlation</em> do just that. It is important to understand that these are measures of a linear relationship between variables.</p>
+<p>Consider two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. (We could certainly consider more than two, but for demonstration, let’s consider only two for now). The covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is denoted as <span class="math inline">\(\mbox{Cov}(X,Y)\)</span> and is found by:
+<span class="math display">\[
+\mbox{Cov}(X,Y)=\mbox{E}\left[(X-\mbox{E}(X))(Y-\mbox{E}(Y))\right]
+\]</span></p>
+<p>We can simplify this expression to make it a little more usable:
+<span class="math display">\[
+\begin{align}
+\mbox{Cov}(X,Y) &amp; = \mbox{E}\left[(X-\mbox{E}(X))(Y-\mbox{E}(Y))\right] \\
+&amp; = \mbox{E}\left[XY - Y\mbox{E}(X) - X\mbox{E}(Y) + \mbox{E}(X)\mbox{E}(Y)\right] \\
+&amp; = \mbox{E}(XY) - \mbox{E}(Y\mbox{E}(X)) - \mbox{E}(X\mbox{E}(Y)) + \mbox{E}(X)\mbox{E}(Y) \\
+&amp; = \mbox{E}(XY)-\mbox{E}(X)\mbox{E}(Y)-\mbox{E}(X)\mbox{E}(Y)+\mbox{E}(X)\mbox{E}(Y) \\
+&amp; = \mbox{E}(XY)-\mbox{E}(X)\mbox{E}(Y)
+\end{align}
+\]</span></p>
+<p>Thus,
+<span class="math display">\[
+\mbox{Cov}(X,Y)=\mbox{E}(XY)-\mbox{E}(X)\mbox{E}(Y)
+\]</span></p>
+<p>This expression is a little easier to use, since it’s typically straightforward to find each of these quantities.</p>
+<p>It is important to note that while variance is a positive quantity, covariance can be positive or negative. A positive covariance implies that as the value of one variable increases, the other tends to increase. This is a statement about a linear relationship. Likewise, a negative covariance implies that as the value of one variable increases, the other tends to decrease.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+An example of positive covariance is human height and weight. As height increase, weight tends to increase. An example of negative covariance is gas mileage and car weight. As car weight increases, gas mileage decreases.</p>
+</blockquote>
+<p>Remember that if <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are constants, <span class="math inline">\(\mbox{E}(aX+b) =a\mbox{E}(X)+b\)</span> and <span class="math inline">\(\mbox{Var}(aX+b)=a^2\mbox{Var}(X)\)</span>. Similarly, if <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, and <span class="math inline">\(d\)</span> are all constants,
+<span class="math display">\[
+\mbox{Cov}(aX+b,cY+d)=ac\mbox{Cov}(X,Y)
+\]</span></p>
+<p>One disadvantage of covariance is its dependence on the scales of the random variables involved. This makes it difficult to compare covariances of multiple sets of variables. <em>Correlation</em> avoids this problem. Correlation is a scaled version of covariance. It is denoted by <span class="math inline">\(\rho\)</span> and found by:
+<span class="math display">\[
+\rho = \frac{\mbox{Cov}(X,Y)}{\sqrt{\mbox{Var}(X)\mbox{Var}(Y)}}
+\]</span></p>
+<p>While covariance could take on any real number, correlation is bounded by -1 and 1. Two random variables with a correlation of 1 are said to be perfectly positively correlated, while a correlation of -1 implies perfect negative correlation. Two random variables with a correlation (and thus covariance) of 0 are said to be uncorrelated, that is they do not have a linear relationship but could have a non-linear relationship. This last point is important; random variables with no relationship will have a 0 covariance. However, a 0 covariance only implies that the random variables do not have a linear relationship.</p>
+<p>Let’s look at some plots, Figures <a href="9-MULTIEXP.html#fig:cor1-fig">9.1</a>, <a href="9-MULTIEXP.html#fig:cor2-fig">9.2</a>, <a href="9-MULTIEXP.html#fig:cor3-fig">9.3</a>, and <a href="9-MULTIEXP.html#fig:cor4-fig">9.4</a> of different correlations. Remember that the correlation we are calculating in this section is for the population, while the plots are showing sample points from a population.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cor1-fig"></span>
+<img src="ModernDive_files/figure-html/cor1-fig-1.png" alt="Correlation of 1" width="\textwidth" />
+<p class="caption">
+FIGURE 9.1: Correlation of 1
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cor2-fig"></span>
+<img src="ModernDive_files/figure-html/cor2-fig-1.png" alt="Correlation of .8" width="\textwidth" />
+<p class="caption">
+FIGURE 9.2: Correlation of .8
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cor3-fig"></span>
+<img src="ModernDive_files/figure-html/cor3-fig-1.png" alt="Correlation of .5" width="\textwidth" />
+<p class="caption">
+FIGURE 9.3: Correlation of .5
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cor4-fig"></span>
+<img src="ModernDive_files/figure-html/cor4-fig-1.png" alt="Correlation of 0" width="\textwidth" />
+<p class="caption">
+FIGURE 9.4: Correlation of 0
+</p>
+</div>
+<div style="page-break-after: always;"></div>
+<div id="variance-of-sums" class="section level3 hasAnchor" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Variance of sums<a href="9-MULTIEXP.html#variance-of-sums" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are two random variables. Then,
+<span class="math display">\[
+\mbox{Var}(X+Y)=\mbox{E}\left[(X+Y-\mbox{E}(X+Y))^2\right]=\mbox{E}[(X+Y)^2]-\left[\mbox{E}(X+Y)\right]^2
+\]</span></p>
+<p>In the last step, we are using the alternative expression for variance (<span class="math inline">\(\mbox{Var}(X)=\mbox{E}(X^2)-\mbox{E}(X)^2\)</span>). Evaluating:
+<span class="math display">\[
+\mbox{Var}(X+Y)=\mbox{E}(X^2)+\mbox{E}(Y^2)+2\mbox{E}(XY)-\mbox{E}(X)^2-\mbox{E}(Y)^2-2\mbox{E}(X)\mbox{E}(Y)
+\]</span></p>
+<p>Regrouping the terms:
+<span class="math display">\[
+=\mbox{E}(X^2)-\mbox{E}(X)^2+\mbox{E}(Y^2)-\mbox{E}(Y)^2+2\left(\mbox{E}(XY)-\mbox{E}(X)\mbox{E}(Y)\right)
+\]</span></p>
+<p><span class="math display">\[
+=\mbox{Var}(X)+\mbox{Var}(Y)+2\mbox{Cov}(X,Y)
+\]</span></p>
+<blockquote>
+<p><em>Example</em>:<br />
+Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be defined as above. Find <span class="math inline">\(\mbox{Cov}(X,Y)\)</span>, <span class="math inline">\(\rho\)</span>, and <span class="math inline">\(\mbox{Var}(X+Y)\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[
+\mbox{Cov}(X,Y)=\mbox{E}(XY)-\mbox{E}(X)\mbox{E}(Y)=0.9-0.92*0.97=0.0076
+\]</span></p>
+<p><span class="math display">\[
+\rho=\frac{\mbox{Cov}(X,Y)}{\sqrt{\mbox{Var}(X)\mbox{Var}(Y)}}
+\]</span></p>
+<p>Quickly, <span class="math inline">\(\mbox{Var}(X)=\mbox{E}(X^2)-\mbox{E}(X)^2= 1.34-0.92^2 =0.4936\)</span> and <span class="math inline">\(\mbox{Var}(Y)=0.6691\)</span>. So,
+<span class="math display">\[
+\rho=\frac{0.0076}{\sqrt{0.4936*0.6691}}=0.013
+\]</span></p>
+<p>With such a low <span class="math inline">\(\rho\)</span>, we would say that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are only slightly positively correlated.</p>
+<p><span class="math display">\[
+\mbox{Var}(X+Y)=\mbox{Var}(X)+\mbox{Var}(Y)+2\mbox{Cov}(X,Y)=0.4936+0.6691+2*0.0076=1.178
+\]</span></p>
+</div>
+</div>
+<div id="independence-1" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Independence<a href="9-MULTIEXP.html#independence-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are said to be <em>independent</em> if their joint pmf/pdf is the product of their marginal pmfs/pdfs:
+<span class="math display">\[
+f_{X,Y}(x,y)=f_X(x)f_Y(y)
+\]</span></p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(\mbox{Cov}(X,Y) = 0\)</span>. The converse is not necessarily true, however because they could have a non-linear relationship.</p>
+<p>For a discrete distribution, you must check that each cell, joint probabilities, are equal to the product of the marginal probability. Back to our joint pmf from above:</p>
+<p><span class="math display">\[
+\begin{array}{cc|ccc} &amp; &amp; &amp; \textbf{Y} &amp;
+\\ &amp; &amp; 0 &amp; 1 &amp; 2  
+\\&amp;\hline0 &amp; 0.10 &amp; 0.08 &amp; 0.11  
+\\\textbf{X} &amp;1 &amp; 0.18 &amp; 0.20 &amp; 0.12  
+\\&amp;2 &amp; 0.07 &amp; 0.05 &amp; 0.09
+\end{array}
+\]</span></p>
+<p>The marginal pmf of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display">\[
+f_X(x) = \left\{\begin{array}{ll} 0.29, &amp; x=0 \\
+0.50, &amp; x=1 \\
+0.21, &amp; x=2 \\
+0, &amp; \mbox{otherwise}
+\end{array}\right.
+\]</span>
+The marginal pmf of <span class="math inline">\(Y\)</span> is</p>
+<p><span class="math display">\[
+f_Y(y) = \left\{\begin{array}{ll} 0.35, &amp; y=0 \\
+0.33, &amp; y=1 \\
+0.32, &amp; y=2 \\
+0, &amp; \mbox{otherwise}
+\end{array}\right.
+\]</span>
+Checking the first cell, we immediately see that <span class="math inline">\(f_{X,Y}(x=0,y=0) \neq f_{X}(x=0)\cdot f_{Y}(y=0)\)</span> so <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are not independent.</p>
+<p>An easy way to determine if continuous variables are independent is to first check that the domain only contains constants, it is rectangular, and second that the joint pdf can be written as a product of a function of <span class="math inline">\(X\)</span> only and a function of <span class="math inline">\(Y\)</span> only.</p>
+<p>Thus for our examples above even though the domains were rectangular, in <span class="math inline">\(f(x,y)=xy\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> were independent while <span class="math inline">\(f(x,y)=x+y\)</span> they were not.</p>
+</div>
+<div id="conditional-expectation" class="section level2 hasAnchor" number="9.6">
+<h2><span class="header-section-number">9.6</span> Conditional expectation<a href="9-MULTIEXP.html#conditional-expectation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>An important idea in graph theory, network analysis, Bayesian networks, and queuing theory is conditional expectation. We will only briefly introduce the ideas here so that you have a basic understanding. This does not imply it is not an important topic.</p>
+<p>Let’s start with a simple example to illustrate the ideas.</p>
+<blockquote>
+<p><em>Example</em>:<br />
+Sam will read either one chapter of his history book or one chapter of his philosophy book. If the number of misprints in a chapter of his history book is Poisson with mean 2 and if the number of misprints in a chapter of his philosophy book is Poisson with mean 5, then assuming Sam is equally likely to choose either book, what is the expected number of misprints that Sam will find?</p>
+</blockquote>
+<p>Note: in the next chapter we are working with transformations and could attack the problem using that method.</p>
+<p>First let’s use simulation to get an idea what value the answer should be and then use algebraic techniques and definitions we have learned in this book.</p>
+<p>Simulate 5000 reads from the history book and 5000 from philosophy and combine:</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="9-MULTIEXP.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2011</span>)</span>
+<span id="cb288-2"><a href="9-MULTIEXP.html#cb288-2" aria-hidden="true" tabindex="-1"></a>my_data<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">misprints=</span><span class="fu">c</span>(<span class="fu">rpois</span>(<span class="dv">5000</span>,<span class="dv">2</span>),<span class="fu">rpois</span>(<span class="dv">5000</span>,<span class="dv">5</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="9-MULTIEXP.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data)</span></code></pre></div>
+<pre><code>  misprints
+1         1
+2         1
+3         2
+4         1
+5         2
+6         4</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="9-MULTIEXP.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(my_data)</span></code></pre></div>
+<pre><code>[1] 10000     1</code></pre>
+<p>Figure <a href="9-MULTIEXP.html#fig:hist151-fig">9.5</a> is a histogram of the data.</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="9-MULTIEXP.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_histogram</span>(<span class="sc">~</span>misprints,<span class="at">data=</span>my_data,<span class="at">breaks=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">15.5</span>, <span class="at">by=</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb293-2"><a href="9-MULTIEXP.html#cb293-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_classic</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb293-3"><a href="9-MULTIEXP.html#cb293-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x=</span><span class="st">&quot;Number of Misprints&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:hist151-fig"></span>
+<img src="ModernDive_files/figure-html/hist151-fig-1.png" alt="Misprints from combined history and philosphy books." width="\textwidth" />
+<p class="caption">
+FIGURE 9.5: Misprints from combined history and philosphy books.
+</p>
+</div>
+<p>Or as a bar chart in Figure <a href="9-MULTIEXP.html#fig:bar151-fig">9.6</a></p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="9-MULTIEXP.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_bar</span>(<span class="sc">~</span>misprints,<span class="at">data=</span>my_data)<span class="sc">%&gt;%</span></span>
+<span id="cb294-2"><a href="9-MULTIEXP.html#cb294-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">theme_classic</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb294-3"><a href="9-MULTIEXP.html#cb294-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x=</span><span class="st">&quot;Number of Misprints&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:bar151-fig"></span>
+<img src="ModernDive_files/figure-html/bar151-fig-1.png" alt="Misprints from combined history and philosphy books as a bar chart." width="\textwidth" />
+<p class="caption">
+FIGURE 9.6: Misprints from combined history and philosphy books as a bar chart.
+</p>
+</div>
+<p>And now find the average.</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="9-MULTIEXP.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="sc">~</span>misprints,<span class="at">data=</span>my_data)</span></code></pre></div>
+<pre><code>[1] 3.4968</code></pre>
+<p>Now for a mathematical solution. Let <span class="math inline">\(X\)</span> stand for the number of misprints and <span class="math inline">\(Y\)</span> for the book, to make <span class="math inline">\(Y\)</span> a random variable let’s call 0 history and 1 philosophy. Then <span class="math inline">\(E[X|Y]\)</span> is the expected number of misprints given the book. This is a conditional expectation. For example <span class="math inline">\(E[X|Y=0]\)</span> is the expected number of misprints in the history book.</p>
+<p>Now here is the tricky part, without specifying a value of <span class="math inline">\(Y\)</span>, called a realization, this expectation function is a random variable that depends on <span class="math inline">\(Y\)</span>. In other words, if we don’t know the book, the expected number of misprints depends on <span class="math inline">\(Y\)</span> and thus is a random variable. If we take the expected value of this random variable we get</p>
+<p><span class="math display">\[E[X]=E[E[X|Y]]\]</span></p>
+<p>The inner expectation in the right hand side is for the conditional distribution and the outer is for the marginal with respect to <span class="math inline">\(Y\)</span>. This seems confusing, so let’s go back to our example.</p>
+<p><span class="math display">\[E[X]=E[E[X|Y]]\]</span>
+<span class="math display">\[=E[X|Y=0] \cdot \mbox{P}(Y=0)+E[X|Y=1] \cdot \mbox{P}(Y=1)\]</span>
+<span class="math display">\[=2*\frac{1}{2}+5*\frac{1}{2}=\frac{7}{2}=3.5\]</span>
+These ideas are going to be similar for continuous random variables. There is so much more that you can do with conditional expectations, but these are beyond the scope of the book.</p>
+</div>
+<div id="homework-problems-8" class="section level2 hasAnchor" number="9.7">
+<h2><span class="header-section-number">9.7</span> Homework Problems<a href="9-MULTIEXP.html#homework-problems-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
-<li>Let <span class="math inline">\(X\)</span> be a continuous random variable on the domain <span class="math inline">\(-k \leq X \leq k\)</span>. Also, let <span class="math inline">\(f(x)=\frac{x^2}{18}\)</span>.</li>
+<li>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be continuous random variables with joint pdf:
+<span class="math display">\[
+f_{X,Y}(x,y)=x + y
+\]</span></li>
 </ol>
+<p>where <span class="math inline">\(0 \leq x \leq 1\)</span> and <span class="math inline">\(0 \leq y \leq 1\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
-<li>Assume that <span class="math inline">\(f(x)\)</span> is a valid pdf. Find the value of <span class="math inline">\(k\)</span>.<br />
+<li>Find <span class="math inline">\(\mbox{E}(X)\)</span> and <span class="math inline">\(\mbox{E}(Y)\)</span>.<br />
 </li>
-<li>Plot the pdf of <span class="math inline">\(X\)</span>.<br />
+<li>Find <span class="math inline">\(\mbox{Var}(X)\)</span> and <span class="math inline">\(\mbox{Var}(Y)\)</span>.<br />
 </li>
-<li>Find and plot the cdf of <span class="math inline">\(X\)</span>.<br />
+<li>Find <span class="math inline">\(\mbox{Cov}(X,Y)\)</span> and <span class="math inline">\(\rho\)</span>. Are <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> independent?<br />
 </li>
-<li>Find <span class="math inline">\(\mbox{P}(X&lt;1)\)</span>.<br />
-</li>
-<li>Find <span class="math inline">\(\mbox{P}(1.5&lt;X\leq 2.5)\)</span>.<br />
-</li>
-<li>Find the 80th percentile of <span class="math inline">\(X\)</span> (the value <span class="math inline">\(x\)</span> for which 80% of the distribution is to the left of that value).<br />
-</li>
-<li>Find the value <span class="math inline">\(x\)</span> such that <span class="math inline">\(\mbox{P}(-x \leq X \leq x)=0.4\)</span>.<br />
-</li>
-<li>Find the mean and variance of <span class="math inline">\(X\)</span>.<br />
-</li>
-<li>Simulate 10000 values from this distribution and plot the density.</li>
+<li>Find <span class="math inline">\(\mbox{Var}(3X+2Y)\)</span>.</li>
 </ol>
 <ol start="2" style="list-style-type: decimal">
-<li>Let <span class="math inline">\(X\)</span> be a continuous random variable. Prove that the cdf of <span class="math inline">\(X\)</span>, <span class="math inline">\(F_X(x)\)</span> is a non-decreasing function. (Hint: show that for any <span class="math inline">\(a &lt; b\)</span>, <span class="math inline">\(F_X(a) \leq F_X(b)\)</span>.)</li>
+<li>Optional - not difficult but does have small Calc III idea. Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be continuous random variables with joint pmf:
+<span class="math display">\[
+f_{X,Y}(x,y)=1
+\]</span>
+where <span class="math inline">\(0 \leq x \leq 1\)</span> and <span class="math inline">\(0 \leq y \leq 2x\)</span>.</li>
 </ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>Find <span class="math inline">\(\mbox{E}(X)\)</span> and <span class="math inline">\(\mbox{E}(Y)\)</span>.</p></li>
+<li><p>Find <span class="math inline">\(\mbox{Var}(X)\)</span> and <span class="math inline">\(\mbox{Var}(Y)\)</span>.</p></li>
+<li><p>Find <span class="math inline">\(\mbox{Cov}(X,Y)\)</span> and <span class="math inline">\(\rho\)</span>. Are <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> independent?</p></li>
+<li><p>Find <span class="math inline">\(\mbox{Var}\left(\frac{X}{2}+2Y\right)\)</span>.</p></li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Suppose <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <em>independent</em> random variables. Show that <span class="math inline">\(\mbox{E}(XY)=\mbox{E}(X)\mbox{E}(Y)\)</span>.</p></li>
+<li><p>You are playing a game with a friend. Each of you roll a fair sided die and record the result.</p></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>Write the joint probability mass function.</p></li>
+<li><p>Find the expected value of the product of your score and your friend’s score.</p></li>
+<li><p>Verify the previous part using simulation.</p></li>
+<li><p>Using simulation, find the expected value of the maximum number on the two roles.</p></li>
+</ol>
+<ol start="5" style="list-style-type: decimal">
+<li><p>A miner is trapped in a mine containing three doors. The first door leads to a tunnel that takes him to safety after two hours of travel. The second door leads to a tunnel that returns him to the mine after three hours of travel. The third door leads to a tunnel that returns him to his mine after five hours. Assuming that the miner is at all times equally likely to choose any one of the doors, yes a bad assumption but it makes for a nice problem, what is the expected length of time until the miner reaches safety?</p></li>
+<li><p>ADVANCED: Let <span class="math inline">\(X_1,X_2,...,X_n\)</span> be independent, identically distributed random variables. (This is often abbreviated as “i.i.d.”). Each <span class="math inline">\(X_i\)</span> has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> (i.e., for all <span class="math inline">\(i\)</span>, <span class="math inline">\(\mbox{E}(X_i)=\mu\)</span> and <span class="math inline">\(\mbox{Var}(X_i)=\sigma^2\)</span>).</p></li>
+</ol>
+<p>Let <span class="math inline">\(S=X_1+X_2+...+X_n=\sum_{i=1}^n X_i\)</span>. And let <span class="math inline">\(\bar{X}={\sum_{i=1}^n X_i \over n}\)</span>.</p>
+<p>Find <span class="math inline">\(\mbox{E}(S)\)</span>, <span class="math inline">\(\mbox{Var}(S)\)</span>, <span class="math inline">\(\mbox{E}(\bar{X})\)</span> and <span class="math inline">\(\mbox{Var}(\bar{X})\)</span>.</p>
 </div>
-<div id="solutions-manual-4" class="section level2 unnumbered hasAnchor">
-<h2><a href="https://ds-usafa.github.io/PSSE-Solutions-Manual/CONRANDVAR.html">Solutions Manual</a><a href="5-CONRANDVAR.html#solutions-manual-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="solutions-manual-8" class="section level2 unnumbered hasAnchor">
+<h2><a href="https://ds-usafa.github.io/CPS-Solutions-Manual/MULTIEXP.html">Solutions Manual</a><a href="9-MULTIEXP.html#solutions-manual-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="4-RANDVAR.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="6-DISCRETENAMED.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="8-MULTIDISTS.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="10-CS1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -958,7 +1198,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/moderndive/moderndive_book/edit/master/PSSE_additions/11-Continuous-Random-Variables.Rmd",
+"link": "https://github.com/moderndive/moderndive_book/edit/master/PSSE_additions/15-Multivariate-Expectation.Rmd",
 "text": "Edit"
 },
 "history": {
